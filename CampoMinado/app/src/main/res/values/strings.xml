@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CampoMinado</string>
+    <string name="recome_ar">Recomeçar</string>
+    <string name="reiniciar">Reiniciar</string>
+</resources>
