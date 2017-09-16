@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 buttons[i][j].setText("*");
                 localBombas[i][j] = 0;
                 buttons[i][j].setBackgroundColor(Color.GRAY);
+                buttons[i][j].setTextColor(Color.BLACK);
 
             }
         }
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             for (int i = 1; i < x; i++) {
                 for (int j = 1; j < y; j++) {
                     if (localBombas[i][j] == 0) {
-                        if (gerador.nextInt(100) > 50) {
+                        if (gerador.nextInt(100) > 80) {
                             localBombas[i][j] = 1;
                             qtdAux++;
                         }
@@ -91,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 buttons[i][j] = (Button) findViewById(resID);
                 buttons[i][j].setClickable(false);
                 if(localBombas[i][j] == 0){
-                    buttons[i][j].setText("0");
+                    buttons[i][j].setText(String.valueOf(getBombasRedor(i,j)));
                 }else{
                     buttons[i][j].setText("X");
                     buttons[i][j].setBackgroundColor(Color.RED);
@@ -99,6 +101,87 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         }
+    }
+
+    public void ganhou(){
+        textView.setText("Você Ganhou!");
+
+        for (int i = 1; i < x; i++) {
+            for (int j = 1; j < y; j++) {
+                String buttonId = "btn" + i + "_" + j;
+                int resID = getResources().getIdentifier(buttonId, "id", getPackageName());
+                buttons[i][j] = (Button) findViewById(resID);
+                buttons[i][j].setClickable(false);
+                if(localBombas[i][j] == 0){
+                    buttons[i][j].setText(String.valueOf(getBombasRedor(i,j)));
+                }else{
+                    buttons[i][j].setText("X");
+                    buttons[i][j].setBackgroundColor(Color.RED);
+                }
+
+            }
+        }
+    }
+
+    public int getBombasRedor(int x, int y){
+        int bombas = 0;
+        try {
+            if(localBombas[x-1][y] == 1){
+                bombas += 1;
+            }
+        }catch (RuntimeException e){
+            bombas += 0;
+        }
+        try {
+            if(localBombas[x-1][y-1] == 1){
+                bombas += 1;
+            }
+        }catch (RuntimeException e){
+            bombas += 0;
+        }
+        try {
+            if(localBombas[x][y-1] == 1){
+                bombas += 1;
+            }
+        }catch (RuntimeException e){
+            bombas += 0;
+        }
+        try {
+            if(localBombas[x+1][y-1] == 1){
+                bombas += 1;
+            }
+        }catch (RuntimeException e){
+            bombas += 0;
+        }
+        try {
+            if(localBombas[x+1][y] == 1){
+                bombas += 1;
+            }
+        }catch (RuntimeException e){
+            bombas += 0;
+        }
+        try {
+            if(localBombas[x+1][y+1] == 1){
+                bombas += 1;
+            }
+        }catch (RuntimeException e){
+            bombas += 0;
+        }
+        try {
+            if(localBombas[x][y+1] == 1){
+                bombas += 1;
+            }
+        }catch (RuntimeException e){
+            bombas += 0;
+        }
+        try {
+            if(localBombas[x-1][y+1] == 1){
+                bombas += 1;
+            }
+        }catch (RuntimeException e){
+            bombas += 0;
+        }
+        return bombas;
     }
 
     @Override
@@ -117,13 +200,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(localBombas[auxX][auxY] == 0){
                 bombasAcertadas++;
                 textView.setText("Cliques: " + bombasAcertadas);
-                buttons[auxX][auxY].setText("O");
+
+                buttons[auxX][auxY].setText(String.valueOf(getBombasRedor(auxX,auxY)));
                 buttons[auxX][auxY].setBackgroundColor(Color.BLUE);
+                buttons[auxX][auxY].setTextColor(Color.WHITE);
             }else{
                 buttons[auxX][auxY].setText("X");
                 perdeu();
             }
             buttons[auxX][auxY].setClickable(false);
+
+            if(bombasAcertadas == 25 -qtdBombas){
+                ganhou();
+            }
         }
     }
 }
