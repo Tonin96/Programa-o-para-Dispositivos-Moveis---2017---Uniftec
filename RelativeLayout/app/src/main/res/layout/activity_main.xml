@@ -7,13 +7,19 @@
     android:layout_height="match_parent"
     tools:context="com.example.brunomarsilio.relativelayout.MainActivity">
 
-    <View
+    <LinearLayout
         android:id="@+id/v1"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="#0000FF"
         android:layout_centerHorizontal="true"
-        />
+        android:orientation="horizontal">
+
+        <ImageView
+            android:src="@drawable/ic_facebook_box_white_48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
     <View
         android:id="@+id/v2"
@@ -37,6 +43,7 @@
         android:background="#0000FF"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@id/v1"
+
         />
 
     <View
@@ -72,6 +79,7 @@
         android:layout_height="40dp"
         android:background="#FF0000"
         android:layout_toLeftOf="@id/v1"
+        android:layout_alignWithParentIfMissing="true"
         android:layout_below="@id/v7"
         />
 
