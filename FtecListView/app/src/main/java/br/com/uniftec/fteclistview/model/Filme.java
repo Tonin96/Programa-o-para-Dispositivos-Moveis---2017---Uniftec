@@ -1,10 +1,12 @@
 package br.com.uniftec.fteclistview.model;
 
+import java.io.Serializable;
+
 /**
  * Created by marioklein on 21/09/17.
  */
 
-public class Filme {
+public class Filme implements Serializable{
 
     private String titulo;
 
