@@ -1,12 +1,13 @@
 package br.com.uniftec.fteclistview.ui;
 
 import android.os.Bundle;
+import android.renderscript.Double2;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import br.com.uniftec.fteclistview.R;
 import br.com.uniftec.fteclistview.model.Filme;
@@ -17,6 +18,9 @@ public class FilmeActivity extends AppCompatActivity implements View.OnClickList
     private Button fecharButton;
     private Filme filme;
     private TextView tituloTextView;
+    private TextView notaTextView;
+    private TextView resumoTextView;
+    private ImageView imagemImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,11 +28,20 @@ public class FilmeActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_filme);
 
         tituloTextView = (TextView)findViewById(R.id.activity_filme_titulo);
+        notaTextView = (TextView)findViewById(R.id.activity_filme_nota);
+        resumoTextView = (TextView)findViewById(R.id.activity_filme_resumo);
+        imagemImageView = (ImageView)findViewById(R.id.activity_filme_imagem);
         fecharButton = (Button)findViewById(R.id.activity_filme_fechar_button);
         fecharButton.setOnClickListener(this);
 
         filme = (Filme)getIntent().getSerializableExtra(FILME_PARAMETER);
+
         tituloTextView.setText(filme.getTitulo());
+        notaTextView.setText(Double.toString(filme.getNota()));
+        resumoTextView.setText(filme.getResumo());
+
+        int idImagem = getResources().getIdentifier(filme.getImagem(), "drawable", getPackageName());
+        imagemImageView.setImageDrawable(getDrawable(idImagem));
     }
 
     @Override

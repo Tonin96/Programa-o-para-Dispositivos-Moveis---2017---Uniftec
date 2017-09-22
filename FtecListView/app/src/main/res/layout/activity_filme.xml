@@ -7,15 +7,50 @@
     tools:context="br.com.uniftec.fteclistview.ui.FilmeActivity"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/activity_filme_imagem"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:src="@drawable/ft_3ldmcbmoq6a9duwphrwwxxiyqzm" />
+
+        <TextView
+            android:id="@+id/activity_filme_titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_alignParentTop="true"
+            android:textColor="#FFFFFF"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="120dp" />
+
+        <TextView
+            android:id="@+id/activity_filme_nota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_alignParentEnd="true"
+            android:textColor="#FFFFFF"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="120dp" />
+
+    </RelativeLayout>
+
     <TextView
-        android:id="@+id/activity_filme_titulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:id="@+id/activity_filme_resumo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="19dp"
+        android:layout_margin="10dp" />
 
     <Button
         android:id="@+id/activity_filme_fechar_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FECHAR"/>
+        android:text="FECHAR" />
 
 </LinearLayout>

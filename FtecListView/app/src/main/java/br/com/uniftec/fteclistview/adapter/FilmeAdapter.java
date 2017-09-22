@@ -52,7 +52,7 @@ public class FilmeAdapter extends ArrayAdapter<Filme>{
         try {
             Log.d("ADAP", filme.getImagem());
             imagem.setImageDrawable(getContext().getDrawable(idImagem));
-        }catch (OutOfMemoryError e) {
+        } catch (OutOfMemoryError e) {
             Log.d("ADAP", filme.getImagem());
             imagem.setImageDrawable(null);
         }
