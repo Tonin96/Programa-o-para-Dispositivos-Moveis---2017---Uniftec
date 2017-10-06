@@ -2,8 +2,10 @@ package br.com.uniftec.fteclistview.ui;
 
 import android.os.Bundle;
 import android.renderscript.Double2;
+import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,7 +14,7 @@ import android.widget.TextView;
 import br.com.uniftec.fteclistview.R;
 import br.com.uniftec.fteclistview.model.Filme;
 
-public class FilmeActivity extends AppCompatActivity implements View.OnClickListener{
+public class FilmeActivity extends AbstractActivity implements View.OnClickListener{
 
     public static final String FILME_PARAMETER = "FILME_PARAMETER";
     private Button fecharButton;
@@ -23,10 +25,12 @@ public class FilmeActivity extends AppCompatActivity implements View.OnClickList
     private ImageView imagemImageView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_filme);
+    protected int getLayoutRes() {
+        return R.layout.activity_filme;
+    }
 
+    @Override
+    protected void setupView() {
         tituloTextView = (TextView)findViewById(R.id.activity_filme_titulo);
         notaTextView = (TextView)findViewById(R.id.activity_filme_nota);
         resumoTextView = (TextView)findViewById(R.id.activity_filme_resumo);
@@ -51,5 +55,17 @@ public class FilmeActivity extends AppCompatActivity implements View.OnClickList
             finish();
         }
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == android.R.id.home) {
+            finish();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

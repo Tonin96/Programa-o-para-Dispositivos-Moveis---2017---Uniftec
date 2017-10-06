@@ -3,6 +3,7 @@ package br.com.uniftec.fteclistview.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -13,32 +14,25 @@ import android.view.MenuItem;
 
 import br.com.uniftec.fteclistview.R;
 
-public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MenuActivity extends AbstractActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+    protected int getLayoutRes() {
+        return R.layout.activity_menu;
+    }
 
-        Toolbar toolbar = (Toolbar)findViewById(R.id.main_toolbar);
-        setSupportActionBar(toolbar);
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+    @Override
+    protected void setupView() {
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.main_drawer_layout);
         navigationView = (NavigationView)findViewById(R.id.main_navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        /*
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_container, new ListaFilmesFragment());
-        transaction.commit();
-        */
+        mudarContainerPrincipal(new ListaFilmesFragment());
     }
 
     @Override
@@ -58,16 +52,34 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
         drawerLayout.closeDrawers();
 
-        if(item.getItemId() == R.id.menu_filmes) {
+        Fragment fragment = null;
 
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.main_container, new ListaFilmesFragment());
-            transaction.commit();
+        switch (item.getItemId()) {
 
-        } else if(item.getItemId() == R.id.menu_musicas) {
+            case R.id.menu_filmes:
+                fragment = new ListaFilmesFragment();
+                break;
+
+            case R.id.menu_musicas:
+                fragment = new Fragment();
+                break;
 
         }
 
+        if(fragment != null) {
+            mudarContainerPrincipal(fragment);
+
+            return true;
+        }
+
         return false;
+    }
+
+    private void mudarContainerPrincipal(Fragment fragment) {
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_container, fragment);
+        transaction.commit();
+
     }
 }
