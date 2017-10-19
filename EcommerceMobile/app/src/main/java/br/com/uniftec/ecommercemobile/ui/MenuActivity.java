@@ -30,7 +30,7 @@ public class MenuActivity extends AbstractActivity implements NavigationView.OnN
         navigationView = (NavigationView)findViewById(R.id.main_navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        mudarContainerPrincipal(new ListaFilmesFragment());
+        //mudarContainerPrincipal(new ListaFilmesFragment());
     }
 
     @Override
@@ -55,7 +55,7 @@ public class MenuActivity extends AbstractActivity implements NavigationView.OnN
         switch (item.getItemId()) {
 
             case R.id.menu_filmes:
-                fragment = new ListaFilmesFragment();
+                //fragment = new ListaFilmesFragment();
                 break;
 
             case R.id.menu_musicas:
