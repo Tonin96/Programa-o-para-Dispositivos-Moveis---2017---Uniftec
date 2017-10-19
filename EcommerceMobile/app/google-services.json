@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "394608616070",
+    "project_id": "ecomerce-b9002"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394608616070:android:b15dff278309e59d",
+        "android_client_info": {
+          "package_name": "br.com.uniftec.ecommercemobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "394608616070-cr93pakfjo60bv0kq3s26go2tlsbj8j2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkdJcmndkFX7lL_EhwL13ZHE5YCMFN0JI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
