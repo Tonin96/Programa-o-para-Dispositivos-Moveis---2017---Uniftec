@@ -94,6 +94,7 @@
                 android:id="@+id/activity_cria_conta_usuario_edit_text_senha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPassword"
                 />
         </LinearLayout>
 
