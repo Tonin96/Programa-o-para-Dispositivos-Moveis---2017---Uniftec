@@ -32,9 +32,15 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <activity android:name=".ui.CriaContaUsuarioActivity" />
+        <activity android:name=".ui.AlteraContaUsuarioActivity" />
+        <activity android:name=".ui.ListaEnderecosUsuarioActivity" />
+        <activity android:name=".ui.CriaEnderecoUsuarioActivity" />
+        <activity android:name=".ui.AlteraEnderecoUsuarioActivity"></activity>
     </application>
 
 </manifest>
