@@ -93,25 +93,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linear_layout_esqueci_minha_senha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/linear_layout_entrar">
-
-            <Button
-                android:id="@+id/activity_cria_conta_usuario_button_esqueci_minha_senha"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Esqueci minha senha"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/linear_layout_criar_nova_conta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/linear_layout_esqueci_minha_senha">
+            android:layout_below="@+id/linear_layout_entrar">
 
             <Button
                 android:id="@+id/activity_cria_conta_usuario_button_criar_nova_conta"
