@@ -1,9 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.com.uniftec.ecommercemobile.ui.AlteraEnderecoUsuarioActivity">
+    android:padding="16dp"
+    tools:context="br.com.uniftec.ecommercemobile.ui.ProdutoActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/linear_layout_titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="">
+
+            <TextView
+                android:id="@+id/activity_altera_endereco_usuario_titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Endereço 1"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_rua"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_layout_titulo">
+
+            <TextView
+                android:id="@+id/activity_altera_endereco_usuario_label_rua"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rua:"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/activity_altera_endereco_usuario_edit_text_rua"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Luiz Carlos da Silva"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_numero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_layout_rua">
+
+            <TextView
+                android:id="@+id/activity_altera_endereco_usuario_label_numero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Número:"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/activity_altera_endereco_usuario_edit_text_numero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="172"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_complemento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_layout_numero">
+
+            <TextView
+                android:id="@+id/activity_altera_endereco_usuario_label_complemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Complemento:"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/activity_altera_endereco_usuario_edit_text_complemento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Casa"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_bairro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_layout_complemento">
+
+            <TextView
+                android:id="@+id/activity_altera_endereco_usuario_label_bairro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bairro:"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/activity_altera_endereco_usuario_edit_text_bairro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="São Caetano"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_cidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_layout_bairro">
+
+            <TextView
+                android:id="@+id/activity_altera_endereco_usuario_label_cidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cidade:"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/activity_altera_endereco_usuario_edit_text_cidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Caxias do Sul"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_estado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_layout_cidade">
+
+            <TextView
+                android:id="@+id/activity_altera_endereco_usuario_label_estado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estado:"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/activity_altera_endereco_usuario_edit_text_estado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rio Grande do Sul"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_salvar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_layout_estado">
+
+            <Button
+                android:id="@+id/activity_altera_endereco_usuario_button_salvar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Atualizar"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>
