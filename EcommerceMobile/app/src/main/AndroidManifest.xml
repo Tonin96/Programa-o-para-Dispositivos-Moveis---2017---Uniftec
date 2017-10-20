@@ -40,7 +40,8 @@
         <activity android:name=".ui.AlteraContaUsuarioActivity" />
         <activity android:name=".ui.ListaEnderecosUsuarioActivity" />
         <activity android:name=".ui.CriaEnderecoUsuarioActivity" />
-        <activity android:name=".ui.AlteraEnderecoUsuarioActivity"></activity>
+        <activity android:name=".ui.AlteraEnderecoUsuarioActivity" />
+        <activity android:name=".ui.LoginActivity"></activity>
     </application>
 
 </manifest>
