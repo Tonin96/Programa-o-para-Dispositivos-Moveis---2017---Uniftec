@@ -9,7 +9,7 @@ import java.util.List;
  * Created by bruno on 05/10/17.
  */
 
-public class Produto implements Serializable{
+public class Produto implements Serializable {
 
     private Integer id;
     private String titulo;

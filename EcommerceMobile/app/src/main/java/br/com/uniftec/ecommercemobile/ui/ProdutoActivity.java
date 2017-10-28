@@ -7,6 +7,8 @@ import br.com.uniftec.ecommercemobile.R;
 
 public class ProdutoActivity extends AppCompatActivity {
 
+    public static final String PRODUTO_PARAMETER = "PRODUTO_PARAMETER";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
