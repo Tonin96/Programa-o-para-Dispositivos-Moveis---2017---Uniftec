@@ -1,67 +1,77 @@
 package br.com.uniftec.ecommercemobile.adapter;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.model.Produto;
-
+import br.com.uniftec.ecommercemobile.ui.ProdutoActivity;
 
 /**
- * Created by bruno on 19/10/17.
+ * Created by bruno on 28/10/17.
  */
 
-public class ListaProdutoAdapter extends ArrayAdapter<Produto> implements View.OnClickListener{
-    private LayoutInflater layoutInflater;
+public class ListaProdutoAdapter extends RecyclerView.Adapter<ListaProdutoAdapter.ViewHolder>{
+    private List<Produto> produtos;
 
-    public ListaProdutoAdapter(@NonNull Context context, @LayoutRes int resource) {
-        super(context, resource);
-
-        layoutInflater = LayoutInflater.from(context);
+    public ListaProdutoAdapter(List<Produto> produtos) {
+        this.produtos = produtos;
     }
 
-    @NonNull
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView titulo;
+        public TextView preco;
+        public ImageView imagem;
+        public View layout;
+
+        public ViewHolder(View v) {
+            super(v);
+            layout = v;
+            titulo = (TextView) v.findViewById(R.id.row_lista_produto_titulo);
+            preco = (TextView) v.findViewById(R.id.row_lista_produto_preco);
+            imagem = (ImageView) v.findViewById(R.id.row_lista_produto_imagem_principal);
+
+        }
+    }
+
+    /*public void add(int position, Produto item) {
+        produtos.add(position, item);
+        notifyItemInserted(position);
+    }
+
+    public void remove(int position) {
+        produtos.remove(position);
+        notifyItemRemoved(position);
+    }*/
+
+
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if(convertView == null) {
-            // linear layout
-            convertView = layoutInflater.inflate(R.layout.row_recycler_view_lista_produto, parent, false);
-        }
-
-        ImageView imagem = (ImageView)convertView.findViewById(R.id.row_recycler_view_lista_produto_imagem);
-        TextView titulo = (TextView)convertView.findViewById(R.id.row_recycler_view_lista_produto_titulo);
-        TextView preco = (TextView)convertView.findViewById(R.id.row_recycler_view_lista_produto_preco);
-        TextView precoDesconto = (TextView)convertView.findViewById(R.id.row_recycler_view_lista_produto_preco_desconto);
-
-        Produto produto = getItem(position);
-
-        titulo.setText(produto.getTitulo());
-        preco.setText(produto.getPreco().toString());
-        precoDesconto.setText(produto.getPreco_desconto().toString());
-
-        int idImagem = convertView.getResources().getIdentifier(produto.getImagem_principal(), "drawable", getContext().getPackageName());
-
-        try {
-            Log.d("ADAP", produto.getImagem_principal());
-            imagem.setImageDrawable(getContext().getDrawable(idImagem));
-        } catch (OutOfMemoryError e) {
-            Log.d("ADAP", produto.getImagem_principal());
-            imagem.setImageDrawable(null);
-        }
-        return convertView;
+    public ListaProdutoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                             int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(
+                parent.getContext());
+        View v = inflater.inflate(R.layout.row_lista_produto, parent, false);
+        ViewHolder vh = new ViewHolder(v);
+        return vh;
     }
 
     @Override
-    public void onClick(View v) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        holder.titulo.setText(produtos.get(position).getTitulo());
+        holder.preco.setText(produtos.get(position).getPreco().toString());
+    }
 
+    @Override
+    public int getItemCount() {
+        return produtos.size();
     }
 }

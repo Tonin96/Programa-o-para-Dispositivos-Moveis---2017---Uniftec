@@ -5,13 +5,11 @@ import android.os.Bundle;
 
 import br.com.uniftec.ecommercemobile.R;
 
-public class ProdutoActivity extends AppCompatActivity {
-
-    public static final String PRODUTO_PARAMETER = "PRODUTO_PARAMETER";
+public class CriaContaUsuarioActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_produto);
+        setContentView(R.layout.activity_cria_conta_usuario);
     }
 }

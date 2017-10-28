@@ -8,12 +8,23 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import br.com.uniftec.ecommercemobile.adapter.MyAdapter;
+import br.com.uniftec.ecommercemobile.model.Produto;
 import br.com.uniftec.ecommercemobile.ui.ProdutoActivity;
 
 import static android.support.v4.app.NotificationCompat.VISIBILITY_PUBLIC;
 
 public class MainActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,5 +58,34 @@ public class MainActivity extends AppCompatActivity {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 // mId allows you to update the notification later on.
         mNotificationManager.notify(1, mBuilder.build());
+
+
+
+
+
+
+
+
+
+
+
+
+        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+        // use this setting to
+        // improve performance if you know that changes
+        // in content do not change the layout size
+        // of the RecyclerView
+        recyclerView.setHasFixedSize(true);
+        // use a linear layout manager
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        List<Produto> input = new ArrayList<Produto>();
+        for (int i = 0; i < 100; i++) {
+            Produto produto = new Produto();
+            produto.setTitulo("teste" + i);
+            input.add(produto);
+        }// define an adapter
+        mAdapter = new MyAdapter(input);
+        recyclerView.setAdapter(mAdapter);
     }
 }

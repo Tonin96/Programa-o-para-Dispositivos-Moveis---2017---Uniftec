@@ -36,6 +36,12 @@
             </intent-filter>
         </service>
 
+        <activity android:name=".ui.CriaContaUsuarioActivity" />
+        <activity android:name=".ui.AlteraContaUsuarioActivity" />
+        <activity android:name=".ui.ListaEnderecosUsuarioActivity" />
+        <activity android:name=".ui.CriaEnderecoUsuarioActivity" />
+        <activity android:name=".ui.AlteraEnderecoUsuarioActivity" />
+        <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.ListaProdutoActivity"></activity>
     </application>
 

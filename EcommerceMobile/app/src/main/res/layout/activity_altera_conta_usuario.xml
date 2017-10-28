@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context="br.com.uniftec.ecommercemobile.ui.ProdutoActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/linear_layout_titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/activity_altera_conta_usuario_titulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Bruno Marsilio"
+                android:textSize="40dp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/activity_altera_conta_usuario_imagen_principal"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/user_image" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_nome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_layout_titulo">
+
+            <TextView
+                android:id="@+id/activity_altera_conta_usuario_label_nome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome:"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/activity_altera_conta_usuario_edit_text_nome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bruno Marsilio"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_layout_nome">
+
+            <TextView
+                android:id="@+id/activity_altera_conta_usuario_label_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email:"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/activity_altera_conta_usuario_edit_text_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="bruno.marsilio@gmail.com"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_senha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_layout_email">
+
+            <TextView
+                android:id="@+id/activity_altera_conta_usuario_label_senha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Senha:"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/activity_altera_conta_usuario_edit_text_senha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:text="123456"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_cpf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_layout_senha">
+
+            <TextView
+                android:id="@+id/activity_altera_conta_usuario_label_cpf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CPF:"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/activity_altera_conta_usuario_edit_text_cpf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="036.866.440-61"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_telefone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_layout_cpf">
+
+            <TextView
+                android:id="@+id/activity_altera_conta_usuario_label_telefone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Telefone:"
+                android:textSize="15dp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/activity_altera_conta_usuario_edit_text_telefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="(54) 99967-1473"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_salvar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear_layout_telefone">
+
+            <Button
+                android:id="@+id/activity_altera_conta_usuario_button_salvar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Atualizar"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>
