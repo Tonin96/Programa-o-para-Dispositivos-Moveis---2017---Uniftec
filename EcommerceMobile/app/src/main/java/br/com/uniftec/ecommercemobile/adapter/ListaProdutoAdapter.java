@@ -27,10 +27,11 @@ public class ListaProdutoAdapter extends RecyclerView.Adapter<ListaProdutoAdapte
         this.produtos = produtos;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView titulo;
         public TextView preco;
         public ImageView imagem;
+        public Produto produto;
         public View layout;
 
         public ViewHolder(View v) {
@@ -39,7 +40,21 @@ public class ListaProdutoAdapter extends RecyclerView.Adapter<ListaProdutoAdapte
             titulo = (TextView) v.findViewById(R.id.row_lista_produto_titulo);
             preco = (TextView) v.findViewById(R.id.row_lista_produto_preco);
             imagem = (ImageView) v.findViewById(R.id.row_lista_produto_imagem_principal);
+            v.setOnClickListener(this);
 
+        }
+
+
+        @Override
+        public void onClick(View v) {
+
+            final Intent intent;
+
+            intent =  new Intent(v.getContext(), ProdutoActivity.class);
+            intent.putExtra(ProdutoActivity.PRODUTO_PARAMETER, produto);
+
+
+            v.getContext().startActivity(intent);
         }
     }
 
@@ -66,8 +81,10 @@ public class ListaProdutoAdapter extends RecyclerView.Adapter<ListaProdutoAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        holder.produto = produtos.get(position);
         holder.titulo.setText(produtos.get(position).getTitulo());
         holder.preco.setText(produtos.get(position).getPreco().toString());
+
     }
 
     @Override

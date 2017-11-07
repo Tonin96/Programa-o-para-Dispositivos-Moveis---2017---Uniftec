@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/menu_filmes"
-        android:title="Filmes"
+        android:id="@+id/menu_lista_produtos"
+        android:title="Lista de Produtos"
         />
 
     <item
