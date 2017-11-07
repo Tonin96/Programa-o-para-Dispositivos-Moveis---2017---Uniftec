@@ -60,10 +60,10 @@ public class FilmeAdapter extends ArrayAdapter<Filme> implements View.OnClickLis
 
         try {
             Log.d("ADAP", filme.getImagem());
-            imagem.setImageDrawable(getContext().getDrawable(idImagem));
+            //imagem.setImageDrawable(getContext().getDrawable(idImagem));
         } catch (OutOfMemoryError e) {
             Log.d("ADAP", filme.getImagem());
-            imagem.setImageDrawable(null);
+            //imagem.setImageDrawable(null);
         }
 
         return convertView;

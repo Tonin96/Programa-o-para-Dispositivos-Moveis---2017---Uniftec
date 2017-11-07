@@ -10,21 +10,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.uniftec.fteclistview.DataSource;
 import br.com.uniftec.fteclistview.R;
 import br.com.uniftec.fteclistview.adapter.FilmeAdapter;
 import br.com.uniftec.fteclistview.model.Filme;
+import br.com.uniftec.fteclistview.model.PopularResponse;
+import br.com.uniftec.fteclistview.task.CarregarPopularesTask;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListaFilmesFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class ListaFilmesFragment extends Fragment implements AdapterView.OnItemClickListener, CarregarPopularesTask.CarregarPopularesDelegate {
 
     private ListView listViewFilmes;
     private FilmeAdapter adapter;
+    private List<Filme> dataSource;
 
     public ListaFilmesFragment() {
         // Required empty public constructor
@@ -45,10 +50,15 @@ public class ListaFilmesFragment extends Fragment implements AdapterView.OnItemC
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
-        List<Filme> filmes = DataSource.carregarFilmes(getActivity());
+        //List<Filme> filmes = DataSource.carregarFilmes(getActivity());
+        dataSource = new ArrayList<>();
 
-        adapter = new FilmeAdapter(getActivity(), 0, filmes);
+        adapter = new FilmeAdapter(getActivity(), 0, dataSource);
         listViewFilmes.setAdapter(adapter);
+
+        CarregarPopularesTask task = new CarregarPopularesTask(this);
+
+        task.execute("8cc65cc237509b082427cce84df4fe28");
 
         super.onActivityCreated(savedInstanceState);
     }
@@ -62,5 +72,21 @@ public class ListaFilmesFragment extends Fragment implements AdapterView.OnItemC
         intent.putExtra(FilmeActivity.FILME_PARAMETER, filme);
 
         startActivity(intent);
+    }
+
+    @Override
+    public void sucesso(PopularResponse popularResponse) {
+
+        dataSource.clear();
+        dataSource.addAll(popularResponse.getFilmes());
+
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void falha(String mensagem) {
+
+        Toast.makeText(getActivity(), mensagem, Toast.LENGTH_LONG).show();
+
     }
 }
