@@ -41,10 +41,20 @@ public class CarrinhoService {
             Produto produto_teste = produtos.get(i);
             if (produto_teste.getId() == produto.getId()) {
                 produtos.remove(i);
+                break;
             }
         }
 
         setList(TAG, produtos);
+    }
+
+    public double getValorCarrinho(){
+        double total = 0;
+        ArrayList<Produto> produtos =  buscaProdutos();
+        for (int i = 0; i < produtos.size(); i++) {
+            total += produtos.get(i).getPreco();
+        }
+        return total;
     }
 
     public ArrayList<Produto> buscaProdutos() {

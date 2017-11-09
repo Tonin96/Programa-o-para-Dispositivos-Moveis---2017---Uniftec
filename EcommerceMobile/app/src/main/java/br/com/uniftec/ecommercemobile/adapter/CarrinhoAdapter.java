@@ -3,28 +3,14 @@ package br.com.uniftec.ecommercemobile.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.constraint.solver.SolverVariable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import br.com.uniftec.ecommercemobile.MainActivity;
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.model.Produto;
 import br.com.uniftec.ecommercemobile.services.CarrinhoService;
@@ -68,10 +54,8 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.ViewHo
         public void onClick(View v) {
             if(v.getId() == R.id.row_carrinho_retirar){
                 remove(getAdapterPosition());
-
             }else{
                 final Intent intent;
-
                 intent =  new Intent(v.getContext(), ProdutoActivity.class);
                 intent.putExtra(ProdutoActivity.PRODUTO_PARAMETER, produto);
 
@@ -90,6 +74,7 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.ViewHo
         carrinhoService.removeProduto(produtos.get(position));
         produtos.remove(position);
         notifyItemRemoved(position);
+        notifyDataSetChanged();
     }
 
 
