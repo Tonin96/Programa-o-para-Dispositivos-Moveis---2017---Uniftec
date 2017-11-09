@@ -3,17 +3,28 @@ package br.com.uniftec.ecommercemobile.ui;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+
+import org.json.JSONException;
 
 import br.com.uniftec.ecommercemobile.R;
 
-public class CriaEnderecoUsuarioActivity extends AbstractActivity {
-        @Override
+public class PedidosActivity extends AbstractActivity implements View.OnClickListener {
+    public static final String PEDIDO_PARAMETER = "PEDIDO_PARAMETER";
+
+
+    @Override
     protected int getLayoutRes() {
-        return R.layout.activity_cria_endereco_usuario;
+        return R.layout.activity_pedidos;
     }
 
     @Override
     protected void setupView() {
+
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 
@@ -28,5 +39,4 @@ public class CriaEnderecoUsuarioActivity extends AbstractActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

@@ -17,7 +17,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.ProdutoActivity" />
-        <activity android:name=".ui.MenuActivity" />
 
         <service
             android:name=".services.MyFirebaseMessagingService"
@@ -42,7 +41,8 @@
         <activity android:name=".ui.CriaEnderecoUsuarioActivity" />
         <activity android:name=".ui.AlteraEnderecoUsuarioActivity" />
         <activity android:name=".ui.LoginActivity" />
-        <activity android:name=".ui.ListaProdutoActivity"></activity>
+        <activity android:name=".ui.CarrinhoActivity" />
+        <activity android:name=".ui.PedidosActivity"></activity>
     </application>
 
 </manifest>

@@ -1,60 +1,53 @@
 package br.com.uniftec.ecommercemobile.adapter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.uniftec.ecommercemobile.R;
+import br.com.uniftec.ecommercemobile.model.Pedido;
 import br.com.uniftec.ecommercemobile.model.Produto;
+import br.com.uniftec.ecommercemobile.ui.PedidosActivity;
 import br.com.uniftec.ecommercemobile.ui.ProdutoActivity;
 
 /**
  * Created by bruno on 28/10/17.
  */
 
-public class ListaProdutoAdapter extends RecyclerView.Adapter<ListaProdutoAdapter.ViewHolder>{
-    private List<Produto> produtos;
+public class ListaPedidosAdapter extends RecyclerView.Adapter<ListaPedidosAdapter.ViewHolder>{
+    private ArrayList<Pedido> pedidos;
 
-    public ListaProdutoAdapter(List<Produto> produtos) {
-        this.produtos = produtos;
+    public ListaPedidosAdapter(ArrayList<Pedido> pedidos) {
+        this.pedidos = pedidos;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView titulo;
-        public TextView preco;
-        public ImageView imagem;
-        public Produto produto;
+        public Pedido pedido;
         public View layout;
 
         public ViewHolder(View v) {
             super(v);
             layout = v;
-            titulo = (TextView) v.findViewById(R.id.row_lista_produto_titulo);
-            preco = (TextView) v.findViewById(R.id.row_lista_produto_preco);
-            imagem = (ImageView) v.findViewById(R.id.row_lista_produto_imagem_principal);
             v.setOnClickListener(this);
-
         }
 
 
         @Override
         public void onClick(View v) {
-
             final Intent intent;
 
-            intent =  new Intent(v.getContext(), ProdutoActivity.class);
-            intent.putExtra(ProdutoActivity.PRODUTO_PARAMETER, produto);
+            //intent =  new Intent(v.getContext(), ProdutoActivity.class);
+            //intent.putExtra(PedidosActivity.PEDIDO_PARAMETER, pedido);
 
-
-            v.getContext().startActivity(intent);
+            //v.getContext().startActivity(intent);
         }
     }
 
@@ -70,25 +63,25 @@ public class ListaProdutoAdapter extends RecyclerView.Adapter<ListaProdutoAdapte
 
 
     @Override
-    public ListaProdutoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+    public ListaPedidosAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                              int viewType) {
         LayoutInflater inflater = LayoutInflater.from(
                 parent.getContext());
-        View v = inflater.inflate(R.layout.row_lista_produto, parent, false);
+        View v = inflater.inflate(R.layout.row_lista_pedido, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.produto = produtos.get(position);
-        holder.titulo.setText(produtos.get(position).getTitulo());
-        holder.preco.setText(produtos.get(position).getPreco().toString());
+        holder.pedido = pedidos.get(position);
+        //holder.titulo.setText(produtos.get(position).getTitulo());
+        //holder.preco.setText(produtos.get(position).getPreco().toString());
 
     }
 
     @Override
     public int getItemCount() {
-        return produtos.size();
+        return pedidos.size();
     }
 }

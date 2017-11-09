@@ -77,7 +77,6 @@ public class Produto implements Serializable {
     }
 
     public Integer getId() {
-
         return id;
     }
 

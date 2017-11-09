@@ -5,7 +5,7 @@
     android:padding="6dip">
 
     <ImageView
-        android:id="@+id/row_lista_produto_imagem_principal"
+        android:id="@+id/row_carrinho_imagem_principal"
         android:layout_width="150dp"
         android:layout_height="300dp"
         android:layout_alignParentBottom="true"
@@ -16,23 +16,23 @@
         android:src="@drawable/ft_4gx0m4rifoqxbz9lejqq6wypqyo" />
 
     <TextView
-        android:id="@+id/row_lista_produto_titulo"
+        android:id="@+id/row_carrinho_titulo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_alignWithParentIfMissing="true"
-        android:layout_toRightOf="@id/row_lista_produto_imagem_principal"
+        android:layout_toRightOf="@id/row_carrinho_imagem_principal"
         android:gravity="center_vertical"
         android:text="Titulo"
         android:textSize="20dp" />
 
     <TextView
-        android:id="@+id/row_lista_produto_label_preco"
+        android:id="@+id/row_carrinho_label_preco"
         android:layout_width="20dp"
         android:layout_height="26dp"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@id/row_lista_produto_imagem_principal"
+        android:layout_toRightOf="@id/row_carrinho_imagem_principal"
         android:ellipsize="marquee"
         android:maxLines="1"
         android:text="R$: "
@@ -40,15 +40,25 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/row_lista_produto_preco"
-        android:layout_width="fill_parent"
+        android:id="@+id/row_carrinho_preco"
+        android:layout_width="100dp"
         android:layout_height="26dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@id/row_lista_produto_label_preco"
+        android:layout_toRightOf="@id/row_carrinho_label_preco"
         android:ellipsize="marquee"
         android:maxLines="1"
         android:text="Preço"
+        android:textSize="13dp" />
+
+    <Button
+        android:id="@+id/row_carrinho_retirar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/row_carrinho_preco"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:text="Retirar"
         android:textSize="13dp" />
 
 </RelativeLayout>

@@ -1,58 +1,49 @@
 package br.com.uniftec.ecommercemobile.adapter;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.uniftec.ecommercemobile.R;
+import br.com.uniftec.ecommercemobile.model.Endereco;
 import br.com.uniftec.ecommercemobile.model.Produto;
+import br.com.uniftec.ecommercemobile.ui.AlteraEnderecoUsuarioActivity;
 import br.com.uniftec.ecommercemobile.ui.ProdutoActivity;
 
 /**
  * Created by bruno on 28/10/17.
  */
 
-public class ListaProdutoAdapter extends RecyclerView.Adapter<ListaProdutoAdapter.ViewHolder>{
-    private List<Produto> produtos;
+public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdapter.ViewHolder>{
+    private List<Endereco> enderecos;
 
-    public ListaProdutoAdapter(List<Produto> produtos) {
-        this.produtos = produtos;
+    public ListaEnderecoAdapter(ArrayList<Endereco> enderecos) {
+        this.enderecos = enderecos;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView titulo;
-        public TextView preco;
-        public ImageView imagem;
-        public Produto produto;
+        public Endereco endereco;
         public View layout;
 
         public ViewHolder(View v) {
             super(v);
             layout = v;
-            titulo = (TextView) v.findViewById(R.id.row_lista_produto_titulo);
-            preco = (TextView) v.findViewById(R.id.row_lista_produto_preco);
-            imagem = (ImageView) v.findViewById(R.id.row_lista_produto_imagem_principal);
             v.setOnClickListener(this);
-
         }
 
 
         @Override
         public void onClick(View v) {
-
             final Intent intent;
 
-            intent =  new Intent(v.getContext(), ProdutoActivity.class);
-            intent.putExtra(ProdutoActivity.PRODUTO_PARAMETER, produto);
-
+            intent =  new Intent(v.getContext(), AlteraEnderecoUsuarioActivity.class);
 
             v.getContext().startActivity(intent);
         }
@@ -70,25 +61,23 @@ public class ListaProdutoAdapter extends RecyclerView.Adapter<ListaProdutoAdapte
 
 
     @Override
-    public ListaProdutoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                             int viewType) {
+    public ListaEnderecoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                              int viewType) {
         LayoutInflater inflater = LayoutInflater.from(
                 parent.getContext());
-        View v = inflater.inflate(R.layout.row_lista_produto, parent, false);
+        View v = inflater.inflate(R.layout.row_lista_endereco, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.produto = produtos.get(position);
-        holder.titulo.setText(produtos.get(position).getTitulo());
-        holder.preco.setText(produtos.get(position).getPreco().toString());
+        holder.endereco = enderecos.get(position);
 
     }
 
     @Override
     public int getItemCount() {
-        return produtos.size();
+        return enderecos.size();
     }
 }

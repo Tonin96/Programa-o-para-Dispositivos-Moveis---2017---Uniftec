@@ -1,91 +1,114 @@
 package br.com.uniftec.ecommercemobile;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.view.MenuItem;
 
-import java.util.ArrayList;
+import com.google.gson.Gson;
+
 import java.util.List;
 
-import br.com.uniftec.ecommercemobile.adapter.MyAdapter;
+import br.com.uniftec.ecommercemobile.model.Carrinho;
+import br.com.uniftec.ecommercemobile.model.Conta;
 import br.com.uniftec.ecommercemobile.model.Produto;
-import br.com.uniftec.ecommercemobile.ui.ProdutoActivity;
+import br.com.uniftec.ecommercemobile.services.CarrinhoService;
+import br.com.uniftec.ecommercemobile.ui.AbstractActivity;
+import br.com.uniftec.ecommercemobile.ui.AlteraContaUsuarioActivity;
+import br.com.uniftec.ecommercemobile.ui.CarrinhoActivity;
+import br.com.uniftec.ecommercemobile.ui.ListaPedidosFragment;
+import br.com.uniftec.ecommercemobile.ui.ListaProdutoFragment;
+import br.com.uniftec.ecommercemobile.ui.LoginActivity;
+import br.com.uniftec.ecommercemobile.ui.PedidosActivity;
 
-import static android.support.v4.app.NotificationCompat.VISIBILITY_PUBLIC;
+public class MainActivity extends AbstractActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-public class MainActivity extends AppCompatActivity {
-
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected int getLayoutRes() {
+        return R.layout.activity_main;
+    }
 
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.ic_heart_black_18dp)
-                        .setContentTitle("My notification")
-                        .setContentText("Hello World!");
-// Creates an explicit intent for an Activity in your app
-        Intent resultIntent = new Intent(this, ProdutoActivity.class);
+    @Override
+    protected void setupView() {
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
 
-// The stack builder object will contain an artificial back stack for the
-// started Activity.
-// This ensures that navigating backward from the Activity leads out of
-// your application to the Home screen.
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-// Adds the back stack for the Intent (but not the Intent itself)
-        stackBuilder.addParentStack(ProdutoActivity.class);
-// Adds the Intent that starts the Activity to the top of the stack
-        stackBuilder.addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent =
-                stackBuilder.getPendingIntent(
-                        0,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                );
-        mBuilder.setContentIntent(resultPendingIntent);
-        NotificationManager mNotificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-// mId allows you to update the notification later on.
-        mNotificationManager.notify(1, mBuilder.build());
+        drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer_layout);
+        navigationView = (NavigationView) findViewById(R.id.main_navigation_view);
+        navigationView.setNavigationItemSelectedListener(this);
 
+        //mudarContainerPrincipal(new ListaProdutoFragment());
+        Intent intent = null;
+        intent =  new Intent(this, LoginActivity.class);
 
+        this.startActivity(intent);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
 
+        if (item.getItemId() == android.R.id.home) {
+            drawerLayout.openDrawer(GravityCompat.START);
 
+            return true;
+        }
 
+        return super.onOptionsItemSelected(item);
+    }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+        drawerLayout.closeDrawers();
 
+        Fragment fragment = null;
+        Intent intent = null;
 
+        switch (item.getItemId()) {
 
+            case R.id.menu_lista_produtos:
+                fragment = new ListaProdutoFragment();
+                break;
 
-        recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-        // use this setting to
-        // improve performance if you know that changes
-        // in content do not change the layout size
-        // of the RecyclerView
-        recyclerView.setHasFixedSize(true);
-        // use a linear layout manager
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        List<Produto> input = new ArrayList<Produto>();
-        for (int i = 0; i < 100; i++) {
-            Produto produto = new Produto();
-            produto.setTitulo("teste" + i);
-            input.add(produto);
-        }// define an adapter
-        mAdapter = new MyAdapter(input);
-        recyclerView.setAdapter(mAdapter);
+            case R.id.menu_carrinho:
+                intent =  new Intent(this, CarrinhoActivity.class);
+
+                this.startActivity(intent);
+                break;
+
+            case R.id.menu_conta:
+                intent =  new Intent(this, AlteraContaUsuarioActivity.class);
+
+                this.startActivity(intent);
+                break;
+
+            case R.id.menu_pedidos:
+                fragment = new ListaPedidosFragment();
+                break;
+
+        }
+
+        if (fragment != null) {
+            mudarContainerPrincipal(fragment);
+
+            return true;
+        }
+        return false;
+    }
+
+    private void mudarContainerPrincipal(Fragment fragment) {
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_container, fragment);
+        transaction.commit();
+
     }
 }
