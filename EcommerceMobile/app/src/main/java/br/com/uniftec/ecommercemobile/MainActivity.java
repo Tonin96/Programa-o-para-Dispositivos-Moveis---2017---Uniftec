@@ -1,8 +1,6 @@
 package br.com.uniftec.ecommercemobile;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -10,22 +8,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
-
-import com.google.gson.Gson;
-
-import java.util.List;
-
-import br.com.uniftec.ecommercemobile.model.Carrinho;
-import br.com.uniftec.ecommercemobile.model.Conta;
-import br.com.uniftec.ecommercemobile.model.Produto;
-import br.com.uniftec.ecommercemobile.services.CarrinhoService;
 import br.com.uniftec.ecommercemobile.ui.AbstractActivity;
 import br.com.uniftec.ecommercemobile.ui.AlteraContaUsuarioActivity;
 import br.com.uniftec.ecommercemobile.ui.CarrinhoActivity;
 import br.com.uniftec.ecommercemobile.ui.ListaPedidosFragment;
 import br.com.uniftec.ecommercemobile.ui.ListaProdutoFragment;
 import br.com.uniftec.ecommercemobile.ui.LoginActivity;
-import br.com.uniftec.ecommercemobile.ui.PedidosActivity;
 
 public class MainActivity extends AbstractActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -50,6 +38,9 @@ public class MainActivity extends AbstractActivity implements NavigationView.OnN
         intent =  new Intent(this, LoginActivity.class);
 
         this.startActivity(intent);
+
+
+
     }
 
     @Override
