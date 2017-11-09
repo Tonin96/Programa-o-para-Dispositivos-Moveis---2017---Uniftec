@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="6dip">
+
+    <ImageView
+        android:id="@+id/row_carrinho_imagem_principal"
+        android:layout_width="150dp"
+        android:layout_height="300dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="6dip"
+        android:contentDescription="TODO"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ft_4gx0m4rifoqxbz9lejqq6wypqyo" />
+
+    <TextView
+        android:id="@+id/row_carrinho_titulo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignWithParentIfMissing="true"
+        android:layout_toRightOf="@id/row_carrinho_imagem_principal"
+        android:gravity="center_vertical"
+        android:text="Titulo"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/row_carrinho_label_preco"
+        android:layout_width="20dp"
+        android:layout_height="26dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/row_carrinho_imagem_principal"
+        android:ellipsize="marquee"
+        android:maxLines="1"
+        android:text="R$: "
+        android:textSize="13dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/row_carrinho_preco"
+        android:layout_width="100dp"
+        android:layout_height="26dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@id/row_carrinho_label_preco"
+        android:ellipsize="marquee"
+        android:maxLines="1"
+        android:text="Preço"
+        android:textSize="13dp" />
+
+    <Button
+        android:id="@+id/row_carrinho_retirar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/row_carrinho_preco"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:text="Retirar"
+        android:textSize="13dp" />
+
+</RelativeLayout>

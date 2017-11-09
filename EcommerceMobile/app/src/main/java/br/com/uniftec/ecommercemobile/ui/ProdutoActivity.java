@@ -4,15 +4,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import br.com.uniftec.ecommercemobile.R;
+import br.com.uniftec.ecommercemobile.model.Carrinho;
 import br.com.uniftec.ecommercemobile.model.Produto;
+import br.com.uniftec.ecommercemobile.services.CarrinhoService;
 
 import static java.security.AccessController.getContext;
 
-public class ProdutoActivity extends AbstractActivity {
+public class ProdutoActivity extends AbstractActivity implements View.OnClickListener{
 
     public static final String PRODUTO_PARAMETER = "PRODUTO_PARAMETER";
 
@@ -23,6 +27,7 @@ public class ProdutoActivity extends AbstractActivity {
     private TextView descricaoTextView;
     private TextView idTextView;
     private ImageView imagemPrincipalImageView;
+    private Button botaoComprar;
 
     @Override
     protected void setupView() {
@@ -32,9 +37,12 @@ public class ProdutoActivity extends AbstractActivity {
         precoDescontoTextView = (TextView) findViewById(R.id.activity_produto_preco_desconto);
         descricaoTextView = (TextView) findViewById(R.id.activity_produto_descricao);
         imagemPrincipalImageView = (ImageView) findViewById(R.id.activity_produto_imagen_principal);
+        botaoComprar = (Button) findViewById(R.id.activity_produto_botao_comprar);
+
 
         produto = (Produto) getIntent().getSerializableExtra(PRODUTO_PARAMETER);
 
+        botaoComprar.setOnClickListener(this);
         idTextView.setText(produto.getId().toString());
         tituloTextView.setText(produto.getTitulo());
         precoTextView.setText(Double.toString(produto.getPreco()));
@@ -60,5 +68,12 @@ public class ProdutoActivity extends AbstractActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        CarrinhoService carrinhoService = new CarrinhoService(this);
+
+        carrinhoService.adicionarProduto(produto);
     }
 }

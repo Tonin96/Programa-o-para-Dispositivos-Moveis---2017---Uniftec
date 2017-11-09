@@ -3,12 +3,18 @@
 
     <item
         android:id="@+id/menu_lista_produtos"
-        android:title="Lista de Produtos"
-        />
+        android:title="Lista de Produtos" />
 
     <item
-        android:id="@+id/menu_musicas"
-        android:title="Músicas"
-        />
+        android:id="@+id/menu_carrinho"
+        android:title="Carrinho de Compras" />
+
+    <item
+        android:id="@+id/menu_conta"
+        android:title="Conta" />
+
+    <item
+        android:id="@+id/menu_pedidos"
+        android:title="Pedidos" />
 
 </menu>

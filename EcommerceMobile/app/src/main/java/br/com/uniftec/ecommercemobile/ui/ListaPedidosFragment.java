@@ -14,21 +14,23 @@ import java.util.List;
 import java.util.Random;
 
 import br.com.uniftec.ecommercemobile.R;
+import br.com.uniftec.ecommercemobile.adapter.ListaPedidosAdapter;
 import br.com.uniftec.ecommercemobile.adapter.ListaProdutoAdapter;
+import br.com.uniftec.ecommercemobile.model.Pedido;
 import br.com.uniftec.ecommercemobile.model.Produto;
 
 /**
  * Created by bruno on 06/11/17.
  */
 
-public class ListaProdutoFragment extends Fragment {
+public class ListaPedidosFragment extends Fragment {
 
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    public ListaProdutoFragment() {
+    public ListaPedidosFragment() {
         // Required empty public constructor
     }
 
@@ -36,9 +38,9 @@ public class ListaProdutoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_lista_produto, container, false);
+        View view = inflater.inflate(R.layout.fragment_lista_pedidos, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_list_produto);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_list_pedidos);
 
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
@@ -51,6 +53,7 @@ public class ListaProdutoFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         List<Produto> input = new ArrayList<Produto>();
+        ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
         Random gerador = new Random();
 
         for (int i = 0; i < 100; i++) {
@@ -63,7 +66,11 @@ public class ListaProdutoFragment extends Fragment {
             produto.setImagem_principal("ft_4gx0m4rifoqxbz9lejqq6wypqyo");
             input.add(produto);
         }// define an adapter
-        mAdapter = new ListaProdutoAdapter(input);
+
+        Pedido pedido = new Pedido();
+        pedido.setProdutos((ArrayList<Produto>) input);
+        pedidos.add(pedido);
+        mAdapter = new ListaPedidosAdapter(pedidos);
         recyclerView.setAdapter(mAdapter);
 
 

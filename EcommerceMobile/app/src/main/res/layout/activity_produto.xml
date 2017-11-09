@@ -144,6 +144,11 @@
                 android:layout_height="150dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ft_4gx0m4rifoqxbz9lejqq6wypqyo" />
+            <Button
+                android:id="@+id/activity_produto_botao_comprar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Comprar"/>
         </LinearLayout>
 
     </RelativeLayout>
