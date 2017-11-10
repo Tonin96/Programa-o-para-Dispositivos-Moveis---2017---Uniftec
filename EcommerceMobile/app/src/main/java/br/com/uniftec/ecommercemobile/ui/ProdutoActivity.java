@@ -42,6 +42,8 @@ public class ProdutoActivity extends AbstractActivity implements View.OnClickLis
 
         produto = (Produto) getIntent().getSerializableExtra(PRODUTO_PARAMETER);
 
+        getSupportActionBar().setTitle(produto.getTitulo());
+
         botaoComprar.setOnClickListener(this);
         idTextView.setText(produto.getId().toString());
         tituloTextView.setText(produto.getTitulo());

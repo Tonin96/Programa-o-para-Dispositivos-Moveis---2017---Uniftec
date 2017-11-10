@@ -3,6 +3,7 @@ package br.com.uniftec.ecommercemobile.services;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -33,6 +34,8 @@ public class CarrinhoService {
         produtos.add(produto);
 
         setList(this.TAG, produtos);
+
+        Toast.makeText(this.context, "Adicionado ao carrinho", Toast.LENGTH_SHORT).show();
     }
 
     public void removeProduto(Produto produto) {
@@ -46,6 +49,8 @@ public class CarrinhoService {
         }
 
         setList(TAG, produtos);
+
+        Toast.makeText(this.context, "Removido do carrinho", Toast.LENGTH_SHORT).show();
     }
 
     public double getValorCarrinho(){

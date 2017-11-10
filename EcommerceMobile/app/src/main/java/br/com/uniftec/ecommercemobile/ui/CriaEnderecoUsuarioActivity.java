@@ -15,6 +15,8 @@ public class CriaEnderecoUsuarioActivity extends AbstractActivity {
     @Override
     protected void setupView() {
 
+        getSupportActionBar().setTitle("Novo Endereço");
+
     }
 
     @Override

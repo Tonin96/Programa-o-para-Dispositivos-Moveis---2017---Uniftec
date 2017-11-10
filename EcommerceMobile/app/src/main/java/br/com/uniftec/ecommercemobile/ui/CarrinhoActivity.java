@@ -30,6 +30,9 @@ public class CarrinhoActivity extends AbstractActivity {
 
     @Override
     protected void setupView() {
+
+        getSupportActionBar().setTitle("Carrinho");
+
         final CarrinhoService carrinhoService = new CarrinhoService(this);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_lcarrinho);
         textViewTotal = (TextView) findViewById(R.id.activity_carrinho_total);

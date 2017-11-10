@@ -20,9 +20,11 @@ public class AlteraContaUsuarioActivity extends AbstractActivity implements View
 
     @Override
     protected void setupView() {
+
+        getSupportActionBar().setTitle("Minha Conta");
+
         buttonEndereco = (Button) findViewById(R.id.activity_altera_conta_usuario_button_endereco);
         buttonEndereco.setOnClickListener(this);
-
     }
 
     @Override

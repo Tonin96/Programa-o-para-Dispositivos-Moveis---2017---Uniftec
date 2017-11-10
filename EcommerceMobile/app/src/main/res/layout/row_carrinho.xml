@@ -52,13 +52,10 @@
 
     <Button
         android:id="@+id/row_carrinho_retirar"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
         android:layout_toRightOf="@id/row_carrinho_preco"
         android:backgroundTint="@android:color/holo_red_light"
-        android:text="Retirar"
-        android:textSize="13dp" />
+        android:drawableLeft="@drawable/delete" />
 
 </RelativeLayout>
