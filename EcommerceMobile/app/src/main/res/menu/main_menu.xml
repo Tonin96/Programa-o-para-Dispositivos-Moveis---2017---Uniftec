@@ -3,10 +3,12 @@
 
     <item
         android:id="@+id/menu_lista_produtos"
-        android:title="Lista de Produtos" />
+        android:icon="@drawable/apps"
+        android:title="Produtos" />
 
     <item
         android:id="@+id/menu_carrinho"
+        android:icon="@drawable/cart"
         android:title="Carrinho de Compras" />
 
     <item
@@ -15,6 +17,7 @@
 
     <item
         android:id="@+id/menu_pedidos"
+        android:icon="@drawable/view_list"
         android:title="Pedidos" />
 
 </menu>
