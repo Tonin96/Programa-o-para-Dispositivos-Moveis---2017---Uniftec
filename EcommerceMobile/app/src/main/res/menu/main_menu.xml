@@ -12,10 +12,6 @@
         android:title="Carrinho de Compras" />
 
     <item
-        android:id="@+id/menu_conta"
-        android:title="Conta" />
-
-    <item
         android:id="@+id/menu_pedidos"
         android:icon="@drawable/view_list"
         android:title="Pedidos" />

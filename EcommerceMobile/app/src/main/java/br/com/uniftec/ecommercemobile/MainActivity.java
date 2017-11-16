@@ -77,12 +77,6 @@ public class MainActivity extends AbstractActivity implements NavigationView.OnN
                 this.startActivity(intent);
                 break;
 
-            case R.id.menu_conta:
-                intent =  new Intent(this, AlteraContaUsuarioActivity.class);
-
-                this.startActivity(intent);
-                break;
-
             case R.id.menu_pedidos:
                 fragment = new ListaPedidosFragment();
                 break;
