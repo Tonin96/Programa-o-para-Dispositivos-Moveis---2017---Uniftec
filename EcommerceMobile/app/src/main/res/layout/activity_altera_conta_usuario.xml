@@ -194,7 +194,7 @@
                     android:id="@+id/activity_altera_conta_usuario_button_endereco"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Endereço" />
+                    android:text="Endereços" />
 
             </LinearLayout>
 
