@@ -43,7 +43,8 @@
         <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.CarrinhoActivity" />
         <activity android:name=".ui.PedidosActivity" />
-        <activity android:name=".ui.DestaqueActivity"></activity>
+        <activity android:name=".ui.DestaqueActivity" />
+        <activity android:name=".ui.FinalizaCarrinhoActivity"></activity>
     </application>
 
 </manifest>
