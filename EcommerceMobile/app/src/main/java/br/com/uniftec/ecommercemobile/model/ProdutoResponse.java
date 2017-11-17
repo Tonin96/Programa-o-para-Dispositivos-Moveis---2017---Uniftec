@@ -1,17 +1,28 @@
 package br.com.uniftec.ecommercemobile.model;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.List;
 
-public class Produto implements Serializable {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ProdutoResponse {
 
+    private Long id;
     private String descricao;
     private String nome;
     private Double preco;
     private Double precoDesconto;
-    private ProdutoCategoria categoria;
-    private ProdutoImagem imagemPrincipal;
-    private List<ProdutoImagem> imagens;
+    private ProdutoCategoriaResponse categoria;
+    private ProdutoImagemResponse imagemPrincipal;
+    private List<ProdutoImagemResponse> imagens;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getDescricao() {
         return descricao;
@@ -45,27 +56,27 @@ public class Produto implements Serializable {
         this.precoDesconto = precoDesconto;
     }
 
-    public ProdutoCategoria getCategoria() {
+    public ProdutoCategoriaResponse getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(ProdutoCategoria categoria) {
+    public void setCategoria(ProdutoCategoriaResponse categoria) {
         this.categoria = categoria;
     }
 
-    public ProdutoImagem getImagemPrincipal() {
+    public ProdutoImagemResponse getImagemPrincipal() {
         return imagemPrincipal;
     }
 
-    public void setImagemPrincipal(ProdutoImagem imagemPrincipal) {
+    public void setImagemPrincipal(ProdutoImagemResponse imagemPrincipal) {
         this.imagemPrincipal = imagemPrincipal;
     }
 
-    public List<ProdutoImagem> getImagens() {
+    public List<ProdutoImagemResponse> getImagens() {
         return imagens;
     }
 
-    public void setImagens(List<ProdutoImagem> imagens) {
+    public void setImagens(List<ProdutoImagemResponse> imagens) {
         this.imagens = imagens;
     }
 }

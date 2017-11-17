@@ -5,31 +5,27 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.uniftec.ecommercemobile.R;
-import br.com.uniftec.ecommercemobile.model.Endereco;
-import br.com.uniftec.ecommercemobile.model.Produto;
+import br.com.uniftec.ecommercemobile.model.UsuarioEndereco;
 import br.com.uniftec.ecommercemobile.ui.AlteraEnderecoUsuarioActivity;
-import br.com.uniftec.ecommercemobile.ui.ProdutoActivity;
 
 /**
  * Created by bruno on 28/10/17.
  */
 
 public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdapter.ViewHolder>{
-    private List<Endereco> enderecos;
+    private List<UsuarioEndereco> enderecos;
 
-    public ListaEnderecoAdapter(ArrayList<Endereco> enderecos) {
+    public ListaEnderecoAdapter(ArrayList<UsuarioEndereco> enderecos) {
         this.enderecos = enderecos;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public Endereco endereco;
+        public UsuarioEndereco endereco;
         public View layout;
 
         public ViewHolder(View v) {
