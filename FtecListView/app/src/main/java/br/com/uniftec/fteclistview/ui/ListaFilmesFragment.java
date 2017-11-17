@@ -1,6 +1,7 @@
 package br.com.uniftec.fteclistview.ui;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,21 +16,23 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.uniftec.fteclistview.DataSource;
 import br.com.uniftec.fteclistview.R;
 import br.com.uniftec.fteclistview.adapter.FilmeAdapter;
 import br.com.uniftec.fteclistview.model.Filme;
 import br.com.uniftec.fteclistview.model.PopularResponse;
+import br.com.uniftec.fteclistview.model.Usuario;
 import br.com.uniftec.fteclistview.task.CarregarPopularesTask;
+import br.com.uniftec.fteclistview.task.IncluirUsuarioTask;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListaFilmesFragment extends Fragment implements AdapterView.OnItemClickListener, CarregarPopularesTask.CarregarPopularesDelegate {
+public class ListaFilmesFragment extends Fragment implements AdapterView.OnItemClickListener, CarregarPopularesTask.CarregarPopularesDelegate, IncluirUsuarioTask.IncluirUsuarioDelegate {
 
     private ListView listViewFilmes;
     private FilmeAdapter adapter;
     private List<Filme> dataSource;
+    private ProgressDialog progressDialog;
 
     public ListaFilmesFragment() {
         // Required empty public constructor
@@ -56,6 +59,8 @@ public class ListaFilmesFragment extends Fragment implements AdapterView.OnItemC
         adapter = new FilmeAdapter(getActivity(), 0, dataSource);
         listViewFilmes.setAdapter(adapter);
 
+        progressDialog = ProgressDialog.show(getActivity(), "Aguarde", "Carregando filmes", true, false);
+
         CarregarPopularesTask task = new CarregarPopularesTask(this);
 
         task.execute("8cc65cc237509b082427cce84df4fe28");
@@ -81,12 +86,40 @@ public class ListaFilmesFragment extends Fragment implements AdapterView.OnItemC
         dataSource.addAll(popularResponse.getFilmes());
 
         adapter.notifyDataSetChanged();
+
+        Usuario usuario = new Usuario();
+        usuario.setCpf("03686644061");
+        usuario.setEmail("bruno.marsilio@gmail.com");
+        usuario.setNome("Bruno Marsilio");
+        usuario.setSenha("123456");
+        usuario.setTelefone("54999671473");
+
+        IncluirUsuarioTask incluirUsuarioTask = new IncluirUsuarioTask(this);
+        incluirUsuarioTask.execute(usuario);
     }
 
     @Override
     public void falha(String mensagem) {
+        dismisProgressDialog();
 
         Toast.makeText(getActivity(), mensagem, Toast.LENGTH_LONG).show();
+    }
 
+    public void dismisProgressDialog() {
+        progressDialog.dismiss();
+        progressDialog = null;
+    }
+
+    @Override
+    public void incluirUsuarioSucesso(String token) {
+
+        Toast.makeText(getActivity(), "Usuário incluído com sucesso " + token, Toast.LENGTH_SHORT).show();
+
+        dismisProgressDialog();
+    }
+
+    @Override
+    public void incluirUsuarioFalha(String mensagem) {
+        Toast.makeText(getActivity(),mensagem, Toast.LENGTH_SHORT).show();
     }
 }

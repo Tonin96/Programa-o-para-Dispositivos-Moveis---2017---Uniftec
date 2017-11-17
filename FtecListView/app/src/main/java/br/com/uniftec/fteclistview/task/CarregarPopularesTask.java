@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import br.com.uniftec.fteclistview.model.PopularResponse;
 import br.com.uniftec.fteclistview.service.MovieService;
 import retrofit2.Call;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
