@@ -19,7 +19,7 @@ public interface PedidoService {
     public Call<EcommerceResponse<List<PedidoResponse>>> carregarPedidos(@Header("X-Token") String token);
 
     @PUT("/pedido")
-    public Call<EcommerceResponse<PedidoResponse>> salvarPedido(@Body Pedido pedido, @Header("X-Token") String token);
+    public Call<EcommerceResponse<PedidoResponse>> salvarPedido(@Header("X-Token") String token, @Body Pedido pedido);
 
     @POST("/pedido")
     public Call<EcommerceResponse<PedidoResponse>> atualizarPedido(@Path("id") Long id);
