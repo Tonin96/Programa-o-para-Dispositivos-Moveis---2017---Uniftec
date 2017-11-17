@@ -2,6 +2,8 @@ package br.com.uniftec.ecommercemobile.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PedidoResponse {
 
@@ -9,6 +11,8 @@ public class PedidoResponse {
     private String data;
     private String status;
     private Double total;
+    private List<UsuarioEnderecoResponse> enderecoEntrega;
+    private List<PedidoProdutoResponse> itensDoPedido;
 
     public Long getId() {
         return id;
@@ -40,5 +44,21 @@ public class PedidoResponse {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public List<UsuarioEnderecoResponse> getEnderecoEntrega() {
+        return enderecoEntrega;
+    }
+
+    public void setEnderecoEntrega(List<UsuarioEnderecoResponse> enderecoEntrega) {
+        this.enderecoEntrega = enderecoEntrega;
+    }
+
+    public List<PedidoProdutoResponse> getItensDoPedido() {
+        return itensDoPedido;
+    }
+
+    public void setItensDoPedido(List<PedidoProdutoResponse> itensDoPedido) {
+        this.itensDoPedido = itensDoPedido;
     }
 }

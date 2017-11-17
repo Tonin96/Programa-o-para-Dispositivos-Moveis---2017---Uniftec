@@ -8,13 +8,13 @@ import java.util.ArrayList;
  */
 
 public class Conta implements Serializable {
-    ArrayList<EnderecoUsuario> listaEndereco;
+    ArrayList<UsuarioEndereco> listaEndereco;
 
-    public ArrayList<EnderecoUsuario> getListaEndereco() {
+    public ArrayList<UsuarioEndereco> getListaEndereco() {
         return listaEndereco;
     }
 
-    public void setListaEndereco(ArrayList<EnderecoUsuario> listaEndereco) {
+    public void setListaEndereco(ArrayList<UsuarioEndereco> listaEndereco) {
         this.listaEndereco = listaEndereco;
     }
 }

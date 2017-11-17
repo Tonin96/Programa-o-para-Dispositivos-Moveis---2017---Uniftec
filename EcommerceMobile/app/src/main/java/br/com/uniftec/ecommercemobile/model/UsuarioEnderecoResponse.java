@@ -3,7 +3,7 @@ package br.com.uniftec.ecommercemobile.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class EnderecoUsuarioResponse {
+public class UsuarioEnderecoResponse {
 
     private Long id;
     private String bairro;

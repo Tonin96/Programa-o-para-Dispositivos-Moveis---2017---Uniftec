@@ -1,18 +1,17 @@
 package br.com.uniftec.ecommercemobile.model;
 
 import java.io.Serializable;
+import java.util.List;
 
-/**
- * TODO: adicionar categoria
- * TODO: adicionar imagemPrincipal
- * TODO: adicionar imagens
- * */
 public class Produto implements Serializable {
 
     private String descricao;
     private String nome;
     private Double preco;
     private Double precoDesconto;
+    private ProdutoCategoria categoria;
+    private ProdutoImagem imagemPrincipal;
+    private List<ProdutoImagem> imagens;
 
     public String getDescricao() {
         return descricao;
@@ -44,5 +43,29 @@ public class Produto implements Serializable {
 
     public void setPrecoDesconto(Double precoDesconto) {
         this.precoDesconto = precoDesconto;
+    }
+
+    public ProdutoCategoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(ProdutoCategoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public ProdutoImagem getImagemPrincipal() {
+        return imagemPrincipal;
+    }
+
+    public void setImagemPrincipal(ProdutoImagem imagemPrincipal) {
+        this.imagemPrincipal = imagemPrincipal;
+    }
+
+    public List<ProdutoImagem> getImagens() {
+        return imagens;
+    }
+
+    public void setImagens(List<ProdutoImagem> imagens) {
+        this.imagens = imagens;
     }
 }

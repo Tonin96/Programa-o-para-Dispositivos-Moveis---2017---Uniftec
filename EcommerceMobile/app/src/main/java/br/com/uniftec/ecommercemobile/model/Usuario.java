@@ -1,8 +1,7 @@
 package br.com.uniftec.ecommercemobile.model;
 
-/**
- * TODO: adicionar endereços
- * */
+import java.util.List;
+
 public class Usuario {
 
     private String cpf;
@@ -10,6 +9,7 @@ public class Usuario {
     private String nome;
     private String senha;
     private String telefone;
+    private List<UsuarioEndereco> enderecos;
 
     public String getCpf() {
         return cpf;
@@ -51,4 +51,11 @@ public class Usuario {
         this.telefone = telefone;
     }
 
+    public List<UsuarioEndereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(List<UsuarioEndereco> enderecos) {
+        this.enderecos = enderecos;
+    }
 }

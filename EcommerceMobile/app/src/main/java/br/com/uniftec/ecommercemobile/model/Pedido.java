@@ -1,16 +1,15 @@
 package br.com.uniftec.ecommercemobile.model;
 
 import java.io.Serializable;
+import java.util.List;
 
-/**
- * TODO: adicionar enderecoEntrega
- * TODO: adicionar itens
- * */
 public class Pedido implements Serializable {
 
     private String data;
     private String status;
     private Double total;
+    private UsuarioEndereco enderecoEntrega;
+    private List<PedidoProduto> itens;
 
     public String getData() {
         return data;
@@ -34,5 +33,21 @@ public class Pedido implements Serializable {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public UsuarioEndereco getEnderecoEntrega() {
+        return enderecoEntrega;
+    }
+
+    public void setEnderecoEntrega(UsuarioEndereco enderecoEntrega) {
+        this.enderecoEntrega = enderecoEntrega;
+    }
+
+    public List<PedidoProduto> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<PedidoProduto> itens) {
+        this.itens = itens;
     }
 }

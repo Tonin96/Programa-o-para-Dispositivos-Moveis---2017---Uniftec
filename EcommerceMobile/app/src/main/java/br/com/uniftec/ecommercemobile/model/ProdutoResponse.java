@@ -2,6 +2,8 @@ package br.com.uniftec.ecommercemobile.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ProdutoResponse {
 
@@ -10,6 +12,9 @@ public class ProdutoResponse {
     private String nome;
     private Double preco;
     private Double precoDesconto;
+    private ProdutoCategoriaResponse categoria;
+    private ProdutoImagemResponse imagemPrincipal;
+    private List<ProdutoImagemResponse> imagens;
 
     public Long getId() {
         return id;
@@ -49,5 +54,29 @@ public class ProdutoResponse {
 
     public void setPrecoDesconto(Double precoDesconto) {
         this.precoDesconto = precoDesconto;
+    }
+
+    public ProdutoCategoriaResponse getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(ProdutoCategoriaResponse categoria) {
+        this.categoria = categoria;
+    }
+
+    public ProdutoImagemResponse getImagemPrincipal() {
+        return imagemPrincipal;
+    }
+
+    public void setImagemPrincipal(ProdutoImagemResponse imagemPrincipal) {
+        this.imagemPrincipal = imagemPrincipal;
+    }
+
+    public List<ProdutoImagemResponse> getImagens() {
+        return imagens;
+    }
+
+    public void setImagens(List<ProdutoImagemResponse> imagens) {
+        this.imagens = imagens;
     }
 }

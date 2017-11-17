@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.adapter.ListaEnderecoAdapter;
-import br.com.uniftec.ecommercemobile.model.EnderecoUsuario;
+import br.com.uniftec.ecommercemobile.model.UsuarioEndereco;
 
 /**
  * Created by bruno on 06/11/17.
@@ -48,8 +48,8 @@ public class ListaEnderecosFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        ArrayList<EnderecoUsuario> enderecos = new ArrayList<EnderecoUsuario>();
-       EnderecoUsuario endereco = new EnderecoUsuario();
+        ArrayList<UsuarioEndereco> enderecos = new ArrayList<UsuarioEndereco>();
+       UsuarioEndereco endereco = new UsuarioEndereco();
 
         enderecos.add(endereco);
 

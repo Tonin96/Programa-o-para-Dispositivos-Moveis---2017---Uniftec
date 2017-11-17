@@ -1,6 +1,6 @@
 package br.com.uniftec.ecommercemobile.model;
 
-public class EnderecoUsuario {
+public class UsuarioEndereco {
 
     private String bairro;
     private String cidade;

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.uniftec.ecommercemobile.R;
-import br.com.uniftec.ecommercemobile.model.EnderecoUsuario;
+import br.com.uniftec.ecommercemobile.model.UsuarioEndereco;
 import br.com.uniftec.ecommercemobile.ui.AlteraEnderecoUsuarioActivity;
 
 /**
@@ -18,14 +18,14 @@ import br.com.uniftec.ecommercemobile.ui.AlteraEnderecoUsuarioActivity;
  */
 
 public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdapter.ViewHolder>{
-    private List<EnderecoUsuario> enderecos;
+    private List<UsuarioEndereco> enderecos;
 
-    public ListaEnderecoAdapter(ArrayList<EnderecoUsuario> enderecos) {
+    public ListaEnderecoAdapter(ArrayList<UsuarioEndereco> enderecos) {
         this.enderecos = enderecos;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public EnderecoUsuario endereco;
+        public UsuarioEndereco endereco;
         public View layout;
 
         public ViewHolder(View v) {
