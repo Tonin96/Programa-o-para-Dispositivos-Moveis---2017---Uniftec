@@ -5,12 +5,20 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UsuarioResponse {
 
+    private Long id;
     private String cpf;
     private String email;
     private String nome;
     private String senha;
     private String telefone;
-    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getCpf() {
         return cpf;
@@ -50,13 +58,5 @@ public class UsuarioResponse {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }

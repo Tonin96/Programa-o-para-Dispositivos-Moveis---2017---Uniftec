@@ -10,14 +10,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.adapter.ListaEnderecoAdapter;
-import br.com.uniftec.ecommercemobile.adapter.ListaProdutoAdapter;
-import br.com.uniftec.ecommercemobile.model.Endereco;
-import br.com.uniftec.ecommercemobile.model.Produto;
+import br.com.uniftec.ecommercemobile.model.EnderecoUsuario;
 
 /**
  * Created by bruno on 06/11/17.
@@ -52,8 +48,8 @@ public class ListaEnderecosFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        ArrayList<Endereco> enderecos = new ArrayList<Endereco>();
-       Endereco endereco = new Endereco();
+        ArrayList<EnderecoUsuario> enderecos = new ArrayList<EnderecoUsuario>();
+       EnderecoUsuario endereco = new EnderecoUsuario();
 
         enderecos.add(endereco);
 

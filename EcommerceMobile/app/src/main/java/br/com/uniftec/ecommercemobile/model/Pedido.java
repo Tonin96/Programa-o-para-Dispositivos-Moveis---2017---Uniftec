@@ -1,28 +1,22 @@
 package br.com.uniftec.ecommercemobile.model;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
+/**
+ * TODO: adicionar enderecoEntrega
+ * TODO: adicionar itens
+ * */
 public class Pedido implements Serializable {
 
-    public final static String STATUS_PEDIDO_ABERTO  = "ABERTO";
-    public final static String STATUS_PEDIDO_FECHADO  = "FECHADO";
-
-    private Date data;
-    private Carrinho carrinho;
+    private String data;
     private String status;
+    private Double total;
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public String getDataFormatada(){
-        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
-        return formatador.format(data);
-    }
-
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 
@@ -34,11 +28,11 @@ public class Pedido implements Serializable {
         this.status = status;
     }
 
-    public Carrinho getCarrinho() {
-        return carrinho;
+    public Double getTotal() {
+        return total;
     }
 
-    public void setCarrinho(Carrinho carrinho) {
-        this.carrinho = carrinho;
+    public void setTotal(Double total) {
+        this.total = total;
     }
 }

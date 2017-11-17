@@ -1,5 +1,8 @@
 package br.com.uniftec.ecommercemobile.model;
 
+/**
+ * TODO: adicionar endereços
+ * */
 public class Usuario {
 
     private String cpf;
