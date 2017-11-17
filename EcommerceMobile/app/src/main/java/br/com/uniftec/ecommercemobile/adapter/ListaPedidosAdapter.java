@@ -2,6 +2,7 @@ package br.com.uniftec.ecommercemobile.adapter;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,20 +24,28 @@ import br.com.uniftec.ecommercemobile.ui.ProdutoActivity;
  * Created by bruno on 28/10/17.
  */
 
-public class ListaPedidosAdapter extends RecyclerView.Adapter<ListaPedidosAdapter.ViewHolder>{
-    private ArrayList<Pedido> pedidos;
+public class ListaPedidosAdapter extends RecyclerView.Adapter<ListaPedidosAdapter.ViewHolder> {
+    private List<Pedido> pedidos;
 
-    public ListaPedidosAdapter(ArrayList<Pedido> pedidos) {
+    public ListaPedidosAdapter(List<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public Pedido pedido;
         public View layout;
+        public TextView dataPedido;
+        public TextView status;
+        public TextView qtd;
+        public TextView precoTotal;
 
         public ViewHolder(View v) {
             super(v);
             layout = v;
+            dataPedido = v.findViewById(R.id.row_pedido_data_pedido);
+            status = v.findViewById(R.id.row_pedido_status);
+            qtd = v.findViewById(R.id.row_lista_pedido_qtd);
+            precoTotal = v.findViewById(R.id.row_lista_pedido_total);
             v.setOnClickListener(this);
         }
 
@@ -44,10 +54,10 @@ public class ListaPedidosAdapter extends RecyclerView.Adapter<ListaPedidosAdapte
         public void onClick(View v) {
             final Intent intent;
 
-            //intent =  new Intent(v.getContext(), ProdutoActivity.class);
-            //intent.putExtra(PedidosActivity.PEDIDO_PARAMETER, pedido);
+            intent =  new Intent(v.getContext(), PedidosActivity.class);
+            intent.putExtra(PedidosActivity.PEDIDO_PARAMETER, pedido);
 
-            //v.getContext().startActivity(intent);
+            v.getContext().startActivity(intent);
         }
     }
 
@@ -75,9 +85,18 @@ public class ListaPedidosAdapter extends RecyclerView.Adapter<ListaPedidosAdapte
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.pedido = pedidos.get(position);
-        //holder.titulo.setText(produtos.get(position).getTitulo());
-        //holder.preco.setText(produtos.get(position).getPreco().toString());
+        holder.dataPedido.setText(pedidos.get(position).getDataFormatada());
+        holder.status.setText(pedidos.get(position).getStatus());
+        holder.qtd.setText(String.valueOf(pedidos.get(position).getCarrinho().getProdutos().size()));
 
+        double total = 0;
+        List<Produto> produtos = pedidos.get(position).getCarrinho().getProdutos();
+
+        for (Produto produto:produtos) {
+            total += produto.getPreco();
+        }
+
+        holder.precoTotal.setText(String.valueOf(total));
     }
 
     @Override

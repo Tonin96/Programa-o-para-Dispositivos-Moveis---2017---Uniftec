@@ -18,7 +18,6 @@ public class CarrinhoActivity extends AbstractActivity {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-    private TextView textViewTotal;
 
     public CarrinhoActivity(){
     }
@@ -34,10 +33,9 @@ public class CarrinhoActivity extends AbstractActivity {
         getSupportActionBar().setTitle("Carrinho");
 
         final CarrinhoService carrinhoService = new CarrinhoService(this);
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_lcarrinho);
-        textViewTotal = (TextView) findViewById(R.id.activity_carrinho_total);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_carrinho);
 
-        textViewTotal.setText(String.valueOf(carrinhoService.getValorCarrinho()));
+        getSupportActionBar().setSubtitle("Total R$: " + String.valueOf(carrinhoService.getValorCarrinho()));
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
@@ -48,7 +46,7 @@ public class CarrinhoActivity extends AbstractActivity {
             @Override
             public void onChanged() {
                 super.onChanged();
-                textViewTotal.setText(String.valueOf(carrinhoService.getValorCarrinho()));
+                getSupportActionBar().setSubtitle("Total R$: " + String.valueOf(carrinhoService.getValorCarrinho()));
             }
         };
         recyclerView.getAdapter().registerAdapterDataObserver(dataSetObserver);

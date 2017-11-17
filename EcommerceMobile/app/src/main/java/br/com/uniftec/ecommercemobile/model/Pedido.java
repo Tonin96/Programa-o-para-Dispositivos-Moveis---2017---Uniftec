@@ -1,11 +1,8 @@
 package br.com.uniftec.ecommercemobile.model;
 
-import android.media.Image;
-
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by bruno on 05/10/17.
@@ -13,24 +10,24 @@ import java.util.List;
 
 public class Pedido implements Serializable {
 
+    public final static String STATUS_PEDIDO_ABERTO  = "ABERTO";
+    public final static String STATUS_PEDIDO_FECHADO  = "FECHADO";
+
     private Date data;
-    private ArrayList<Produto> produtos;
+    private Carrinho carrinho;
     private String status;
 
     public Date getData() {
         return data;
     }
 
+    public String getDataFormatada(){
+        SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
+        return formatador.format(data);
+    }
+
     public void setData(Date data) {
         this.data = data;
-    }
-
-    public ArrayList<Produto> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(ArrayList<Produto> produtos) {
-        this.produtos = produtos;
     }
 
     public String getStatus() {
@@ -39,5 +36,13 @@ public class Pedido implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Carrinho getCarrinho() {
+        return carrinho;
+    }
+
+    public void setCarrinho(Carrinho carrinho) {
+        this.carrinho = carrinho;
     }
 }

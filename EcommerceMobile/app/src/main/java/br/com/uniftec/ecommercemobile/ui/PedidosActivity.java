@@ -2,16 +2,29 @@ package br.com.uniftec.ecommercemobile.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 
 import org.json.JSONException;
 
 import br.com.uniftec.ecommercemobile.R;
+import br.com.uniftec.ecommercemobile.adapter.ListaProdutoAdapter;
+import br.com.uniftec.ecommercemobile.model.Pedido;
+import br.com.uniftec.ecommercemobile.model.Produto;
 
-public class PedidosActivity extends AbstractActivity implements View.OnClickListener {
+public class PedidosActivity extends AbstractActivity {
     public static final String PEDIDO_PARAMETER = "PEDIDO_PARAMETER";
 
+    private Pedido pedido;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+
+    public PedidosActivity() {
+
+    }
 
     @Override
     protected int getLayoutRes() {
@@ -20,12 +33,16 @@ public class PedidosActivity extends AbstractActivity implements View.OnClickLis
 
     @Override
     protected void setupView() {
+        pedido = (Pedido) getIntent().getSerializableExtra(PEDIDO_PARAMETER);
 
-    }
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_pedido);
+        recyclerView.setHasFixedSize(true);
 
-    @Override
-    public void onClick(View v) {
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
 
+        mAdapter = new ListaProdutoAdapter(pedido.getCarrinho().getProdutos());
+        recyclerView.setAdapter(mAdapter);
     }
 
     @Override

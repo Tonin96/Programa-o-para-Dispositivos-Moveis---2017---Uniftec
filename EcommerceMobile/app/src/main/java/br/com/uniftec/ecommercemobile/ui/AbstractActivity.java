@@ -49,6 +49,5 @@ public abstract class AbstractActivity extends AppCompatActivity implements View
     }
 
     protected abstract int getLayoutRes();
-
     protected abstract void setupView();
 }

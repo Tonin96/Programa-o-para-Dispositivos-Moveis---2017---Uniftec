@@ -10,12 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.adapter.ListaPedidosAdapter;
 import br.com.uniftec.ecommercemobile.adapter.ListaProdutoAdapter;
+import br.com.uniftec.ecommercemobile.model.Carrinho;
 import br.com.uniftec.ecommercemobile.model.Pedido;
 import br.com.uniftec.ecommercemobile.model.Produto;
 
@@ -40,7 +42,7 @@ public class ListaPedidosFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_lista_pedidos, container, false);
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_list_pedidos);
+        recyclerView = view.findViewById(R.id.recycler_view_list_pedidos);
 
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
@@ -52,8 +54,8 @@ public class ListaPedidosFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        List<Produto> input = new ArrayList<Produto>();
-        ArrayList<Pedido> pedidos = new ArrayList<Pedido>();
+        ArrayList<Pedido> pedidos = new ArrayList<>();
+        Carrinho carrinho = new Carrinho();
         Random gerador = new Random();
 
         for (int i = 0; i < 100; i++) {
@@ -64,12 +66,20 @@ public class ListaPedidosFragment extends Fragment {
             produto.setPreco_desconto(produto.getPreco() / 2);
             produto.setDescricao("O Produto: " + produto.getTitulo() + " é muito legal.");
             produto.setImagem_principal("ft_4gx0m4rifoqxbz9lejqq6wypqyo");
-            input.add(produto);
+            carrinho.addProduto(produto);
         }// define an adapter
 
+
         Pedido pedido = new Pedido();
-        pedido.setProdutos((ArrayList<Produto>) input);
+        pedido.setStatus(Pedido.STATUS_PEDIDO_ABERTO);
+        Pedido pedido2 = new Pedido();
+        pedido2.setStatus(Pedido.STATUS_PEDIDO_FECHADO);
+        pedido.setCarrinho(carrinho);
+        pedido2.setCarrinho(carrinho);
+        pedido.setData(new Date());
+        pedido2.setData(new Date());
         pedidos.add(pedido);
+        pedidos.add(pedido2);
         mAdapter = new ListaPedidosAdapter(pedidos);
         recyclerView.setAdapter(mAdapter);
 
