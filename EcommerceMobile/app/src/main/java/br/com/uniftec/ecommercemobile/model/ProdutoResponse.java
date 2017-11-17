@@ -1,18 +1,15 @@
 package br.com.uniftec.ecommercemobile.model;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-/**
- * TODO: adicionar categoria
- * TODO: adicionar imagemPrincipal
- * TODO: adicionar imagens
- * */
-public class Produto implements Serializable {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class ProdutoResponse {
 
     private String descricao;
     private String nome;
     private Double preco;
     private Double precoDesconto;
+    private Long id;
 
     public String getDescricao() {
         return descricao;
@@ -20,6 +17,14 @@ public class Produto implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
