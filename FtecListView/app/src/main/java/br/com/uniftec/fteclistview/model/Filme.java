@@ -1,23 +1,33 @@
 package br.com.uniftec.fteclistview.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 /**
  * Created by marioklein on 21/09/17.
  */
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Filme implements Serializable{
 
+    @JsonProperty("title")
     private String titulo;
 
+    @JsonProperty("vote_count")
     private int votos;
 
+    @JsonProperty("vote_average")
     private double nota;
 
+    @JsonProperty("overview")
     private String resumo;
 
+    @JsonProperty("release_date")
     private String lancamento;
 
+    @JsonProperty("poster_path")
     private String imagem;
 
     public String getTitulo() {
