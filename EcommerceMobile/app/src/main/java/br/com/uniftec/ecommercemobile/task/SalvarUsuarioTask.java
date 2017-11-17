@@ -9,12 +9,12 @@ import br.com.uniftec.ecommercemobile.services.UsuarioService;
 import br.com.uniftec.ecommercemobile.util.ServerCommunicationUtil;
 import retrofit2.Call;
 
-public class IncluirUsuarioTask extends AsyncTask<Usuario, Void, EcommerceResponse<String>> {
+public class SalvarUsuarioTask extends AsyncTask<Usuario, Void, EcommerceResponse<String>> {
 
     private IncluirUsuarioDelegate delegate;
     private UsuarioService usuarioService;
 
-    public IncluirUsuarioTask(IncluirUsuarioDelegate delegate) {
+    public SalvarUsuarioTask(IncluirUsuarioDelegate delegate) {
 
         this.usuarioService = ServerCommunicationUtil
                 .getInstance()

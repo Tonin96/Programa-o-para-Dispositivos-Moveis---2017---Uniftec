@@ -2,13 +2,14 @@ package br.com.uniftec.ecommercemobile.task;
 
 import android.os.AsyncTask;
 
+import br.com.uniftec.ecommercemobile.model.EcommerceResponse;
 import br.com.uniftec.ecommercemobile.model.UsuarioResponse;
 import br.com.uniftec.ecommercemobile.services.UsuarioService;
 import br.com.uniftec.ecommercemobile.util.ServerCommunicationUtil;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class CarregarUsuarioTask extends AsyncTask<String, Void, UsuarioResponse>{
+public class CarregarUsuarioTask extends AsyncTask<String, Void, EcommerceResponse<UsuarioResponse>>{
 
     private CarregarUsuarioDelegate delegate;
     private UsuarioService usuarioService;
@@ -24,12 +25,14 @@ public class CarregarUsuarioTask extends AsyncTask<String, Void, UsuarioResponse
     }
 
     @Override
-    protected UsuarioResponse doInBackground(String... parameters) {
+    protected EcommerceResponse<UsuarioResponse> doInBackground(String... parameters) {
 
-        Call<UsuarioResponse> call = usuarioService.carregarUsuario(parameters[0]);
+        Call<EcommerceResponse<UsuarioResponse>> call = usuarioService.carregarUsuario(parameters[0]);
 
         try {
-            return call.execute().body();
+            Response<EcommerceResponse<UsuarioResponse>> response = call.execute();
+
+            return response.body();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -39,12 +42,12 @@ public class CarregarUsuarioTask extends AsyncTask<String, Void, UsuarioResponse
     }
 
     @Override
-    protected void onPostExecute(UsuarioResponse usuarioResponse) {
+    protected void onPostExecute(EcommerceResponse<UsuarioResponse> response) {
 
-        if(usuarioResponse != null) {
-            delegate.sucessoCarregarUsuario(usuarioResponse);
+        if(response != null) {
+            delegate.sucessoCarregarUsuario(response.getData());
         } else {
-            delegate.falhaCarregarUsuario("Não foi possível carregar o usuário");
+            delegate.falhaCarregarUsuario(response.getMessage());
         }
 
     }
