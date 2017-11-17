@@ -4,10 +4,6 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by bruno on 05/10/17.
- */
-
 public class Pedido implements Serializable {
 
     public final static String STATUS_PEDIDO_ABERTO  = "ABERTO";
