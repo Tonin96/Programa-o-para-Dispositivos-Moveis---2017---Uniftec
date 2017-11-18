@@ -2,6 +2,7 @@ package br.com.uniftec.ecommercemobile.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -79,4 +80,23 @@ public class ProdutoResponse {
     public void setImagens(List<ProdutoImagemResponse> imagens) {
         this.imagens = imagens;
     }
+
+    public Produto getProduto() {
+        Produto produto = new Produto();
+        produto.setDescricao(getDescricao());
+        produto.setNome(getNome());
+        produto.setPreco(getPreco());
+        produto.setPrecoDesconto(getPrecoDesconto());
+        ProdutoImagem produtoImagem = new ProdutoImagem();
+        produtoImagem.setUrl(getImagemPrincipal().getUrl());
+        ArrayList<ProdutoImagem> produtoImagemArrayList = new ArrayList<ProdutoImagem>();
+        for (ProdutoImagemResponse produtoImagemResponse : getImagens()) {
+            produtoImagemArrayList.add(produtoImagemResponse.getProdutoImagem());
+        }
+        produto.setImagens(produtoImagemArrayList);
+        produto.setImagemPrincipal(produtoImagem);
+
+        return produto;
+    }
+
 }

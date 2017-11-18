@@ -1,20 +1,22 @@
 package br.com.uniftec.ecommercemobile.ui;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import br.com.uniftec.ecommercemobile.R;
-import br.com.uniftec.ecommercemobile.model.Carrinho;
+import br.com.uniftec.ecommercemobile.adapter.ListaImagensAdapter;
+import br.com.uniftec.ecommercemobile.adapter.ListaProdutoAdapter;
 import br.com.uniftec.ecommercemobile.model.Produto;
 import br.com.uniftec.ecommercemobile.services.CarrinhoService;
 
-import static java.security.AccessController.getContext;
+import static android.widget.LinearLayout.HORIZONTAL;
 
 public class ProdutoActivity extends AbstractActivity implements View.OnClickListener{
 
@@ -27,6 +29,10 @@ public class ProdutoActivity extends AbstractActivity implements View.OnClickLis
     private TextView descricaoTextView;
     private ImageView imagemPrincipalImageView;
     private Button botaoComprar;
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void setupView() {
@@ -48,8 +54,17 @@ public class ProdutoActivity extends AbstractActivity implements View.OnClickLis
         precoDescontoTextView.setText(Double.toString(produto.getPrecoDesconto()));
         descricaoTextView.setText(produto.getDescricao());
 
-        int imagemPrincipal = getResources().getIdentifier(produto.getImagemPrincipal().getUrl(), "drawable", getPackageName());
-        imagemPrincipalImageView.setImageDrawable(getDrawable(imagemPrincipal));
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view_list_imagens_produto);
+
+        recyclerView.setHasFixedSize(true);
+        // use a linear layout manager
+        layoutManager = new LinearLayoutManager(this, HORIZONTAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+
+        mAdapter = new ListaImagensAdapter(produto.getImagens());
+        recyclerView.setAdapter(mAdapter);
+
+        Picasso.with(this).load(produto.getImagemPrincipal().getUrl()).into(imagemPrincipalImageView);
     }
 
     @Override
