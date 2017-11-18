@@ -1,6 +1,8 @@
 package br.com.uniftec.ecommercemobile.model;
 
-public class ProdutoCategoria {
+import java.io.Serializable;
+
+public class ProdutoCategoria implements Serializable {
 
     private String nome;
 

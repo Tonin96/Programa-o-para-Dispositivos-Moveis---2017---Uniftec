@@ -1,5 +1,7 @@
 package br.com.uniftec.ecommercemobile.model;
 
+import android.content.Intent;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -49,5 +51,13 @@ public class Pedido implements Serializable {
 
     public void setItens(List<PedidoProduto> itens) {
         this.itens = itens;
+    }
+
+    public Integer getQuantidadeItens(){
+        Integer quantidade = 0;
+
+        quantidade += itens.size();
+
+        return quantidade;
     }
 }

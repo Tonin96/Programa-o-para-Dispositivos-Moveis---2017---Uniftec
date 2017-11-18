@@ -20,7 +20,6 @@ public class AlteraContaUsuarioActivity extends AbstractActivity implements View
 
     @Override
     protected void setupView() {
-
         getSupportActionBar().setTitle("Minha Conta");
 
         buttonEndereco = (Button) findViewById(R.id.activity_altera_conta_usuario_button_endereco);
@@ -31,8 +30,8 @@ public class AlteraContaUsuarioActivity extends AbstractActivity implements View
     public void onClick(View v) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_container, new ListaEnderecosFragment());
-        transaction.addToBackStack(null);
         transaction.commit();
+
     }
 
     @Override

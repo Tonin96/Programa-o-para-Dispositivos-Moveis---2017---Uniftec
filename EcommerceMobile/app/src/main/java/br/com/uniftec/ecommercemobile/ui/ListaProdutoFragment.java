@@ -65,6 +65,7 @@ public class ListaProdutoFragment extends Fragment {
             produto.setDescricao("O Produto: " + produto.getNome() + " é muito legal.");
             ProdutoImagem produtoImagem = new ProdutoImagem();
             produtoImagem.setUrl("ft_4gx0m4rifoqxbz9lejqq6wypqyo");
+            produto.setImagemPrincipal(produtoImagem);
             PedidoProduto pedidoProduto = new PedidoProduto();
             pedidoProduto.setProduto(produto);
             pedidoProduto.setValor(produto.getPreco());

@@ -7,8 +7,8 @@ public class Produto implements Serializable {
 
     private String descricao;
     private String nome;
-    private Double preco;
-    private Double precoDesconto;
+    private Double preco = 0.0;
+    private Double precoDesconto = 0.0;
     private ProdutoCategoria categoria;
     private ProdutoImagem imagemPrincipal;
     private List<ProdutoImagem> imagens;
