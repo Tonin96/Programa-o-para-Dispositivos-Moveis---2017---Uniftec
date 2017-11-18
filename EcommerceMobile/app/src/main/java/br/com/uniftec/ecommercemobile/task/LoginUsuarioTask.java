@@ -4,18 +4,18 @@ import android.os.AsyncTask;
 
 import br.com.uniftec.ecommercemobile.model.EcommerceResponse;
 import br.com.uniftec.ecommercemobile.model.EcommerceResponseStatus;
-import br.com.uniftec.ecommercemobile.model.Usuario;
+import br.com.uniftec.ecommercemobile.model.Login;
+import br.com.uniftec.ecommercemobile.model.UsuarioResponse;
 import br.com.uniftec.ecommercemobile.services.UsuarioService;
 import br.com.uniftec.ecommercemobile.util.ServerCommunicationUtil;
 import retrofit2.Call;
 
-public class IncluirUsuarioTask extends AsyncTask<Usuario, Void, EcommerceResponse<String>> {
+public class LoginUsuarioTask extends AsyncTask<Login, Void, EcommerceResponse<String>>{
 
-    private IncluirUsuarioDelegate delegate;
+    private LoginUsuarioDelegate delegate;
     private UsuarioService usuarioService;
 
-    public IncluirUsuarioTask(IncluirUsuarioDelegate delegate) {
-
+    public LoginUsuarioTask(LoginUsuarioDelegate delegate) {
         this.usuarioService = ServerCommunicationUtil
                 .getInstance()
                 .getRetrofit()
@@ -25,9 +25,8 @@ public class IncluirUsuarioTask extends AsyncTask<Usuario, Void, EcommerceRespon
     }
 
     @Override
-    protected EcommerceResponse<String> doInBackground(Usuario... parameters) {
-
-        Call<EcommerceResponse<String>> call = usuarioService.salvarUsuario(parameters[0]);
+    protected EcommerceResponse<String> doInBackground(Login... parameters) {
+        Call<EcommerceResponse<String>> call = usuarioService.loginUsuario(parameters[0]);
 
         try {
             retrofit2.Response<EcommerceResponse<String>> response = call.execute();
@@ -42,16 +41,15 @@ public class IncluirUsuarioTask extends AsyncTask<Usuario, Void, EcommerceRespon
 
     @Override
     protected void onPostExecute(EcommerceResponse<String> response) {
-
         if(response.getStatus() == EcommerceResponseStatus.SUCCESS) {
-            delegate.incluirUsuarioSucesso(response.getData());
+            delegate.loginUsuarioSucesso(response.getData());
         } else {
-            delegate.incluirUsuarioSucesso(response.getMessage());
+            delegate.loginUsuarioFalha(response.getMessage());
         }
     }
 
-    public interface IncluirUsuarioDelegate {
-        public void incluirUsuarioSucesso(String token);
-        public void incluirUsuarioFalha(String mensagem);
+    public interface LoginUsuarioDelegate {
+        public void loginUsuarioSucesso(String token);
+        public void loginUsuarioFalha(String mensagem);
     }
 }

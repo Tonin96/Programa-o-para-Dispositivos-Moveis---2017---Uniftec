@@ -38,11 +38,10 @@ public class CarrinhoService {
         Toast.makeText(this.context, "Adicionado ao carrinho", Toast.LENGTH_SHORT).show();
     }
 
-    public void removeProduto(Produto produto) {
-        ArrayList<Produto> produtos =  buscaProdutos();
+    public void removeProduto(List<Produto> produtos, Produto produto) {
         for (int i = 0; i < produtos.size(); i++) {
             Produto produto_teste = produtos.get(i);
-            if (produto_teste.getId() == produto.getId()) {
+            if (produto_teste.equals(produto)) {
                 produtos.remove(i);
                 break;
             }
