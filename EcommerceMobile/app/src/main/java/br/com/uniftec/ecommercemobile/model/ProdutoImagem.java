@@ -1,6 +1,8 @@
 package br.com.uniftec.ecommercemobile.model;
 
-public class ProdutoImagem {
+import java.io.Serializable;
+
+public class ProdutoImagem implements Serializable {
 
     private String url;
 

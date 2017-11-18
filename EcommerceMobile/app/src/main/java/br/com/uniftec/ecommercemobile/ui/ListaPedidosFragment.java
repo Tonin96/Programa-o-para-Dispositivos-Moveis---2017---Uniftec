@@ -19,6 +19,7 @@ import br.com.uniftec.ecommercemobile.adapter.ListaPedidosAdapter;
 import br.com.uniftec.ecommercemobile.adapter.ListaProdutoAdapter;
 import br.com.uniftec.ecommercemobile.model.Carrinho;
 import br.com.uniftec.ecommercemobile.model.Pedido;
+import br.com.uniftec.ecommercemobile.model.PedidoProduto;
 import br.com.uniftec.ecommercemobile.model.Produto;
 import br.com.uniftec.ecommercemobile.model.ProdutoImagem;
 
@@ -56,10 +57,11 @@ public class ListaPedidosFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         ArrayList<Pedido> pedidos = new ArrayList<>();
-        Carrinho carrinho = new Carrinho();
+        ArrayList<PedidoProduto> itens = new ArrayList<PedidoProduto>();
         Random gerador = new Random();
 
         for (int i = 0; i < 100; i++) {
+
             Produto produto = new Produto();
             produto.setNome("Produto: " + i);
             produto.setPreco((double) gerador.nextInt(100));
@@ -68,7 +70,10 @@ public class ListaPedidosFragment extends Fragment {
             ProdutoImagem produtoImagem = new ProdutoImagem();
             produtoImagem.setUrl("ft_4gx0m4rifoqxbz9lejqq6wypqyo");
             produto.setImagemPrincipal(produtoImagem);
-            carrinho.addProduto(produto);
+            PedidoProduto pedidoProduto = new PedidoProduto();
+            pedidoProduto.setProduto(produto);
+            pedidoProduto.setValor(produto.getPreco());
+            itens.add(pedidoProduto);
         }// define an adapter
 
 
@@ -78,6 +83,8 @@ public class ListaPedidosFragment extends Fragment {
         pedido2.setStatus("FECHADO");
         pedido.setData(new Date().toString());
         pedido2.setData(new Date().toString());
+        pedido.setItens(itens);
+        pedido2.setItens(itens);
         pedidos.add(pedido);
         pedidos.add(pedido2);
         mAdapter = new ListaPedidosAdapter(pedidos);

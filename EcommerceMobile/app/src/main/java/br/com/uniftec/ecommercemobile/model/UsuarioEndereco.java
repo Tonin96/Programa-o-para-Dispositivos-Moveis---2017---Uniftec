@@ -1,6 +1,8 @@
 package br.com.uniftec.ecommercemobile.model;
 
-public class UsuarioEndereco {
+import java.io.Serializable;
+
+public class UsuarioEndereco implements Serializable {
 
     private String bairro;
     private String cidade;

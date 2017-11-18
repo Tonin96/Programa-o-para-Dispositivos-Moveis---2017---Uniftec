@@ -70,9 +70,9 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.ViewHo
         carrinhoService.adicionarProduto(item);
     }
 
-    public void remove(int position) {
+    private void remove(int position) {
         carrinhoService.removeProduto(produtos, produtos.get(position));
-        produtos.remove(position);
+        produtos = carrinhoService.buscaProdutos();
         notifyItemRemoved(position);
         notifyDataSetChanged();
     }

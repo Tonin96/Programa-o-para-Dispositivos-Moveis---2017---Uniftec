@@ -1,23 +1,24 @@
 package br.com.uniftec.ecommercemobile.ui;
 
-import android.database.DataSetObserver;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Button;
 
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.adapter.CarrinhoAdapter;
 import br.com.uniftec.ecommercemobile.services.CarrinhoService;
 
-public class CarrinhoActivity extends AbstractActivity {
+public class CarrinhoActivity extends AbstractActivity implements View.OnClickListener {
 
     public static final String CARRINHO_PARAMETER = "CARRINHO_PARAMETER";
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private Button finalizarCarrinho;
 
     public CarrinhoActivity(){
     }
@@ -34,7 +35,9 @@ public class CarrinhoActivity extends AbstractActivity {
 
         final CarrinhoService carrinhoService = new CarrinhoService(this);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_carrinho);
+        finalizarCarrinho = (Button) findViewById(R.id.actvity_carrinho_finalizar);
 
+        finalizarCarrinho.setOnClickListener(this);
         getSupportActionBar().setSubtitle("Total R$: " + String.valueOf(carrinhoService.getValorCarrinho()));
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
@@ -50,6 +53,19 @@ public class CarrinhoActivity extends AbstractActivity {
             }
         };
         recyclerView.getAdapter().registerAdapterDataObserver(dataSetObserver);
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+
+        final Intent intent;
+
+        intent =  new Intent(v.getContext(), FinalizaCarrinhoActivity.class);
+        //intent.putExtra(FinalizaCarrinhoActivity.FINALIZAR_CARRINHO_PARAMETER, ca);
+
+        v.getContext().startActivity(intent);
+
     }
 
     @Override

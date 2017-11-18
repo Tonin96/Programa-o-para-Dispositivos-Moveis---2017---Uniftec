@@ -33,14 +33,14 @@ public class ListaPedidosAdapter extends RecyclerView.Adapter<ListaPedidosAdapte
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public Pedido pedido;
+        Pedido pedido;
         public View layout;
-        public TextView dataPedido;
-        public TextView status;
-        public TextView qtd;
-        public TextView precoTotal;
+        TextView dataPedido;
+        TextView status;
+        TextView qtd;
+        TextView precoTotal;
 
-        public ViewHolder(View v) {
+        ViewHolder(View v) {
             super(v);
             layout = v;
             dataPedido = v.findViewById(R.id.row_pedido_data_pedido);
@@ -88,7 +88,7 @@ public class ListaPedidosAdapter extends RecyclerView.Adapter<ListaPedidosAdapte
         holder.pedido = pedidos.get(position);
         holder.dataPedido.setText(pedidos.get(position).getData());
         holder.status.setText(pedidos.get(position).getStatus());
-        holder.qtd.setText(String.valueOf(pedidos.get(position).getItens().size()));
+        holder.qtd.setText(String.valueOf(pedidos.get(position).getQuantidadeItens()));
 
         double total = 0;
         List<PedidoProduto> produtos = pedidos.get(position).getItens();
