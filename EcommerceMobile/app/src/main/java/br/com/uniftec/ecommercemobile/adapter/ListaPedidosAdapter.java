@@ -16,6 +16,7 @@ import java.util.List;
 
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.model.Pedido;
+import br.com.uniftec.ecommercemobile.model.PedidoProduto;
 import br.com.uniftec.ecommercemobile.model.Produto;
 import br.com.uniftec.ecommercemobile.ui.PedidosActivity;
 import br.com.uniftec.ecommercemobile.ui.ProdutoActivity;
@@ -85,15 +86,15 @@ public class ListaPedidosAdapter extends RecyclerView.Adapter<ListaPedidosAdapte
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.pedido = pedidos.get(position);
-        holder.dataPedido.setText(pedidos.get(position).getDataFormatada());
+        holder.dataPedido.setText(pedidos.get(position).getData());
         holder.status.setText(pedidos.get(position).getStatus());
-        holder.qtd.setText(String.valueOf(pedidos.get(position).getCarrinho().getProdutos().size()));
+        holder.qtd.setText(String.valueOf(pedidos.get(position).getItens().size()));
 
         double total = 0;
-        List<Produto> produtos = pedidos.get(position).getCarrinho().getProdutos();
+        List<PedidoProduto> produtos = pedidos.get(position).getItens();
 
-        for (Produto produto:produtos) {
-            total += produto.getPreco();
+        for (PedidoProduto produto:produtos) {
+            total += produto.getValor();
         }
 
         holder.precoTotal.setText(String.valueOf(total));

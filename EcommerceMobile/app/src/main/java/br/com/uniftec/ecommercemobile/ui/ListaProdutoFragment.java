@@ -16,7 +16,9 @@ import java.util.Random;
 
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.adapter.ListaProdutoAdapter;
+import br.com.uniftec.ecommercemobile.model.PedidoProduto;
 import br.com.uniftec.ecommercemobile.model.Produto;
+import br.com.uniftec.ecommercemobile.model.ProdutoImagem;
 
 /**
  * Created by bruno on 06/11/17.
@@ -52,18 +54,21 @@ public class ListaProdutoFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        List<Produto> input = new ArrayList<Produto>();
+        List<PedidoProduto> input = new ArrayList<PedidoProduto>();
         Random gerador = new Random();
 
         for (int i = 0; i < 100; i++) {
             Produto produto = new Produto();
-            produto.setId(i);
-            produto.setTitulo("Produto: " + i);
+            produto.setNome("Produto: " + i);
             produto.setPreco((double) gerador.nextInt(100));
-            produto.setPreco_desconto(produto.getPreco() / 2);
-            produto.setDescricao("O Produto: " + produto.getTitulo() + " é muito legal.");
-            produto.setImagem_principal("ft_4gx0m4rifoqxbz9lejqq6wypqyo");
-            input.add(produto);
+            produto.setPrecoDesconto(produto.getPreco() / 2);
+            produto.setDescricao("O Produto: " + produto.getNome() + " é muito legal.");
+            ProdutoImagem produtoImagem = new ProdutoImagem();
+            produtoImagem.setUrl("ft_4gx0m4rifoqxbz9lejqq6wypqyo");
+            PedidoProduto pedidoProduto = new PedidoProduto();
+            pedidoProduto.setProduto(produto);
+            pedidoProduto.setValor(produto.getPreco());
+            input.add(pedidoProduto);
         }// define an adapter
         mAdapter = new ListaProdutoAdapter(input);
         recyclerView.setAdapter(mAdapter);

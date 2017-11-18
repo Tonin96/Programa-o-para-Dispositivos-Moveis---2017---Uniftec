@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.uniftec.ecommercemobile.R;
+import br.com.uniftec.ecommercemobile.model.PedidoProduto;
 import br.com.uniftec.ecommercemobile.model.Produto;
 import br.com.uniftec.ecommercemobile.ui.ProdutoActivity;
 
@@ -19,9 +20,9 @@ import br.com.uniftec.ecommercemobile.ui.ProdutoActivity;
  */
 
 public class ListaProdutoAdapter extends RecyclerView.Adapter<ListaProdutoAdapter.ViewHolder>{
-    private List<Produto> produtos;
+    private List<PedidoProduto> produtos;
 
-    public ListaProdutoAdapter(List<Produto> produtos) {
+    public ListaProdutoAdapter(List<PedidoProduto> produtos) {
         this.produtos = produtos;
     }
 
@@ -79,9 +80,9 @@ public class ListaProdutoAdapter extends RecyclerView.Adapter<ListaProdutoAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.produto = produtos.get(position);
-        holder.titulo.setText(produtos.get(position).getTitulo());
-        holder.preco.setText(produtos.get(position).getPreco().toString());
+        holder.produto = produtos.get(position).getProduto();
+        holder.titulo.setText(produtos.get(position).getProduto().getNome());
+        holder.preco.setText(produtos.get(position).getProduto().getPreco().toString());
 
     }
 
