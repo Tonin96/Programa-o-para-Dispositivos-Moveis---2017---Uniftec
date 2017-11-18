@@ -1,5 +1,7 @@
 package br.com.uniftec.ecommercemobile.ui;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,10 +12,12 @@ import android.widget.Toast;
 
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.model.Usuario;
+import br.com.uniftec.ecommercemobile.services.LoadingService;
 import br.com.uniftec.ecommercemobile.task.SalvarUsuarioTask;
 
-public class CriaContaUsuarioActivity extends AppCompatActivity implements View.OnClickListener, SalvarUsuarioTask.IncluirUsuarioDelegate{
+public class CriaContaUsuarioActivity extends AppCompatActivity implements View.OnClickListener, SalvarUsuarioTask.IncluirUsuarioDelegate, LoadingService{
 
+    private ProgressDialog progressDialog;
     private Button botaoSalvar;
     private EditText nome;
     private EditText email;
@@ -44,6 +48,9 @@ public class CriaContaUsuarioActivity extends AppCompatActivity implements View.
             boolean validacao = this.validarCamposObrigatorios();
 
             if(validacao) {
+
+                this.progressDialog(this, "Criando usuário");
+
                 Usuario usuario = new Usuario();
                 usuario.setCpf(cpf.getText().toString());
                 usuario.setEmail(email.getText().toString());
@@ -61,12 +68,23 @@ public class CriaContaUsuarioActivity extends AppCompatActivity implements View.
 
     @Override
     public void incluirUsuarioSucesso(String token) {
+        dismisProgressDialog();
         Toast.makeText(this, "Usuário incluído com sucesso", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void incluirUsuarioFalha(String mensagem) {
+        dismisProgressDialog();
         Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
+    }
+
+    public void progressDialog(Activity activity, String mensagem) {
+        progressDialog = ProgressDialog.show(activity, "Aguarde", mensagem, true, false);
+    }
+
+    public void dismisProgressDialog() {
+        progressDialog.dismiss();
+        progressDialog = null;
     }
 
     public boolean validarCamposObrigatorios() {
