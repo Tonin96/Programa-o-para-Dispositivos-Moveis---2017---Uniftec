@@ -1,6 +1,8 @@
 package br.com.uniftec.ecommercemobile.model;
 
-public class ProdutoImagemResponse {
+import java.io.Serializable;
+
+public class ProdutoImagemResponse implements Serializable {
 
     private Long id;
     private String url;
@@ -19,5 +21,12 @@ public class ProdutoImagemResponse {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public ProdutoImagem getProdutoImagem() {
+        ProdutoImagem produtoImagem = new ProdutoImagem();
+        produtoImagem.setUrl(getUrl());
+
+        return produtoImagem;
     }
 }

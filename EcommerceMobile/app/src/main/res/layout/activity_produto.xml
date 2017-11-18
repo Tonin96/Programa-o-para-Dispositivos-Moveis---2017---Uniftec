@@ -114,12 +114,12 @@
             android:layout_below="@+id/linear_layout_descricao"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/activity_produto_imagen_galeria"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_list_imagens_produto"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ft_4gx0m4rifoqxbz9lejqq6wypqyo" />
+                android:layout_height="match_parent"
+                android:scrollbars="horizontal" />
+
             <Button
                 android:id="@+id/activity_produto_botao_comprar"
                 android:layout_width="match_parent"

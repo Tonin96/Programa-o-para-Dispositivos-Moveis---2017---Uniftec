@@ -2,16 +2,12 @@ package br.com.uniftec.ecommercemobile.adapter;
 
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import br.com.uniftec.ecommercemobile.R;
@@ -19,10 +15,10 @@ import br.com.uniftec.ecommercemobile.model.PedidoProduto;
 import br.com.uniftec.ecommercemobile.model.Produto;
 import br.com.uniftec.ecommercemobile.ui.ProdutoActivity;
 
-public class ListaProdutoAdapter extends RecyclerView.Adapter<ListaProdutoAdapter.ViewHolder>{
-    private List<Produto> produtos;
+public class ListaPedidoProdutoAdapter extends RecyclerView.Adapter<ListaPedidoProdutoAdapter.ViewHolder>{
+    private List<PedidoProduto> produtos;
 
-    public ListaProdutoAdapter(List<Produto> produtos) {
+    public ListaPedidoProdutoAdapter(List<PedidoProduto> produtos) {
         this.produtos = produtos;
     }
 
@@ -57,9 +53,20 @@ public class ListaProdutoAdapter extends RecyclerView.Adapter<ListaProdutoAdapte
         }
     }
 
+    /*public void add(int position, Produto item) {
+        produtos.add(position, item);
+        notifyItemInserted(position);
+    }
+
+    public void remove(int position) {
+        produtos.remove(position);
+        notifyItemRemoved(position);
+    }*/
+
+
     @Override
-    public ListaProdutoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                             int viewType) {
+    public ListaPedidoProdutoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                                   int viewType) {
         LayoutInflater inflater = LayoutInflater.from(
                 parent.getContext());
         View v = inflater.inflate(R.layout.row_lista_produto, parent, false);
@@ -69,10 +76,9 @@ public class ListaProdutoAdapter extends RecyclerView.Adapter<ListaProdutoAdapte
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.produto = produtos.get(position);
-        holder.titulo.setText(produtos.get(position).getNome());
-        holder.preco.setText(produtos.get(position).getPreco().toString());
-        Picasso.with(holder.layout.getContext()).load(holder.produto.getImagemPrincipal().getUrl()).into(holder.imagem);
+        holder.produto = produtos.get(position).getProduto();
+        holder.titulo.setText(produtos.get(position).getProduto().getNome());
+        holder.preco.setText(produtos.get(position).getProduto().getPreco().toString());
 
     }
 

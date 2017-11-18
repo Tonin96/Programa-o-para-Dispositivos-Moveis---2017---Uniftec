@@ -9,9 +9,13 @@ import android.view.View;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
+
 import br.com.uniftec.ecommercemobile.R;
+import br.com.uniftec.ecommercemobile.adapter.ListaPedidoProdutoAdapter;
 import br.com.uniftec.ecommercemobile.adapter.ListaProdutoAdapter;
 import br.com.uniftec.ecommercemobile.model.Pedido;
+import br.com.uniftec.ecommercemobile.model.PedidoProduto;
 import br.com.uniftec.ecommercemobile.model.Produto;
 
 public class PedidosActivity extends AbstractActivity {
@@ -41,7 +45,7 @@ public class PedidosActivity extends AbstractActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new ListaProdutoAdapter(pedido.getItens());
+        mAdapter = new ListaPedidoProdutoAdapter(pedido.getItens());
         recyclerView.setAdapter(mAdapter);
     }
 
