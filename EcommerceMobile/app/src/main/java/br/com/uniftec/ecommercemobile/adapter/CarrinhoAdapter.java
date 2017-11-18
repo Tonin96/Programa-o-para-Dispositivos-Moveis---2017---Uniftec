@@ -71,7 +71,7 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.ViewHo
     }
 
     public void remove(int position) {
-        carrinhoService.removeProduto(produtos.get(position));
+        carrinhoService.removeProduto(produtos, produtos.get(position));
         produtos.remove(position);
         notifyItemRemoved(position);
         notifyDataSetChanged();
@@ -91,7 +91,7 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.produto = produtos.get(position);
-        holder.titulo.setText(produtos.get(position).getTitulo());
+        holder.titulo.setText(produtos.get(position).getNome());
         holder.preco.setText(produtos.get(position).getPreco().toString());
 
     }

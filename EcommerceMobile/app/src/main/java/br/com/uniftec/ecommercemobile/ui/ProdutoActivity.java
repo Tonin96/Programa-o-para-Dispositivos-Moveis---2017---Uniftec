@@ -25,13 +25,11 @@ public class ProdutoActivity extends AbstractActivity implements View.OnClickLis
     private TextView precoTextView;
     private TextView precoDescontoTextView;
     private TextView descricaoTextView;
-    private TextView idTextView;
     private ImageView imagemPrincipalImageView;
     private Button botaoComprar;
 
     @Override
     protected void setupView() {
-        idTextView = (TextView) findViewById(R.id.activity_produto_id);
         tituloTextView = (TextView) findViewById(R.id.activity_produto_titulo);
         precoTextView = (TextView) findViewById(R.id.activity_produto_preco);
         precoDescontoTextView = (TextView) findViewById(R.id.activity_produto_preco_desconto);
@@ -42,16 +40,15 @@ public class ProdutoActivity extends AbstractActivity implements View.OnClickLis
 
         produto = (Produto) getIntent().getSerializableExtra(PRODUTO_PARAMETER);
 
-        getSupportActionBar().setTitle(produto.getTitulo());
+        getSupportActionBar().setTitle(produto.getNome());
 
         botaoComprar.setOnClickListener(this);
-        idTextView.setText(produto.getId().toString());
-        tituloTextView.setText(produto.getTitulo());
+        tituloTextView.setText(produto.getNome());
         precoTextView.setText(Double.toString(produto.getPreco()));
-        precoDescontoTextView.setText(Double.toString(produto.getPreco_desconto()));
+        precoDescontoTextView.setText(Double.toString(produto.getPrecoDesconto()));
         descricaoTextView.setText(produto.getDescricao());
 
-        int imagemPrincipal = getResources().getIdentifier(produto.getImagem_principal(), "drawable", getPackageName());
+        int imagemPrincipal = getResources().getIdentifier(produto.getImagemPrincipal().getUrl(), "drawable", getPackageName());
         imagemPrincipalImageView.setImageDrawable(getDrawable(imagemPrincipal));
     }
 

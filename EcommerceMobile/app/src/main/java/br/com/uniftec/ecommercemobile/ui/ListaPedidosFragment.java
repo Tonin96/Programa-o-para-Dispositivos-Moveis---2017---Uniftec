@@ -20,6 +20,7 @@ import br.com.uniftec.ecommercemobile.adapter.ListaProdutoAdapter;
 import br.com.uniftec.ecommercemobile.model.Carrinho;
 import br.com.uniftec.ecommercemobile.model.Pedido;
 import br.com.uniftec.ecommercemobile.model.Produto;
+import br.com.uniftec.ecommercemobile.model.ProdutoImagem;
 
 /**
  * Created by bruno on 06/11/17.
@@ -60,24 +61,23 @@ public class ListaPedidosFragment extends Fragment {
 
         for (int i = 0; i < 100; i++) {
             Produto produto = new Produto();
-            produto.setId(i);
-            produto.setTitulo("Produto: " + i);
+            produto.setNome("Produto: " + i);
             produto.setPreco((double) gerador.nextInt(100));
-            produto.setPreco_desconto(produto.getPreco() / 2);
-            produto.setDescricao("O Produto: " + produto.getTitulo() + " é muito legal.");
-            produto.setImagem_principal("ft_4gx0m4rifoqxbz9lejqq6wypqyo");
+            produto.setPrecoDesconto(produto.getPreco() / 2);
+            produto.setDescricao("O Produto: " + produto.getNome() + " é muito legal.");
+            ProdutoImagem produtoImagem = new ProdutoImagem();
+            produtoImagem.setUrl("ft_4gx0m4rifoqxbz9lejqq6wypqyo");
+            produto.setImagemPrincipal(produtoImagem);
             carrinho.addProduto(produto);
         }// define an adapter
 
 
         Pedido pedido = new Pedido();
-        pedido.setStatus(Pedido.STATUS_PEDIDO_ABERTO);
+        pedido.setStatus("Aberto");
         Pedido pedido2 = new Pedido();
-        pedido2.setStatus(Pedido.STATUS_PEDIDO_FECHADO);
-        pedido.setCarrinho(carrinho);
-        pedido2.setCarrinho(carrinho);
-        pedido.setData(new Date());
-        pedido2.setData(new Date());
+        pedido2.setStatus("FECHADO");
+        pedido.setData(new Date().toString());
+        pedido2.setData(new Date().toString());
         pedidos.add(pedido);
         pedidos.add(pedido2);
         mAdapter = new ListaPedidosAdapter(pedidos);

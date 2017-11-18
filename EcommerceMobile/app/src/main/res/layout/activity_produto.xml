@@ -52,34 +52,10 @@
 
 
         <LinearLayout
-            android:id="@+id/linear_layout_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/linear_layout_titulo">
-
-            <TextView
-                android:id="@+id/activity_produto_label_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ID:"
-                android:textSize="15dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/activity_produto_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/activity_produto_label_id"
-                android:text="123"
-                android:textSize="15dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/linear_layout_preco"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/linear_layout_id">
+            android:layout_below="@id/linear_layout_titulo">
 
             <TextView
                 android:id="@+id/activity_produto_label_preco"
