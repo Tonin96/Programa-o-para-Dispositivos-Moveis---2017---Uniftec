@@ -11,8 +11,8 @@ public class ProdutoResponse {
     private Long id;
     private String descricao;
     private String nome;
-    private Double preco;
-    private Double precoDesconto;
+    private Double preco = 0.0;
+    private Double precoDesconto = 0.0;
     private ProdutoCategoriaResponse categoria;
     private ProdutoImagemResponse imagemPrincipal;
     private List<ProdutoImagemResponse> imagens;
