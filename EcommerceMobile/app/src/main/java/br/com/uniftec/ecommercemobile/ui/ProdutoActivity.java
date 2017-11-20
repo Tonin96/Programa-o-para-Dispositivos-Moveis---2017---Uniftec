@@ -2,6 +2,7 @@ package br.com.uniftec.ecommercemobile.ui;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.adapter.ListaImagensAdapter;
@@ -50,8 +53,17 @@ public class ProdutoActivity extends AbstractActivity implements View.OnClickLis
 
         botaoComprar.setOnClickListener(this);
         tituloTextView.setText(produto.getNome());
-        precoTextView.setText(Double.toString(produto.getPreco()));
-        precoDescontoTextView.setText(Double.toString(produto.getPrecoDesconto()));
+        precoTextView.setText(String.valueOf(produto.getPreco()));
+
+        if(produto.getPrecoDesconto() == null){
+            precoDescontoTextView.setVisibility(View.GONE);
+            TextView labelPrecoDescontoTextView = (TextView) findViewById(R.id.activity_produto_label_preco_desconto);
+            labelPrecoDescontoTextView.setVisibility(View.GONE);
+
+        }else{
+            precoDescontoTextView.setText(Double.toString(produto.getPrecoDesconto()));
+        }
+
         descricaoTextView.setText(produto.getDescricao());
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_list_imagens_produto);
