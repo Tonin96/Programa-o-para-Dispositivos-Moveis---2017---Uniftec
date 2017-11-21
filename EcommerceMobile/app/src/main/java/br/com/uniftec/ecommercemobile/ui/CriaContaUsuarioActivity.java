@@ -69,7 +69,7 @@ public class CriaContaUsuarioActivity extends AppCompatActivity implements View.
     @Override
     public void incluirUsuarioSucesso(String token) {
         dismisProgressDialog();
-        Toast.makeText(this, "Usuário incluído com sucesso", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Usuário incluído com sucesso " + token, Toast.LENGTH_SHORT).show();
     }
 
     @Override
