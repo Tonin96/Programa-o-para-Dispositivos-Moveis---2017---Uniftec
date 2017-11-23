@@ -28,9 +28,9 @@ public class AlteraContaUsuarioActivity extends AbstractActivity implements View
 
     @Override
     public void onClick(View v) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.main_container, new ListaEnderecosFragment());
-        transaction.commit();
+        final Intent intent =  new Intent(this, ListaEnderecosUsuarioActivity.class);
+
+        this.startActivity(intent);
 
     }
 
