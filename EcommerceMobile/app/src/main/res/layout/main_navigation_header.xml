@@ -42,17 +42,17 @@
                     android:id="@+id/main_navigation_header_usuario_nome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bruno Marsilio"
+                    android:text=""
                     android:textColor="#fff"
                     android:textSize="15dp"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/main_navigation_header_usuario_meu_perfil"
+                    android:id="@+id/main_navigation_header_usuario_meus_dados"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Meu Perfil"
+                    android:text="Meus Dados"
                     android:textColor="#fff"
                     android:textSize="10dp" />
             </LinearLayout>
