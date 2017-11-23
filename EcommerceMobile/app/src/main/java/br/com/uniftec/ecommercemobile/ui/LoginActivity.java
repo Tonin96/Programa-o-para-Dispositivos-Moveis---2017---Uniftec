@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity
         LoadingService {
 
     private ProgressDialog progressDialog;
+
     private Button buttonEntrar;
     private Button buttonNovaConta;
     private EditText email;
