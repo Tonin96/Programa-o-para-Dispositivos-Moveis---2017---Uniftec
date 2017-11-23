@@ -1,6 +1,5 @@
 package br.com.uniftec.ecommercemobile.adapter;
 
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +12,6 @@ import java.util.List;
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.model.UsuarioEndereco;
 
-/**
- * Created by bruno on 28/10/17.
- */
-
 public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdapter.ViewHolder>{
     private List<UsuarioEndereco> enderecos;
 
@@ -25,6 +20,7 @@ public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdap
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
         public UsuarioEndereco endereco;
         public View layout;
         public TextView logradouro;
@@ -42,24 +38,12 @@ public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdap
             excluir.setOnClickListener(this);
         }
 
-
         @Override
         public void onClick(View v) {
 
 
         }
     }
-
-    /*public void add(int position, Produto item) {
-        produtos.add(position, item);
-        notifyItemInserted(position);
-    }
-
-    public void remove(int position) {
-        produtos.remove(position);
-        notifyItemRemoved(position);
-    }*/
-
 
     @Override
     public ListaEnderecoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
