@@ -102,7 +102,11 @@ public class AlteraContaUsuarioActivity extends AbstractActivity
 
                 atualizarUsuarioTask.execute(parametros);
             }
+        }
 
+        if(view.getId() == R.id.activity_altera_conta_usuario_button_endereco) {
+            final Intent intent =  new Intent(this, ListaEnderecosUsuarioActivity.class);
+            this.startActivity(intent);
         }
 
     }

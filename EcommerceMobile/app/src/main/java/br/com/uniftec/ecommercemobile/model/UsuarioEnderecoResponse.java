@@ -6,12 +6,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class UsuarioEnderecoResponse {
 
     private Long id;
-    private String bairro;
-    private String cidade;
-    private String complemento;
-    private String estado;
-    private String logradouro;
-    private String numero;
+    private String bairro = "";
+    private String cidade = "";
+    private String complemento ="";
+    private String estado = "";
+    private String logradouro = "";
+    private String numero = "";
 
     public Long getId() {
         return id;
