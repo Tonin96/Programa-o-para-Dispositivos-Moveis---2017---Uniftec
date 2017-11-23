@@ -42,7 +42,7 @@
                     android:id="@+id/main_navigation_header_usuario_nome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bruno Marsilio"
+                    android:text=""
                     android:textColor="#fff"
                     android:textSize="15dp"
                     android:textStyle="bold" />

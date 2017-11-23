@@ -2,6 +2,9 @@ package br.com.uniftec.ecommercemobile.ui;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,12 +13,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import br.com.uniftec.ecommercemobile.MainActivity;
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.model.Usuario;
+import br.com.uniftec.ecommercemobile.model.UsuarioResponse;
 import br.com.uniftec.ecommercemobile.services.LoadingService;
+import br.com.uniftec.ecommercemobile.task.CarregarUsuarioTask;
 import br.com.uniftec.ecommercemobile.task.SalvarUsuarioTask;
 
-public class CriaContaUsuarioActivity extends AppCompatActivity implements View.OnClickListener, SalvarUsuarioTask.IncluirUsuarioDelegate, LoadingService{
+public class CriaContaUsuarioActivity extends AppCompatActivity
+        implements
+        View.OnClickListener,
+        SalvarUsuarioTask.IncluirUsuarioDelegate,
+        CarregarUsuarioTask.CarregarUsuarioDelegate,
+        LoadingService {
 
     private ProgressDialog progressDialog;
     private Button botaoSalvar;
@@ -24,6 +37,7 @@ public class CriaContaUsuarioActivity extends AppCompatActivity implements View.
     private EditText senha;
     private EditText cpf;
     private EditText telefone;
+    private SharedPreferences user_preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +52,9 @@ public class CriaContaUsuarioActivity extends AppCompatActivity implements View.
         senha = (EditText) findViewById(R.id.activity_cria_conta_usuario_edit_text_senha);
         cpf = (EditText) findViewById(R.id.activity_cria_conta_usuario_edit_text_cpf);
         telefone = (EditText) findViewById(R.id.activity_cria_conta_usuario_edit_text_telefone);
+
+        user_preferences = this.getSharedPreferences("usuario_preferences", Context.MODE_PRIVATE);
+        user_preferences.edit().clear().commit();
     }
 
     @Override
@@ -68,8 +85,10 @@ public class CriaContaUsuarioActivity extends AppCompatActivity implements View.
 
     @Override
     public void incluirUsuarioSucesso(String token) {
-        dismisProgressDialog();
-        Toast.makeText(this, "Usuário incluído com sucesso", Toast.LENGTH_SHORT).show();
+        CarregarUsuarioTask carregarUsuarioTask = new CarregarUsuarioTask(this);
+        carregarUsuarioTask.execute(token);
+
+        putStringSharedPreference("X-Token", token);
     }
 
     @Override
@@ -116,5 +135,33 @@ public class CriaContaUsuarioActivity extends AppCompatActivity implements View.
         }
 
         return validacao;
+    }
+
+    @Override
+    public void sucessoCarregarUsuario(UsuarioResponse usuarioResponse) {
+        Gson gson = new Gson();
+        String json = gson.toJson(usuarioResponse);
+
+        putStringSharedPreference("usuario", json);
+
+        dismisProgressDialog();
+        Toast.makeText(this, "Usuário incluído com sucesso", Toast.LENGTH_SHORT).show();
+
+        Intent intent = null;
+        intent =  new Intent(this, MainActivity.class);
+
+        this.startActivity(intent);
+    }
+
+    @Override
+    public void falhaCarregarUsuario(String mensagem) {
+        dismisProgressDialog();
+        Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
+    }
+
+    private void putStringSharedPreference(String key, String value) {
+        SharedPreferences.Editor editor = user_preferences.edit();
+        editor.putString(key, value);
+        editor.commit();
     }
 }

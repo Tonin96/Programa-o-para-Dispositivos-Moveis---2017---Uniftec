@@ -47,10 +47,13 @@ public abstract class AbstractActivity extends AppCompatActivity implements View
 
             /*Converte o usuario armazenado no momento do login para UsuarioResponse*/
             Gson gson = new Gson();
-            UsuarioResponse retornoJson = gson.fromJson(preferences.getString("usuario", null), UsuarioResponse.class);
+            String usuario = preferences.getString("usuario", "null");
+            if(!usuario.equals("null")) {
+                UsuarioResponse retornoJson = gson.fromJson(usuario, UsuarioResponse.class);
 
             /*Troca o nome do usuário na barra lateral*/
-            nome.setText(retornoJson.getNome());
+                nome.setText(retornoJson.getNome());
+            }
 
             meusDados.setOnClickListener(this);
         }

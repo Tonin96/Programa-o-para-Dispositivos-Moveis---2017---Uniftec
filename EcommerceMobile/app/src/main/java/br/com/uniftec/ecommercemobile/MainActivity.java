@@ -1,6 +1,8 @@
 package br.com.uniftec.ecommercemobile;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
@@ -10,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -24,7 +27,8 @@ public class MainActivity extends AbstractActivity implements NavigationView.OnN
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    
+    private SharedPreferences user_preferences;
+
     @Override
     protected int getLayoutRes() {
         return R.layout.activity_main;
@@ -38,11 +42,18 @@ public class MainActivity extends AbstractActivity implements NavigationView.OnN
         navigationView = (NavigationView) findViewById(R.id.main_navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //mudarContainerPrincipal(new ListaProdutoFragment());
-        Intent intent = null;
-        intent =  new Intent(this, LoginActivity.class);
+        user_preferences = this.getSharedPreferences("usuario_preferences", Context.MODE_PRIVATE);
 
-        this.startActivity(intent);
+        String token = user_preferences.getString("X-Token", "null");
+
+        Log.d("token retornado", token);
+
+        if(token.equals("null")) {
+            Intent intent = null;
+            intent =  new Intent(this, LoginActivity.class);
+
+            this.startActivity(intent);
+        }
     }
 
     @Override

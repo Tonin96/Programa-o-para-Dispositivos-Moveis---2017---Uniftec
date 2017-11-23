@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,9 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.util.Map;
+
+import br.com.uniftec.ecommercemobile.MainActivity;
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.model.Login;
 import br.com.uniftec.ecommercemobile.model.UsuarioResponse;
@@ -22,14 +26,19 @@ import br.com.uniftec.ecommercemobile.services.LoadingService;
 import br.com.uniftec.ecommercemobile.task.CarregarUsuarioTask;
 import br.com.uniftec.ecommercemobile.task.LoginUsuarioTask;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener, LoginUsuarioTask.LoginUsuarioDelegate, CarregarUsuarioTask.CarregarUsuarioDelegate, LoadingService {
+public class LoginActivity extends AppCompatActivity
+        implements
+        View.OnClickListener,
+        LoginUsuarioTask.LoginUsuarioDelegate,
+        CarregarUsuarioTask.CarregarUsuarioDelegate,
+        LoadingService {
 
     private ProgressDialog progressDialog;
     private Button buttonEntrar;
     private Button buttonNovaConta;
     private EditText email;
     private EditText senha;
-    private SharedPreferences preferences;
+    private SharedPreferences user_preferences;
 
     @Override
     public final void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,11 +53,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         email = (EditText) findViewById(R.id.activity_login_edit_text_email);
         senha = (EditText) findViewById(R.id.activity_login_edit_text_senha);
 
-        preferences = this.getSharedPreferences("usuario_preferences", Context.MODE_PRIVATE);
+        user_preferences = this.getSharedPreferences("usuario_preferences", Context.MODE_PRIVATE);
+        user_preferences.edit().clear().commit();
     }
 
     @Override
     public void onClick(View v) {
+
         if(v.getId() == R.id.activity_login_button_entrar) {
 
             boolean validacao = this.validarCamposObrigatorios();
@@ -121,7 +132,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         dismisProgressDialog();
         Toast.makeText(this, "Login realizado com sucesso", Toast.LENGTH_SHORT).show();
 
-        finish();
+        Intent intent = null;
+        intent =  new Intent(this, MainActivity.class);
+
+        this.startActivity(intent);
     }
 
     @Override
@@ -131,7 +145,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void putStringSharedPreference(String key, String value) {
-        SharedPreferences.Editor editor = preferences.edit();
+        SharedPreferences.Editor editor = user_preferences.edit();
         editor.putString(key, value);
         editor.commit();
     }
