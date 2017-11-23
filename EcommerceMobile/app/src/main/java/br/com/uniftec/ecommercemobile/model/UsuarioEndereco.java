@@ -58,4 +58,10 @@ public class UsuarioEndereco implements Serializable {
     public void setNumero(String numero) {
         this.numero = numero;
     }
+
+    @Override
+    public String toString() {
+
+        return getLogradouro() + ", " + getNumero() + ", " + getBairro() + ", " + getComplemento();
+    }
 }

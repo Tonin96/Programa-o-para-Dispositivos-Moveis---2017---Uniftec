@@ -177,7 +177,7 @@
                 android:layout_below="@+id/linear_layout_telefone">
 
                 <Button
-                    android:id="@+id/activity_altera_conta_usuario_button_salvar"
+                    android:id="@+id/activity_altera_conta_usuario_button_atualizar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Atualizar" />

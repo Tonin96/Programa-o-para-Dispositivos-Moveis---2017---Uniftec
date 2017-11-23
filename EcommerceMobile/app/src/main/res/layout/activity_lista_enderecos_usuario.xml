@@ -35,7 +35,6 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/activity_finaliza_carrinho_titulo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -51,6 +50,7 @@
                 android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_lista_enderecos_usuario"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                 </android.support.v7.widget.RecyclerView>
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content">
 
                 <Button
-                    android:id="@+id/activity_finaliza_carrinho_button_finalizar"
+                    android:id="@+id/activity_lista_endereco_usuario_adicionar_endereco"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Adicionar novo endereço"

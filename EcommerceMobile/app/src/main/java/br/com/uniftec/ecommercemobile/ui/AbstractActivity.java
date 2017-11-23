@@ -22,6 +22,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements View
 
     protected ActionBar actionBar;
     protected SharedPreferences preferences;
+    protected UsuarioResponse retornoJsonUsuarioResponse;
 
     @Override
     public final void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,10 +50,10 @@ public abstract class AbstractActivity extends AppCompatActivity implements View
             Gson gson = new Gson();
             String usuario = preferences.getString("usuario", "null");
             if(!usuario.equals("null")) {
-                UsuarioResponse retornoJson = gson.fromJson(usuario, UsuarioResponse.class);
+                retornoJsonUsuarioResponse = gson.fromJson(usuario, UsuarioResponse.class);
 
             /*Troca o nome do usuário na barra lateral*/
-                nome.setText(retornoJson.getNome());
+                nome.setText(retornoJsonUsuarioResponse.getNome());
             }
 
             meusDados.setOnClickListener(this);
