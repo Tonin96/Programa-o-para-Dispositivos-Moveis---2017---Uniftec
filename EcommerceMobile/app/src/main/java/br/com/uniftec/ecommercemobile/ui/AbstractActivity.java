@@ -1,6 +1,8 @@
 package br.com.uniftec.ecommercemobile.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -11,15 +13,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import br.com.uniftec.ecommercemobile.R;
+import com.google.gson.Gson;
 
-/**
- * Created by bruno on 05/10/17.
- */
+import br.com.uniftec.ecommercemobile.R;
+import br.com.uniftec.ecommercemobile.model.UsuarioResponse;
 
 public abstract class AbstractActivity extends AppCompatActivity implements View.OnClickListener{
 
     protected ActionBar actionBar;
+    protected SharedPreferences preferences;
 
     @Override
     public final void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,8 +39,20 @@ public abstract class AbstractActivity extends AppCompatActivity implements View
 
         if(navigationView != null) {
             View view = navigationView.getHeaderView(0);
-            TextView textViewMeuPerfil = (TextView) view.findViewById(R.id.main_navigation_header_usuario_meu_perfil);
-            textViewMeuPerfil.setOnClickListener(this);
+            TextView meusDados = (TextView) view.findViewById(R.id.main_navigation_header_usuario_meus_dados);
+            TextView nome = (TextView) view.findViewById(R.id.main_navigation_header_usuario_nome);
+
+            /*Pega os dados de login*/
+            preferences = this.getSharedPreferences("usuario_preferences", Context.MODE_PRIVATE);
+
+            /*Converte o usuario armazenado no momento do login para UsuarioResponse*/
+            Gson gson = new Gson();
+            UsuarioResponse retornoJson = gson.fromJson(preferences.getString("usuario", null), UsuarioResponse.class);
+
+            /*Troca o nome do usuário na barra lateral*/
+            nome.setText(retornoJson.getNome());
+
+            meusDados.setOnClickListener(this);
         }
     }
 
