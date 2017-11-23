@@ -22,6 +22,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements View
 
     protected ActionBar actionBar;
     protected SharedPreferences preferences;
+    protected UsuarioResponse retornoJsonUsuarioResponse;
 
     @Override
     public final void onCreate(@Nullable Bundle savedInstanceState) {
