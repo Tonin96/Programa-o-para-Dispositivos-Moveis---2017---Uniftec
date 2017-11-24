@@ -61,7 +61,6 @@ public class ListaEnderecosUsuarioActivity extends AbstractActivity
         }
 
         recyclerView.setHasFixedSize(true);
-        // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         mAdapter = new ListaEnderecoAdapter(usuarioEnderecoArrayList);
