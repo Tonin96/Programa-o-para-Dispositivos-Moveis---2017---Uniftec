@@ -128,7 +128,7 @@
                 android:orientation="vertical"
                 android:minWidth="70dp">
                 <Button
-                    android:id="@+id/row_lista_endereco_excluir"
+                    android:id="@+id/row_lista_endereco_botao_excluir"
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@android:color/holo_red_light"

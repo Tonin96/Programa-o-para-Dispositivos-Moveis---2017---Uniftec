@@ -42,7 +42,7 @@ public class LoginUsuarioTask extends AsyncTask<Login, Void, EcommerceResponse<S
     @Override
     protected void onPostExecute(EcommerceResponse<String> response) {
         if(response.getStatus() == EcommerceResponseStatus.SUCCESS) {
-            delegate.loginUsuarioSucesso(response.getMessage());
+            delegate.loginUsuarioSucesso(response.getData());
         } else {
             delegate.loginUsuarioFalha(response.getMessage());
         }

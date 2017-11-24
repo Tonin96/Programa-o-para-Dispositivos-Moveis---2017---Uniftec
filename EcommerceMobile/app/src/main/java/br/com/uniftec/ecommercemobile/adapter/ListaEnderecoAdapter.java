@@ -1,5 +1,7 @@
 package br.com.uniftec.ecommercemobile.adapter;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,13 +44,16 @@ public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdap
             cidade = (TextView) view.findViewById(R.id.row_lista_endereco_cidade);
             estado = (TextView) view.findViewById(R.id.row_lista_endereco_estado);
 
-            excluir = (Button) view.findViewById(R.id.row_lista_endereco_excluir);
+            excluir = (Button) view.findViewById(R.id.row_lista_endereco_botao_excluir);
             excluir.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
 
+            if(view.getId() == R.id.row_lista_endereco_botao_excluir) {
+                showDialog(view);
+            }
 
         }
     }
@@ -76,5 +81,23 @@ public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdap
     @Override
     public int getItemCount() {
         return enderecos.size();
+    }
+
+    private void showDialog(View view) {
+        new AlertDialog.Builder(view.getContext())
+                .setTitle("Confirmar exclusão do endereço?")
+                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog,
+                                        int which) {
+                        //Do Something Here
+
+                    }
+                })
+                .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                }).show();
     }
 }
