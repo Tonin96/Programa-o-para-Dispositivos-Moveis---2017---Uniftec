@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -31,6 +32,7 @@ public class AlteraContaUsuarioActivity extends AbstractActivity
     private Button buttonEndereco;
     private SharedPreferences user_preferences;
     private ProgressDialog progressDialog;
+    private TextView nomeTitulo;
     private EditText nome;
     private EditText email;
     private EditText senha;
@@ -53,6 +55,7 @@ public class AlteraContaUsuarioActivity extends AbstractActivity
         buttonEndereco = (Button) findViewById(R.id.activity_altera_conta_usuario_button_endereco);
         buttonEndereco.setOnClickListener(this);
 
+        nomeTitulo = (TextView) findViewById(R.id.activity_altera_conta_usuario_titulo);
         nome = (EditText) findViewById(R.id.activity_altera_conta_usuario_edit_text_nome);
         email = (EditText) findViewById(R.id.activity_altera_conta_usuario_edit_text_email);
         senha = (EditText) findViewById(R.id.activity_altera_conta_usuario_edit_text_senha);
@@ -66,6 +69,7 @@ public class AlteraContaUsuarioActivity extends AbstractActivity
         if(!usuario.equals("null")) {
             retornoJsonUsuarioResponse = gson.fromJson(usuario, UsuarioResponse.class);
 
+            nomeTitulo.setText(retornoJsonUsuarioResponse.getNome());
             nome.setText(retornoJsonUsuarioResponse.getNome());
             email.setText(retornoJsonUsuarioResponse.getEmail());
             senha.setText(retornoJsonUsuarioResponse.getSenha());
