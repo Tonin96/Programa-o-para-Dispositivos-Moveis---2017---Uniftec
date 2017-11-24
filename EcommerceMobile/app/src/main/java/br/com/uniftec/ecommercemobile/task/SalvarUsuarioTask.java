@@ -44,7 +44,7 @@ public class SalvarUsuarioTask extends AsyncTask<Usuario, Void, EcommerceRespons
     protected void onPostExecute(EcommerceResponse<String> response) {
 
         if(response.getStatus() == EcommerceResponseStatus.SUCCESS) {
-            delegate.incluirUsuarioSucesso(response.getMessage());
+            delegate.incluirUsuarioSucesso(response.getData());
         } else {
             delegate.incluirUsuarioFalha(response.getMessage());
         }
