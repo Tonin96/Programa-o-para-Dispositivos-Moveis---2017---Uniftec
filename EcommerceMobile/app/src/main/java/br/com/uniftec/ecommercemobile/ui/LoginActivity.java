@@ -83,6 +83,11 @@ public class LoginActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
+
     public void progressDialog(Activity activity, String mensagem) {
         progressDialog = ProgressDialog.show(activity, "Aguarde", mensagem, true, false);
     }
