@@ -5,11 +5,11 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -19,18 +19,17 @@ import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.model.Usuario;
 import br.com.uniftec.ecommercemobile.model.UsuarioResponse;
 import br.com.uniftec.ecommercemobile.task.AtualizarUsuarioTask;
-import br.com.uniftec.ecommercemobile.task.CarregarUsuarioTask;
 
 public class AlteraContaUsuarioActivity extends AbstractActivity
         implements
         View.OnClickListener,
-        AtualizarUsuarioTask.AtualizarUsuarioDelegate,
-        CarregarUsuarioTask.CarregarUsuarioDelegate{
+        AtualizarUsuarioTask.AtualizarUsuarioDelegate {
 
     private Button buttonAtualizar;
     private Button buttonEndereco;
-    private SharedPreferences user_preferences;
+    private SharedPreferences preferences;
     private ProgressDialog progressDialog;
+    private TextView nomeTitulo;
     private EditText nome;
     private EditText email;
     private EditText senha;
@@ -53,19 +52,21 @@ public class AlteraContaUsuarioActivity extends AbstractActivity
         buttonEndereco = (Button) findViewById(R.id.activity_altera_conta_usuario_button_endereco);
         buttonEndereco.setOnClickListener(this);
 
+        nomeTitulo = (TextView) findViewById(R.id.activity_altera_conta_usuario_titulo);
         nome = (EditText) findViewById(R.id.activity_altera_conta_usuario_edit_text_nome);
         email = (EditText) findViewById(R.id.activity_altera_conta_usuario_edit_text_email);
         senha = (EditText) findViewById(R.id.activity_altera_conta_usuario_edit_text_senha);
         cpf = (EditText) findViewById(R.id.activity_altera_conta_usuario_edit_text_cpf);
         telefone = (EditText) findViewById(R.id.activity_altera_conta_usuario_edit_text_telefone);
 
-        user_preferences = this.getSharedPreferences("usuario_preferences", Context.MODE_PRIVATE);
+        preferences = this.getSharedPreferences("usuario_preferences", Context.MODE_PRIVATE);
 
         Gson gson = new Gson();
-        String usuario = user_preferences.getString("usuario", "null");
+        String usuario = preferences.getString("usuario", "null");
         if(!usuario.equals("null")) {
             retornoJsonUsuarioResponse = gson.fromJson(usuario, UsuarioResponse.class);
 
+            nomeTitulo.setText(retornoJsonUsuarioResponse.getNome());
             nome.setText(retornoJsonUsuarioResponse.getNome());
             email.setText(retornoJsonUsuarioResponse.getEmail());
             senha.setText(retornoJsonUsuarioResponse.getSenha());
@@ -73,12 +74,11 @@ public class AlteraContaUsuarioActivity extends AbstractActivity
             telefone.setText(retornoJsonUsuarioResponse.getTelefone());
         }
 
-        token = user_preferences.getString("X-Token", "null");
+        token = preferences.getString("X-Token", "null");
     }
 
     @Override
     public void onClick(View view) {
-
         if(view.getId() == R.id.activity_altera_conta_usuario_button_atualizar) {
 
             boolean validacao = this.validarCamposObrigatorios();
@@ -108,24 +108,21 @@ public class AlteraContaUsuarioActivity extends AbstractActivity
             final Intent intent =  new Intent(this, ListaEnderecosUsuarioActivity.class);
             this.startActivity(intent);
         }
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home) {
+            finish();
+
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
     public void atualizarUsuarioSucesso(UsuarioResponse usuarioResponse) {
-        CarregarUsuarioTask carregarUsuarioTask = new CarregarUsuarioTask(this);
-
-        carregarUsuarioTask.execute(token);
-    }
-
-    @Override
-    public void atualizarUsuarioFalha(String mensagem) {
-        dismisProgressDialog();
-        Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void sucessoCarregarUsuario(UsuarioResponse usuarioResponse) {
         Gson gson = new Gson();
         String json = gson.toJson(usuarioResponse);
 
@@ -141,7 +138,7 @@ public class AlteraContaUsuarioActivity extends AbstractActivity
     }
 
     @Override
-    public void falhaCarregarUsuario(String mensagem) {
+    public void atualizarUsuarioFalha(String mensagem) {
         dismisProgressDialog();
         Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
     }
@@ -156,13 +153,12 @@ public class AlteraContaUsuarioActivity extends AbstractActivity
     }
 
     private void putStringSharedPreference(String key, String value) {
-        SharedPreferences.Editor editor = user_preferences.edit();
+        SharedPreferences.Editor editor = preferences.edit();
         editor.putString(key, value);
         editor.commit();
     }
 
     public boolean validarCamposObrigatorios() {
-
         boolean validacao = true;
         if(!cpf.getText().toString().matches("[0-9]{11}")) {
             cpf.setError("CPF inválido");

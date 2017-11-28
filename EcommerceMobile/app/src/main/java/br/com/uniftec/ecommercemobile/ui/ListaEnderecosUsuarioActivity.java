@@ -1,6 +1,8 @@
 package br.com.uniftec.ecommercemobile.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,25 +11,28 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.adapter.CarrinhoAdapter;
 import br.com.uniftec.ecommercemobile.adapter.ListaEnderecoAdapter;
 import br.com.uniftec.ecommercemobile.model.UsuarioEndereco;
+import br.com.uniftec.ecommercemobile.model.UsuarioEnderecoResponse;
+import br.com.uniftec.ecommercemobile.model.UsuarioResponse;
 import br.com.uniftec.ecommercemobile.services.CarrinhoService;
 
-public class ListaEnderecosUsuarioActivity extends AbstractActivity implements View.OnClickListener  {
-
-    public static final String CARRINHO_PARAMETER = "CARRINHO_PARAMETER";
+public class ListaEnderecosUsuarioActivity extends AbstractActivity
+        implements
+        View.OnClickListener
+{
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     private Button novoEndereco;
-
-    public ListaEnderecosUsuarioActivity(){
-    }
+    protected SharedPreferences preferences;
 
     @Override
     protected int getLayoutRes() {
@@ -39,22 +44,26 @@ public class ListaEnderecosUsuarioActivity extends AbstractActivity implements V
 
         getSupportActionBar().setTitle("Lista de Endereços");
 
-        final CarrinhoService carrinhoService = new CarrinhoService(this);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_lista_enderecos_usuario);
         novoEndereco = (Button) findViewById(R.id.activity_lista_endereco_usuario_adicionar_endereco);
 
+        preferences = this.getSharedPreferences("usuario_preferences", Context.MODE_PRIVATE);
+
+        Gson gson = new Gson();
+        String usuario = preferences.getString("usuario", "null");
+        if(!usuario.equals("null")) {
+            retornoJsonUsuarioResponse = gson.fromJson(usuario, UsuarioResponse.class);
+        }
+
         ArrayList<UsuarioEndereco> usuarioEnderecoArrayList = new ArrayList<UsuarioEndereco>();
-        UsuarioEndereco usuarioEndereco = new UsuarioEndereco();
-        usuarioEndereco.setBairro("teste");
-        usuarioEndereco.setEstado("RS");
-        usuarioEndereco.setCidade("Caxias do Sul");
-        usuarioEnderecoArrayList.add(usuarioEndereco);
+        for (UsuarioEnderecoResponse usuarioEnderecoResponse : retornoJsonUsuarioResponse.getEnderecos()) {
+            usuarioEnderecoArrayList.add(usuarioEnderecoResponse.getEndereco());
+        }
 
         recyclerView.setHasFixedSize(true);
-        // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new ListaEnderecoAdapter(usuarioEnderecoArrayList);
+        mAdapter = new ListaEnderecoAdapter(usuarioEnderecoArrayList, getBaseContext());
         recyclerView.setAdapter(mAdapter);
         novoEndereco.setOnClickListener(this);
     }
@@ -65,10 +74,9 @@ public class ListaEnderecosUsuarioActivity extends AbstractActivity implements V
 
         final Intent intent;
 
-        intent =  new Intent(v.getContext(), CriaEnderecoUsuarioActivity.class);
+        intent = new Intent(v.getContext(), CriaEnderecoUsuarioActivity.class);
 
         v.getContext().startActivity(intent);
-
     }
 
     @Override

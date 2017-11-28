@@ -2,6 +2,9 @@ package br.com.uniftec.ecommercemobile.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UsuarioEnderecoResponse {
 
@@ -67,5 +70,18 @@ public class UsuarioEnderecoResponse {
 
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+
+    public UsuarioEndereco getEndereco() {
+        UsuarioEndereco endereco = new UsuarioEndereco();
+        endereco.setBairro(getBairro());
+        endereco.setCidade(getCidade());
+        endereco.setComplemento(getComplemento());
+        endereco.setEstado(getEstado());
+        endereco.setLogradouro(getLogradouro());
+        endereco.setNumero(getNumero());
+        endereco.setId(getId());
+
+        return endereco;
     }
 }

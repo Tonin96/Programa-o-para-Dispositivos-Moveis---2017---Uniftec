@@ -4,12 +4,21 @@ import java.io.Serializable;
 
 public class UsuarioEndereco implements Serializable {
 
+    private Long id;
     private String bairro;
     private String cidade;
     private String complemento;
     private String estado;
     private String logradouro;
     private String numero;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getBairro() {
         return bairro;
