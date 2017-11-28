@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +19,6 @@ import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.model.Usuario;
 import br.com.uniftec.ecommercemobile.model.UsuarioResponse;
 import br.com.uniftec.ecommercemobile.task.AtualizarUsuarioTask;
-import br.com.uniftec.ecommercemobile.task.CarregarUsuarioTask;
 
 public class AlteraContaUsuarioActivity extends AbstractActivity
         implements

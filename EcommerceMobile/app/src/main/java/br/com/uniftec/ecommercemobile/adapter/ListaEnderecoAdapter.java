@@ -21,14 +21,12 @@ import java.util.List;
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.model.UsuarioEndereco;
 import br.com.uniftec.ecommercemobile.model.UsuarioResponse;
-import br.com.uniftec.ecommercemobile.task.CarregarUsuarioTask;
 import br.com.uniftec.ecommercemobile.task.RemoverUsuarioEnderecoTask;
 import br.com.uniftec.ecommercemobile.ui.ListaEnderecosUsuarioActivity;
 
 public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdapter.ViewHolder>
         implements
-        RemoverUsuarioEnderecoTask.RemoverUsuarioEnderecoDelegate,
-        CarregarUsuarioTask.CarregarUsuarioDelegate{
+        RemoverUsuarioEnderecoTask.RemoverUsuarioEnderecoDelegate {
 
     private List<UsuarioEndereco> enderecos;
     private SharedPreferences preferences;
@@ -45,7 +43,6 @@ public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdap
     }
 
     private void showDialog(final View view, final int position) {
-
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(view.getContext());
 
         alertDialog.setTitle("Confirmar exclusão do endereço?");
@@ -79,19 +76,6 @@ public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdap
 
     @Override
     public void removerUsuarioEnderecoSucesso(UsuarioResponse usuarioResponse) {
-        CarregarUsuarioTask carregarUsuarioTask = new CarregarUsuarioTask(this);
-
-        carregarUsuarioTask.execute(token);
-    }
-
-    @Override
-    public void removerUsuarioEnderecoFalha(String mensagem) {
-        dismisProgressDialog();
-        Toast.makeText(this.context, mensagem, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void sucessoCarregarUsuario(UsuarioResponse usuarioResponse) {
         Gson gson = new Gson();
         String json = gson.toJson(usuarioResponse);
 
@@ -106,7 +90,7 @@ public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdap
     }
 
     @Override
-    public void falhaCarregarUsuario(String mensagem) {
+    public void removerUsuarioEnderecoFalha(String mensagem) {
         dismisProgressDialog();
         Toast.makeText(this.context, mensagem, Toast.LENGTH_SHORT).show();
     }
@@ -155,11 +139,9 @@ public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdap
 
         @Override
         public void onClick(View view) {
-
             if(view.getId() == R.id.row_lista_endereco_botao_excluir) {
                 showDialog(view, this.getPosition());
             }
-
         }
     }
 
