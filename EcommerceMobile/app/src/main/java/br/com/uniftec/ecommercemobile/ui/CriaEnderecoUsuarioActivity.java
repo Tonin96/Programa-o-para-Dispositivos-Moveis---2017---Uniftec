@@ -13,22 +13,18 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import br.com.uniftec.ecommercemobile.MainActivity;
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.model.UsuarioEndereco;
 import br.com.uniftec.ecommercemobile.model.UsuarioResponse;
 import br.com.uniftec.ecommercemobile.services.LoadingService;
-import br.com.uniftec.ecommercemobile.task.CarregarUsuarioTask;
 import br.com.uniftec.ecommercemobile.task.SalvarUsuarioEnderecoTask;
 
 public class CriaEnderecoUsuarioActivity extends AbstractActivity
         implements
         View.OnClickListener,
         SalvarUsuarioEnderecoTask.SalvarUsuarioEnderecoDelegate,
-        CarregarUsuarioTask.CarregarUsuarioDelegate,
         LoadingService
 {
-
     private ProgressDialog progressDialog;
     private SharedPreferences user_preferences;
     private Button botaoSalvar;
@@ -66,7 +62,6 @@ public class CriaEnderecoUsuarioActivity extends AbstractActivity
 
     @Override
     public void onClick(View view) {
-
         if(view.getId() == R.id.activity_cria_endereco_usuario_button_salvar) {
 
             boolean validacao = this.validarCamposObrigatorios();
@@ -91,12 +86,10 @@ public class CriaEnderecoUsuarioActivity extends AbstractActivity
                 salvarUsuarioEnderecoTask.execute(parametros);
             }
         }
-
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         if (item.getItemId() == android.R.id.home) {
             finish();
 
@@ -107,7 +100,6 @@ public class CriaEnderecoUsuarioActivity extends AbstractActivity
     }
 
     public boolean validarCamposObrigatorios() {
-
         boolean validacao = true;
 
         if(rua.getText().toString().equals("")) {
@@ -145,19 +137,6 @@ public class CriaEnderecoUsuarioActivity extends AbstractActivity
 
     @Override
     public void salvarUsuarioEnderecoSucesso(UsuarioResponse usuarioResponse) {
-        CarregarUsuarioTask carregarUsuarioTask = new CarregarUsuarioTask(this);
-
-        carregarUsuarioTask.execute(token);
-    }
-
-    @Override
-    public void salvarUsuarioEnderecoFalha(String mensagem) {
-        dismisProgressDialog();
-        Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void sucessoCarregarUsuario(UsuarioResponse usuarioResponse) {
         Gson gson = new Gson();
         String json = gson.toJson(usuarioResponse);
 
@@ -173,7 +152,7 @@ public class CriaEnderecoUsuarioActivity extends AbstractActivity
     }
 
     @Override
-    public void falhaCarregarUsuario(String mensagem) {
+    public void salvarUsuarioEnderecoFalha(String mensagem) {
         dismisProgressDialog();
         Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
     }
