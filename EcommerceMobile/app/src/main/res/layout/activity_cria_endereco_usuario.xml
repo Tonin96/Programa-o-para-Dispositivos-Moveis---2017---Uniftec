@@ -33,6 +33,8 @@
             android:id="@+id/linear_layout_rua"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:layout_below="@+id/barra_superior">
 
             <TextView
@@ -54,6 +56,8 @@
             android:id="@+id/linear_layout_numero"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:layout_below="@+id/linear_layout_rua">
 
             <TextView
@@ -75,6 +79,8 @@
             android:id="@+id/linear_layout_complemento"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:layout_below="@+id/linear_layout_numero">
 
             <TextView
@@ -96,6 +102,8 @@
             android:id="@+id/linear_layout_bairro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:layout_below="@+id/linear_layout_complemento">
 
             <TextView
@@ -117,6 +125,8 @@
             android:id="@+id/linear_layout_cidade"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:layout_below="@+id/linear_layout_bairro">
 
             <TextView
@@ -138,6 +148,8 @@
             android:id="@+id/linear_layout_estado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:layout_below="@+id/linear_layout_cidade">
 
             <TextView
@@ -159,6 +171,8 @@
             android:id="@+id/linear_layout_salvar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:layout_below="@+id/linear_layout_estado">
 
             <Button
