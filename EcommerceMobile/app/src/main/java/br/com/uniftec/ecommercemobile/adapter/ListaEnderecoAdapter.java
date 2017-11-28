@@ -33,6 +33,7 @@ public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdap
     private String token;
     private ProgressDialog progressDialog;
     private Context context;
+    private int posicaoSelecionada;
 
     public ListaEnderecoAdapter(List<UsuarioEndereco> enderecos, Context context) {
         this.enderecos = enderecos;
@@ -43,6 +44,9 @@ public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdap
     }
 
     private void showDialog(final View view, final int position) {
+
+        context = view.getContext();
+
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(view.getContext());
 
         alertDialog.setTitle("Confirmar exclusão do endereço?");
@@ -51,7 +55,7 @@ public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdap
             @Override
             public void onClick(DialogInterface dialog,
                                 int which) {
-                progressDialog(view.getContext(), "Removendo endereço");
+                progressDialog(context, "Removendo endereço");
 
                 Long idSelecionado = enderecos.get(position).getId();
 
@@ -81,12 +85,12 @@ public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdap
 
         putStringSharedPreference("usuario", json);
 
+        enderecos.remove(posicaoSelecionada);
+        notifyItemRemoved(posicaoSelecionada);
+
         dismisProgressDialog();
 
-        Intent intent = null;
-        intent =  new Intent(this.context, ListaEnderecosUsuarioActivity.class);
-
-        this.context.startActivity(intent);
+        Toast.makeText(this.context, "Endereço removido com sucesso", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -140,7 +144,10 @@ public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdap
         @Override
         public void onClick(View view) {
             if(view.getId() == R.id.row_lista_endereco_botao_excluir) {
-                showDialog(view, this.getPosition());
+
+                posicaoSelecionada = getAdapterPosition();
+
+                showDialog(view, posicaoSelecionada);
             }
         }
     }

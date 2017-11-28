@@ -7,6 +7,7 @@ import br.com.uniftec.ecommercemobile.model.UsuarioEndereco;
 import br.com.uniftec.ecommercemobile.model.UsuarioResponse;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -27,7 +28,7 @@ public interface UsuarioService {
     @PUT("/usuario/endereco")
     public Call<EcommerceResponse<UsuarioResponse>> salvarUsuarioEndereco(@Header("X-Token") String token, @Body UsuarioEndereco usuarioEndereco);
 
-    @PUT("/usuario/endereco/{id}")
+    @DELETE("/usuario/endereco/{id}")
     public Call<EcommerceResponse<UsuarioResponse>> removerUsuarioEndereco(@Header("X-Token") String token, @Path("id") Long id);
 
     @POST("/usuario/login")
