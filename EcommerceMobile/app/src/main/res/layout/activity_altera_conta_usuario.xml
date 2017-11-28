@@ -39,7 +39,6 @@
                 </android.support.design.widget.AppBarLayout>
             </LinearLayout>
 
-
             <LinearLayout
                 android:id="@+id/linear_layout_titulo"
                 android:layout_width="match_parent"
@@ -68,6 +67,8 @@
                 android:id="@+id/linear_layout_nome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:layout_below="@+id/linear_layout_titulo">
 
                 <TextView
@@ -89,6 +90,8 @@
                 android:id="@+id/linear_layout_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:layout_below="@+id/linear_layout_nome">
 
                 <TextView
@@ -110,6 +113,8 @@
                 android:id="@+id/linear_layout_senha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:layout_below="@+id/linear_layout_email">
 
                 <TextView
@@ -132,6 +137,8 @@
                 android:id="@+id/linear_layout_cpf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:layout_below="@+id/linear_layout_senha">
 
                 <TextView
@@ -153,6 +160,8 @@
                 android:id="@+id/linear_layout_telefone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:layout_below="@+id/linear_layout_cpf">
 
                 <TextView
@@ -174,6 +183,8 @@
                 android:id="@+id/linear_layout_salvar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:layout_below="@+id/linear_layout_telefone">
 
                 <Button
@@ -188,6 +199,8 @@
                 android:id="@+id/linear_layout_endereco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:layout_below="@+id/linear_layout_salvar">
 
                 <Button
