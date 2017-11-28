@@ -80,6 +80,7 @@ public class UsuarioEnderecoResponse {
         endereco.setEstado(getEstado());
         endereco.setLogradouro(getLogradouro());
         endereco.setNumero(getNumero());
+        endereco.setId(getId());
 
         return endereco;
     }

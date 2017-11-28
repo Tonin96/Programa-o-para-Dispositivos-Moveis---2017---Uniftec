@@ -63,7 +63,7 @@ public class ListaEnderecosUsuarioActivity extends AbstractActivity
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new ListaEnderecoAdapter(usuarioEnderecoArrayList);
+        mAdapter = new ListaEnderecoAdapter(usuarioEnderecoArrayList, getBaseContext());
         recyclerView.setAdapter(mAdapter);
         novoEndereco.setOnClickListener(this);
     }

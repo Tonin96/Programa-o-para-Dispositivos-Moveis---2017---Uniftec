@@ -27,8 +27,8 @@ public interface UsuarioService {
     @PUT("/usuario/endereco")
     public Call<EcommerceResponse<UsuarioResponse>> salvarUsuarioEndereco(@Header("X-Token") String token, @Body UsuarioEndereco usuarioEndereco);
 
-    @PUT("/usuario/endereco")
-    public Call<EcommerceResponse<UsuarioResponse>> removerUsuarioEndereco(@Header("X-Token") String token, @Path("id") String id);
+    @PUT("/usuario/endereco/{id}")
+    public Call<EcommerceResponse<UsuarioResponse>> removerUsuarioEndereco(@Header("X-Token") String token, @Path("id") Long id);
 
     @POST("/usuario/login")
     public Call<EcommerceResponse<String>> loginUsuario(@Body Login login);

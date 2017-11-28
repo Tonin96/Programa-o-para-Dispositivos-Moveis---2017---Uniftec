@@ -57,6 +57,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements View
             }
 
             meusDados.setOnClickListener(this);
+            nome.setOnClickListener(this);
         }
     }
 

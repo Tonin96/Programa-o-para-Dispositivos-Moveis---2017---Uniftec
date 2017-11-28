@@ -25,7 +25,7 @@ public class RemoverUsuarioEnderecoTask extends AsyncTask<Object, Void, Ecommerc
 
     @Override
     protected EcommerceResponse<UsuarioResponse> doInBackground(Object... parameters) {
-        Call<EcommerceResponse<UsuarioResponse>> call = usuarioService.removerUsuarioEndereco((String) parameters[0], (String) parameters[1]);
+        Call<EcommerceResponse<UsuarioResponse>> call = usuarioService.removerUsuarioEndereco((String) parameters[0], (Long) parameters[1]);
 
         try {
             retrofit2.Response<EcommerceResponse<UsuarioResponse>> response = call.execute();

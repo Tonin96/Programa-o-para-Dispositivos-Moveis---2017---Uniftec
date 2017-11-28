@@ -1,6 +1,10 @@
 package br.com.uniftec.ecommercemobile.adapter;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,19 +12,120 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.util.List;
 
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.model.UsuarioEndereco;
+import br.com.uniftec.ecommercemobile.model.UsuarioResponse;
+import br.com.uniftec.ecommercemobile.task.CarregarUsuarioTask;
+import br.com.uniftec.ecommercemobile.task.RemoverUsuarioEnderecoTask;
+import br.com.uniftec.ecommercemobile.ui.ListaEnderecosUsuarioActivity;
 
-public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdapter.ViewHolder>{
+public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdapter.ViewHolder>
+        implements
+        RemoverUsuarioEnderecoTask.RemoverUsuarioEnderecoDelegate,
+        CarregarUsuarioTask.CarregarUsuarioDelegate{
 
     private List<UsuarioEndereco> enderecos;
+    private SharedPreferences preferences;
+    private String token;
+    private ProgressDialog progressDialog;
+    private Context context;
 
-    public ListaEnderecoAdapter(List<UsuarioEndereco> enderecos) {
+    public ListaEnderecoAdapter(List<UsuarioEndereco> enderecos, Context context) {
         this.enderecos = enderecos;
+        this.context = context;
+
+        preferences = this.context.getSharedPreferences("usuario_preferences", Context.MODE_PRIVATE);
+        this.token = preferences.getString("X-Token", "null");
     }
+
+    private void showDialog(final View view, final int position) {
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(view.getContext());
+
+        alertDialog.setTitle("Confirmar exclusão do endereço?");
+
+        alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog,
+                                int which) {
+                progressDialog(view.getContext(), "Removendo endereço");
+
+                Long idSelecionado = enderecos.get(position).getId();
+
+                Object[] parametros = new Object[2];
+                parametros[0] = token;
+                parametros[1] = idSelecionado;
+
+                RemoverUsuarioEnderecoTask removerUsuarioEnderecoTask = new RemoverUsuarioEnderecoTask(ListaEnderecoAdapter.this);
+                removerUsuarioEnderecoTask.execute(parametros);
+            }
+        });
+
+        alertDialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        alertDialog.show();
+    }
+
+    @Override
+    public void removerUsuarioEnderecoSucesso(UsuarioResponse usuarioResponse) {
+        CarregarUsuarioTask carregarUsuarioTask = new CarregarUsuarioTask(this);
+
+        carregarUsuarioTask.execute(token);
+    }
+
+    @Override
+    public void removerUsuarioEnderecoFalha(String mensagem) {
+        dismisProgressDialog();
+        Toast.makeText(this.context, mensagem, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void sucessoCarregarUsuario(UsuarioResponse usuarioResponse) {
+        Gson gson = new Gson();
+        String json = gson.toJson(usuarioResponse);
+
+        putStringSharedPreference("usuario", json);
+
+        dismisProgressDialog();
+
+        Intent intent = null;
+        intent =  new Intent(this.context, ListaEnderecosUsuarioActivity.class);
+
+        this.context.startActivity(intent);
+    }
+
+    @Override
+    public void falhaCarregarUsuario(String mensagem) {
+        dismisProgressDialog();
+        Toast.makeText(this.context, mensagem, Toast.LENGTH_SHORT).show();
+    }
+
+    private void progressDialog(Context context, String mensagem) {
+        progressDialog = ProgressDialog.show(context, "Aguarde", mensagem, true, false);
+    }
+
+    private void dismisProgressDialog() {
+        progressDialog.dismiss();
+        progressDialog = null;
+    }
+
+    private void putStringSharedPreference(String key, String value) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(key, value);
+        editor.commit();
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -52,7 +157,7 @@ public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdap
         public void onClick(View view) {
 
             if(view.getId() == R.id.row_lista_endereco_botao_excluir) {
-                showDialog(view);
+                showDialog(view, this.getPosition());
             }
 
         }
@@ -60,7 +165,6 @@ public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdap
 
     @Override
     public ListaEnderecoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.row_lista_endereco, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
@@ -81,23 +185,5 @@ public class ListaEnderecoAdapter extends RecyclerView.Adapter<ListaEnderecoAdap
     @Override
     public int getItemCount() {
         return enderecos.size();
-    }
-
-    private void showDialog(View view) {
-        new AlertDialog.Builder(view.getContext())
-                .setTitle("Confirmar exclusão do endereço?")
-                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog,
-                                        int which) {
-                        //Do Something Here
-
-                    }
-                })
-                .setNegativeButton("Não", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
-                }).show();
     }
 }
