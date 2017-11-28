@@ -67,8 +67,8 @@
                                 android:layout_height="match_parent"
                                 android:text="Produto 1"
                                 android:textSize="25dp"
-                                android:textAlignment="center"
-                                />
+                                android:paddingTop="16dp"
+                                android:textAlignment="center" />
 
                         </LinearLayout>
 
@@ -76,6 +76,8 @@
                             android:id="@+id/linear_layout_imagem"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:paddingTop="16dp"
+                            android:paddingBottom="16dp"
                             android:layout_below="@+id/linear_layout_titulo">
 
                             <ImageView
@@ -90,6 +92,8 @@
                             android:id="@+id/linear_layout_preco"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
                             android:layout_below="@id/linear_layout_imagem">
 
                             <TextView
