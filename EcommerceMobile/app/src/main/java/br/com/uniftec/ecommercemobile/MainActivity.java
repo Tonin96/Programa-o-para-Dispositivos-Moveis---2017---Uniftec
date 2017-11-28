@@ -1,6 +1,7 @@
 package br.com.uniftec.ecommercemobile;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,10 +13,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import br.com.uniftec.ecommercemobile.adapter.ListaEnderecoAdapter;
+import br.com.uniftec.ecommercemobile.task.RemoverUsuarioEnderecoTask;
 import br.com.uniftec.ecommercemobile.ui.AbstractActivity;
 import br.com.uniftec.ecommercemobile.ui.AlteraContaUsuarioActivity;
 import br.com.uniftec.ecommercemobile.ui.CarrinhoActivity;
@@ -27,7 +31,7 @@ public class MainActivity extends AbstractActivity implements NavigationView.OnN
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private SharedPreferences user_preferences;
+    private SharedPreferences preferences;
 
     @Override
     protected int getLayoutRes() {
@@ -42,9 +46,9 @@ public class MainActivity extends AbstractActivity implements NavigationView.OnN
         navigationView = (NavigationView) findViewById(R.id.main_navigation_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        user_preferences = this.getSharedPreferences("usuario_preferences", Context.MODE_PRIVATE);
+        preferences = this.getSharedPreferences("usuario_preferences", Context.MODE_PRIVATE);
 
-        String token = user_preferences.getString("X-Token", "null");
+        String token = preferences.getString("X-Token", "null");
 
         Log.d("token retornado", token);
 
@@ -83,7 +87,7 @@ public class MainActivity extends AbstractActivity implements NavigationView.OnN
                 break;
 
             case R.id.menu_carrinho:
-                intent =  new Intent(this, CarrinhoActivity.class);
+                intent = new Intent(this, CarrinhoActivity.class);
 
                 this.startActivity(intent);
                 break;
@@ -92,6 +96,9 @@ public class MainActivity extends AbstractActivity implements NavigationView.OnN
                 fragment = new ListaPedidosFragment();
                 break;
 
+            case R.id.menu_logout:
+                this.confirmarLogout(this);
+                break;
         }
 
         if (fragment != null) {
@@ -99,14 +106,40 @@ public class MainActivity extends AbstractActivity implements NavigationView.OnN
 
             return true;
         }
+
         return false;
     }
 
     private void mudarContainerPrincipal(Fragment fragment) {
-
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_container, fragment);
         transaction.commit();
+    }
 
+    private void confirmarLogout(final Context context) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
+
+        alertDialog.setTitle("Confirmar logout?");
+
+        alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog,
+                                int which) {
+                preferences.edit().clear().commit();
+
+                Intent intent = new Intent(context, LoginActivity.class);
+
+                context.startActivity(intent);
+            }
+        });
+
+        alertDialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        alertDialog.show();
     }
 }
