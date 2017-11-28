@@ -28,6 +28,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:padding="16dp"
             android:orientation="vertical">
 
             <LinearLayout
@@ -43,7 +44,6 @@
                     android:elevation="24dp"
                     android:text="Finalizar Carrinho" />
             </LinearLayout>
-
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recycler_view_carrinho"
