@@ -18,116 +18,124 @@
             android:background="@color/colorPrimary"
             android:theme="@style/Toolbar">
 
+
         </android.support.v7.widget.Toolbar>
 
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-        <LinearLayout
-            android:id="@+id/linear_layout_titulo"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
 
-            <TextView
-                android:id="@+id/activity_produto_titulo"
+            <LinearLayout
+                android:id="@+id/linear_layout_titulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Titulo"
-                android:textSize="40dp"
-                android:textStyle="bold" />
+                android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/activity_produto_imagen_principal"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ft_4gx0m4rifoqxbz9lejqq6wypqyo" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/activity_produto_titulo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Titulo"
+                    android:textSize="40dp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/activity_produto_imagen_principal"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:minHeight="200dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ft_4gx0m4rifoqxbz9lejqq6wypqyo" />
+            </LinearLayout>
 
 
-        <LinearLayout
-            android:id="@+id/linear_layout_preco"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/linear_layout_titulo">
-
-            <TextView
-                android:id="@+id/activity_produto_label_preco"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Preço:"
-                android:textSize="15dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/activity_produto_preco"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/activity_produto_label_preco"
-                android:text="R$ 100,00"
-                android:textSize="15dp" />
-
-            <TextView
-                android:id="@+id/activity_produto_label_preco_desconto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:text="Preço Desconto:"
-                android:textSize="15dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/activity_produto_preco_desconto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/activity_produto_label_preco"
-                android:text="R$ 100,00"
-                android:textSize="15dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linear_layout_descricao"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/linear_layout_preco"
-            android:layout_marginTop="25dp">
-
-            <TextView
-                android:id="@+id/activity_produto_descricao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Descrição"
-                android:textSize="15dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/linear_layout_descricao"
-            android:orientation="vertical">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view_list_imagens_produto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="horizontal" />
-
-            <Button
-                android:id="@+id/activity_produto_botao_comprar"
+            <LinearLayout
+                android:id="@+id/linear_layout_preco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Comprar"/>
-        </LinearLayout>
+                android:layout_below="@id/linear_layout_titulo">
 
-    </RelativeLayout>
+                <TextView
+                    android:id="@+id/activity_produto_label_preco"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Preço:"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/activity_produto_preco"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/activity_produto_label_preco"
+                    android:text="R$ 100,00"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/activity_produto_label_preco_desconto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Preço Desconto:"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/activity_produto_preco_desconto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/activity_produto_label_preco"
+                    android:text="R$ 100,00"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear_layout_descricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear_layout_preco"
+                android:layout_marginTop="25dp">
+
+                <TextView
+                    android:id="@+id/activity_produto_descricao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Descrição"
+                    android:textSize="15dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear_layout_descricao"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view_list_imagens_produto"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="horizontal" />
+
+                <Button
+                    android:id="@+id/activity_produto_botao_comprar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Comprar" />
+            </LinearLayout>
+
+        </RelativeLayout>
+    </ScrollView>
 </LinearLayout>

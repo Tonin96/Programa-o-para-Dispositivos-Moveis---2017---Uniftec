@@ -8,6 +8,7 @@
     <ImageView
         android:id="@+id/row_lista_imagem_imagem"
         android:layout_width="wrap_content"
+        android:minWidth="150dp"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/ft_4gx0m4rifoqxbz9lejqq6wypqyo"/>
