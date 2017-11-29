@@ -18,6 +18,7 @@
             android:background="@color/colorPrimary"
             android:theme="@style/Toolbar">
 
+
         </android.support.v7.widget.Toolbar>
 
 
@@ -52,7 +53,8 @@
                 <ImageView
                     android:id="@+id/activity_produto_imagen_principal"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="250dp"
+                    android:minHeight="200dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ft_4gx0m4rifoqxbz9lejqq6wypqyo" />
             </LinearLayout>

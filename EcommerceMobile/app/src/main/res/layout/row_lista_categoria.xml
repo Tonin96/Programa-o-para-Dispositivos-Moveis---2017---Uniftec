@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <item
+        android:id="@+id/row_lista_categoria_item_menu"
+        android:title="Teste" />
+
+</menu>
