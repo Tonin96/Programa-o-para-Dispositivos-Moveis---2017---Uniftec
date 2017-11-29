@@ -1,5 +1,6 @@
 package br.com.uniftec.ecommercemobile.ui;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -67,6 +68,7 @@ public class ListaProdutoFragment extends Fragment implements CarregarProdutosTa
         parametros[0] = null;
         parametros[1] = Long.valueOf(1);
         task.execute(parametros);
+        progressDialog(this.getActivity(), "Carregando");
 
         super.onActivityCreated(savedInstanceState);
     }
@@ -80,10 +82,22 @@ public class ListaProdutoFragment extends Fragment implements CarregarProdutosTa
         }
 
         this.mAdapter.notifyDataSetChanged();
+        dismisProgressDialog();
     }
 
     @Override
     public void carregarProdutosFalha(String mensagem) {
-        Log.d("teste", "teste");
+        dismisProgressDialog();
+    }
+
+    public void progressDialog(Activity activity, String mensagem) {
+        progressDialog = ProgressDialog.show(activity, "Aguarde", mensagem, true, false);
+    }
+
+    public void dismisProgressDialog() {
+        progressDialog.dismiss();
+        progressDialog = null;
     }
 }
+
+
