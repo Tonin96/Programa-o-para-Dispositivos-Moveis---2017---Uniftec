@@ -1,50 +1,80 @@
 package br.com.uniftec.ecommercemobile.services;
 
+import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.os.StrictMode;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.RemoteViews;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
+import java.util.Objects;
 
 import br.com.uniftec.ecommercemobile.MainActivity;
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.model.Produto;
+import br.com.uniftec.ecommercemobile.model.ProdutoResponse;
+import br.com.uniftec.ecommercemobile.task.CarregarProdutosTask;
 import br.com.uniftec.ecommercemobile.ui.ProdutoActivity;
 
-public class MyFirebaseMessagingService extends FirebaseMessagingService {
+public class MyFirebaseMessagingService extends FirebaseMessagingService implements CarregarProdutosTask.CarregarProdutosDelegate {
     private static final String TAG = "Message";
+    private RemoteMessage remoteMessage;
+    private Produto produto;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-        // TODO: Handle FCM messages here.
-        // If the application is in the foreground handle both data and notification messages here.
-        // Also if you intend on generating your own notifications as a result of a received FCM
-        // message, here is where that should be initiated.
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
-        Log.d(TAG, "Notification Message Body: " + remoteMessage.getNotification().getBody());
+        this.remoteMessage = remoteMessage;
+        carregarProdutos();
+    }
 
-        NotificationCompat.Builder mBuilder =
+
+    @Override
+    public void carregarProdutosSucesso(List<ProdutoResponse> listEcommerceResponse) {
+        for (ProdutoResponse produtoResponse : listEcommerceResponse) {
+            if (Objects.equals(produtoResponse.getId(), Long.valueOf(remoteMessage.getNotification().getBody()))) {
+                this.produto = produtoResponse.getProduto();
+            }
+        }
+        if (this.produto == null) {
+            return;
+        }
+
+        RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.custom_notification);
+        contentView.setImageViewBitmap(R.id.image, getBitmapFromURL(produto.getImagemPrincipal().getUrl()));
+        contentView.setTextViewText(R.id.title, produto.getNome());
+        contentView.setTextViewText(R.id.text, "Incrivel Promoção");
+
+        final NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_heart_black_18dp)
-                        .setContentTitle("My notification")
-                        .setContentText(remoteMessage.getNotification().getBody());
+                        .setLargeIcon(getBitmapFromURL(produto.getImagemPrincipal().getUrl()))
+                        .setContent(contentView);
         // Creates an explicit intent for an Activity in your app
 
-        /*Produto produto = new Produto();
-        produto.setId(10);
-        produto.setTitulo("Produto: " + produto.getId());
-        produto.setPreco((double) 50);
-        produto.setPreco_desconto(produto.getPreco() / 2);
-        produto.setDescricao("O Produto: " + produto.getTitulo() + " é muito legal.");
-        produto.setImagem_principal("ft_4gx0m4rifoqxbz9lejqq6wypqyo");*/
 
-        Intent resultIntent = new Intent(this, MainActivity.class);
-        //resultIntent.putExtra(ProdutoActivity.PRODUTO_PARAMETER, produto);
+        Intent resultIntent = new Intent(this, ProdutoActivity.class);
+        resultIntent.putExtra(ProdutoActivity.PRODUTO_PARAMETER, this.produto);
+
 
         // The stack builder object will contain an artificial back stack for the
         // started Activity.
@@ -66,6 +96,38 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         // mId allows you to update the notification later on.
         mNotificationManager.notify(1, mBuilder.build());
+    }
+
+
+    @Override
+    public void carregarProdutosFalha(String mensagem) {
+        Log.d("Falha", "falha");
+    }
+
+    private void carregarProdutos() {
+        CarregarProdutosTask task = new CarregarProdutosTask(this);
+        Object[] parametros = new Object[2];
+
+        parametros[0] = null;
+        parametros[1] = null;
+        task.execute(parametros);
+    }
+
+    public Bitmap getBitmapFromURL(String strURL) {
+        try {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+            URL url = new URL(strURL);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return myBitmap;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
 
