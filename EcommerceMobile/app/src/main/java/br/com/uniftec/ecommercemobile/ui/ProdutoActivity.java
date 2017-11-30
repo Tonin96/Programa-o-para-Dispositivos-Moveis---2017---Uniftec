@@ -1,5 +1,6 @@
 package br.com.uniftec.ecommercemobile.ui;
 
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,6 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import br.com.uniftec.ecommercemobile.MainActivity;
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.adapter.ListaImagensAdapter;
 import br.com.uniftec.ecommercemobile.adapter.ListaProdutoAdapter;
@@ -88,8 +90,14 @@ public class ProdutoActivity extends AbstractActivity implements View.OnClickLis
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if(item.getItemId() == android.R.id.home) {
-            finish();
 
+            if(getParent() != null){
+                finish();
+            }else {
+                finish();
+                Intent intent = new Intent(this, MainActivity.class);
+                this.startActivity(intent);
+            }
             return true;
         }
 
