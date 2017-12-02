@@ -1,15 +1,11 @@
 package br.com.uniftec.fteclistview.ui;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import br.com.uniftec.fteclistview.R;
@@ -64,6 +60,11 @@ public class MenuActivity extends AbstractActivity implements NavigationView.OnN
                 fragment = new Fragment();
                 break;
 
+            case R.id.menu_mapa:
+                mudarContainerPrincipal(new IntinerarioMapFragment());
+
+                return true;
+
         }
 
         if(fragment != null) {
@@ -76,10 +77,14 @@ public class MenuActivity extends AbstractActivity implements NavigationView.OnN
     }
 
     private void mudarContainerPrincipal(Fragment fragment) {
-
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.main_container, fragment);
         transaction.commit();
+    }
 
+    private void mudarContainerPrincipal(android.app.Fragment fragment) {
+        android.app.FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_container, fragment);
+        transaction.commit();
     }
 }

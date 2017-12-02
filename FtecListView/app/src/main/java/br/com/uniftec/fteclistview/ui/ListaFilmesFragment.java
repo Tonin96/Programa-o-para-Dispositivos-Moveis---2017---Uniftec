@@ -87,6 +87,7 @@ public class ListaFilmesFragment extends Fragment implements AdapterView.OnItemC
 
         adapter.notifyDataSetChanged();
 
+
         Usuario usuario = new Usuario();
         usuario.setCpf("03686644061");
         usuario.setEmail("bruno.marsilio@gmail.com");
@@ -95,7 +96,8 @@ public class ListaFilmesFragment extends Fragment implements AdapterView.OnItemC
         usuario.setTelefone("54999671473");
 
         IncluirUsuarioTask incluirUsuarioTask = new IncluirUsuarioTask(this);
-        incluirUsuarioTask.execute(usuario);
+        //incluirUsuarioTask.execute(usuario);
+        dismisProgressDialog();
     }
 
     @Override
