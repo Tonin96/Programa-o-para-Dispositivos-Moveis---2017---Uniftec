@@ -60,7 +60,7 @@ public class ListaProdutoFragment extends Fragment implements CarregarProdutosTa
         Button botaoCategorias = view.findViewById(R.id.lista_produtos_button_categorias);
         botaoDestaques.setOnClickListener(this);
         botaoCategorias.setOnClickListener(this);
-        botaoDestaques.setBackgroundColor(Color.GREEN);
+        botaoDestaques.setText("Ocultar destaques");
 
         recyclerView = view.findViewById(R.id.recycler_view_list_produto);
 
@@ -142,9 +142,9 @@ public class ListaProdutoFragment extends Fragment implements CarregarProdutosTa
     private void clickDestaque() {
         this.destaques = !this.destaques;
         if(this.destaques){
-            botaoDestaques.setBackgroundColor(Color.GREEN);
+            botaoDestaques.setText("Ocultar destaques");
         }else{
-            botaoDestaques.setBackgroundColor(Color.RED);
+            botaoDestaques.setText("Mostrar destaques");
         }
 
         carregarProdutos();
