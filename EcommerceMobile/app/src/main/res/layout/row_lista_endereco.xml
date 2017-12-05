@@ -2,140 +2,136 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="3dp"
-    android:paddingBottom="6dp"
-    android:orientation="vertical">
+    android:paddingLeft="1dip"
+    android:paddingRight="2dip"
+    android:paddingBottom="6dip"
+    android:paddingTop="6dip">
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        card_view:cardCornerRadius="4dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent"
+            android:padding="6dip">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/row_lista_endereco_bairro_label"
+                android:layout_below="@+id/row_lista_endereco_botao_excluir"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:text="Bairro: "
+                android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Bairro: "
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/row_lista_endereco_bairro"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="bairro" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Logradouro: "
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/row_lista_endereco_logradouro"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="logradouro" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Complemento: "
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/row_lista_endereco_complemento"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="complemento" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Número: "
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/row_lista_endereco_numero"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="numero" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Cidade: "
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/row_lista_endereco_cidade"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="cidade" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="50dp"
-                        android:text="Estado: "
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/row_lista_endereco_estado"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="estado" />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <Button
-                        android:id="@+id/row_lista_endereco_botao_excluir"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@android:color/holo_red_light"
-                        android:drawableLeft="@drawable/delete" />
-                </LinearLayout>
-            </LinearLayout>
+            <TextView
+                android:id="@+id/row_lista_endereco_bairro"
+                android:layout_toRightOf="@id/row_lista_endereco_bairro_label"
+                android:layout_below="@+id/row_lista_endereco_botao_excluir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="bairro" />
 
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/row_lista_endereco_logradouro_label"
+                android:layout_below="@+id/row_lista_endereco_bairro_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logradouro: "
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/row_lista_endereco_logradouro"
+                android:layout_below="@+id/row_lista_endereco_bairro_label"
+                android:layout_toRightOf="@+id/row_lista_endereco_logradouro_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="logradouro" />
+
+
+            <TextView
+                android:id="@+id/row_lista_endereco_complemento_label"
+                android:layout_below="@+id/row_lista_endereco_logradouro_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Complemento: "
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/row_lista_endereco_complemento"
+                android:layout_below="@+id/row_lista_endereco_logradouro_label"
+                android:layout_toRightOf="@+id/row_lista_endereco_complemento_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="complemento" />
+
+
+            <TextView
+                android:id="@+id/row_lista_endereco_numero_label"
+                android:layout_below="@+id/row_lista_endereco_complemento_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Número: "
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/row_lista_endereco_numero"
+                android:layout_below="@+id/row_lista_endereco_complemento_label"
+                android:layout_toRightOf="@+id/row_lista_endereco_numero_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="numero" />
+
+
+            <TextView
+                android:id="@+id/row_lista_endereco_cidade_label"
+                android:layout_below="@+id/row_lista_endereco_numero_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cidade: "
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/row_lista_endereco_cidade"
+                android:layout_below="@+id/row_lista_endereco_numero_label"
+                android:layout_toRightOf="@+id/row_lista_endereco_cidade_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="cidade" />
+
+
+            <TextView
+                android:id="@+id/row_lista_endereco_estado_label"
+                android:layout_below="@+id/row_lista_endereco_numero_label"
+                android:layout_toRightOf="@+id/row_lista_endereco_cidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Estado: "
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/row_lista_endereco_estado"
+                android:layout_below="@+id/row_lista_endereco_numero_label"
+                android:layout_toRightOf="@+id/row_lista_endereco_estado_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="estado" />
+
+            <Button
+                android:id="@+id/row_lista_endereco_botao_excluir"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/holo_red_light"
+                android:drawableLeft="@drawable/delete" />
+
+        </RelativeLayout>
     </android.support.v7.widget.CardView>
 
 </RelativeLayout>
