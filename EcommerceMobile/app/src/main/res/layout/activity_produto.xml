@@ -47,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="Titulo"
-                    android:textSize="40dp"
+                    android:textSize="25dp"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -55,7 +55,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:minHeight="200dp"
-                    android:scaleType="centerCrop"
                     android:src="@drawable/ft_4gx0m4rifoqxbz9lejqq6wypqyo" />
             </LinearLayout>
 
