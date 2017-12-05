@@ -1,10 +1,11 @@
 package br.com.uniftec.ecommercemobile.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +16,18 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.model.Produto;
 import br.com.uniftec.ecommercemobile.services.CarrinhoService;
+import br.com.uniftec.ecommercemobile.task.RemoverUsuarioEnderecoTask;
 import br.com.uniftec.ecommercemobile.ui.ProdutoActivity;
-
-/**
- * Created by bruno on 28/10/17.
- */
 
 public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.ViewHolder>{
     private List<Produto> produtos;
     private CarrinhoService carrinhoService = null;
+    private Context context;
+    private int posicaoSelecionada;
 
     public CarrinhoAdapter(@NonNull Context context)  {
         this.carrinhoService = new CarrinhoService(context);
@@ -55,15 +56,18 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.ViewHo
 
 
         @Override
-        public void onClick(View v) {
-            if(v.getId() == R.id.row_carrinho_retirar){
-                remove(getAdapterPosition());
-            }else{
+        public void onClick(View view) {
+            if(view.getId() == R.id.row_carrinho_retirar) {
+
+                posicaoSelecionada = getAdapterPosition();
+
+                showDialog(view, posicaoSelecionada);
+            } else {
                 final Intent intent;
-                intent =  new Intent(v.getContext(), ProdutoActivity.class);
+                intent =  new Intent(view.getContext(), ProdutoActivity.class);
                 intent.putExtra(ProdutoActivity.PRODUTO_PARAMETER, produto);
 
-                v.getContext().startActivity(intent);
+                view.getContext().startActivity(intent);
             }
         }
     }
@@ -107,5 +111,31 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.ViewHo
         }else{
             return 0;
         }
+    }
+
+    private void showDialog(final View view, final int position) {
+
+        context = view.getContext();
+
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(view.getContext());
+
+        alertDialog.setTitle("Confirmar exclusão do produto?");
+
+        alertDialog.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog,
+                                int which) {
+                remove(position);
+            }
+        });
+
+        alertDialog.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        alertDialog.show();
     }
 }
