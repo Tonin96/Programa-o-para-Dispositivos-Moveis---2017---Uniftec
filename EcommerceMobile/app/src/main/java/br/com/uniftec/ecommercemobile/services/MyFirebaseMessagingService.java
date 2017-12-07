@@ -4,6 +4,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.StrictMode;
@@ -27,6 +28,7 @@ import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.model.Produto;
 import br.com.uniftec.ecommercemobile.model.ProdutoResponse;
 import br.com.uniftec.ecommercemobile.task.CarregarProdutosTask;
+import br.com.uniftec.ecommercemobile.ui.LoginActivity;
 import br.com.uniftec.ecommercemobile.ui.ProdutoActivity;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService implements CarregarProdutosTask.CarregarProdutosDelegate {
@@ -68,8 +70,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService impleme
                         .setContent(contentView);
         // Creates an explicit intent for an Activity in your app
 
+        SharedPreferences preferences = this.getSharedPreferences("usuario_preferences", Context.MODE_PRIVATE);
+
+        String token = preferences.getString("X-Token", "null");
 
         Intent resultIntent = new Intent(this, ProdutoActivity.class);
+        if(token.equals("null")) {
+            Intent intent = null;
+            intent = new Intent(this, LoginActivity.class);
+
+            resultIntent = intent;
+        }
+
         resultIntent.putExtra(ProdutoActivity.PRODUTO_PARAMETER, this.produto);
 
 
@@ -92,6 +104,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService impleme
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         // mId allows you to update the notification later on.
+        mBuilder.setAutoCancel(true);
         mNotificationManager.notify(1, mBuilder.build());
     }
 

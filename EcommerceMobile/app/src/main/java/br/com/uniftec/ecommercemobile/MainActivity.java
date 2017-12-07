@@ -18,6 +18,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
 import br.com.uniftec.ecommercemobile.adapter.ListaEnderecoAdapter;
 import br.com.uniftec.ecommercemobile.task.RemoverUsuarioEnderecoTask;
 import br.com.uniftec.ecommercemobile.ui.AbstractActivity;
@@ -117,6 +119,7 @@ public class MainActivity extends AbstractActivity implements NavigationView.OnN
     }
 
     private void confirmarLogout(final Context context) {
+
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
 
         alertDialog.setTitle("Confirmar logout?");
