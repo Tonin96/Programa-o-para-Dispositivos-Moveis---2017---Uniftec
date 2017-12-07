@@ -1,30 +1,25 @@
 package br.com.uniftec.ecommercemobile.services;
 
-import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.StrictMode;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Objects;
@@ -34,24 +29,39 @@ import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.model.Produto;
 import br.com.uniftec.ecommercemobile.model.ProdutoResponse;
 import br.com.uniftec.ecommercemobile.task.CarregarProdutosTask;
+import br.com.uniftec.ecommercemobile.ui.LoginActivity;
 import br.com.uniftec.ecommercemobile.ui.ProdutoActivity;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService implements CarregarProdutosTask.CarregarProdutosDelegate {
+
     private static final String TAG = "Message";
     private RemoteMessage remoteMessage;
     private Produto produto;
+    private String produtoId;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         this.remoteMessage = remoteMessage;
-        carregarProdutos();
+        this.produtoId = remoteMessage.getData().get("produtoId");
+
+        boolean validacao = true;
+        try {
+            double d = Double.parseDouble(produtoId);
+        }
+        catch(NumberFormatException nfe) {
+            validacao = false;
+        }
+
+        if(validacao) {
+            carregarProdutos();
+        }
     }
 
 
     @Override
     public void carregarProdutosSucesso(List<ProdutoResponse> listEcommerceResponse) {
         for (ProdutoResponse produtoResponse : listEcommerceResponse) {
-            if (Objects.equals(produtoResponse.getId(), Long.valueOf(remoteMessage.getNotification().getBody()))) {
+            if (Objects.equals(produtoResponse.getId(), Long.valueOf(produtoId))) {
                 this.produto = produtoResponse.getProduto();
             }
         }
@@ -71,8 +81,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService impleme
                         .setContent(contentView);
         // Creates an explicit intent for an Activity in your app
 
+        SharedPreferences preferences = this.getSharedPreferences("usuario_preferences", Context.MODE_PRIVATE);
+
+        String token = preferences.getString("X-Token", "null");
 
         Intent resultIntent = new Intent(this, ProdutoActivity.class);
+        if(token.equals("null")) {
+            Intent intent = null;
+            intent = new Intent(this, LoginActivity.class);
+
+            resultIntent = intent;
+        }
+
         resultIntent.putExtra(ProdutoActivity.PRODUTO_PARAMETER, this.produto);
 
 
@@ -95,6 +115,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService impleme
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         // mId allows you to update the notification later on.
+        mBuilder.setAutoCancel(true);
         mNotificationManager.notify(1, mBuilder.build());
     }
 
