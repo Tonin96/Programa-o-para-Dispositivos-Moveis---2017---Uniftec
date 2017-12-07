@@ -15,6 +15,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import br.com.uniftec.ecommercemobile.model.Produto;
+import br.com.uniftec.ecommercemobile.model.ProdutoResponse;
 
 /**
  * Created by bruno on 08/11/17.

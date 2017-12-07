@@ -1,10 +1,12 @@
 package br.com.uniftec.ecommercemobile.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Produto implements Serializable {
 
+    private Long id;
     private String descricao;
     private String nome;
     private Double preco = 0.0;
@@ -12,6 +14,14 @@ public class Produto implements Serializable {
     private ProdutoCategoria categoria;
     private ProdutoImagem imagemPrincipal;
     private List<ProdutoImagem> imagens;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getDescricao() {
         return descricao;
