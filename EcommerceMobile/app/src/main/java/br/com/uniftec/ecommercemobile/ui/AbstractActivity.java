@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 
 import br.com.uniftec.ecommercemobile.R;
@@ -26,6 +27,10 @@ public abstract class AbstractActivity extends AppCompatActivity implements View
 
     @Override
     public final void onCreate(@Nullable Bundle savedInstanceState) {
+
+        // registra o dispositivo para receber notificacoes atraves do topic TODOS
+        FirebaseMessaging.getInstance().subscribeToTopic("todos");
+
         super.onCreate(savedInstanceState);
         setContentView(getLayoutRes());
 
