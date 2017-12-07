@@ -1,63 +1,54 @@
 package br.com.uniftec.ecommercemobile.model;
 
-import android.content.Intent;
-
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 
 public class Pedido implements Serializable {
 
-    private String data;
-    private String status;
-    private Double total;
-    private UsuarioEndereco enderecoEntrega;
-    private List<PedidoProduto> itens;
+    private String cartaoCredito;
+    private String codigoSeguranca;
+    private Long idEnderecoUsuario;
+    private ArrayList<Long> produtos;
+    private String validadeCartaoCredito;
 
-    public String getData() {
-        return data;
+    public String getCodigoSeguranca() {
+        return codigoSeguranca;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setCodigoSeguranca(String codigoSeguranca) {
+        this.codigoSeguranca = codigoSeguranca;
     }
 
-    public String getStatus() {
-        return status;
+    public Long getIdEnderecoUsuario() {
+        return idEnderecoUsuario;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setIdEnderecoUsuario(Long idEnderecoUsuario) {
+        this.idEnderecoUsuario = idEnderecoUsuario;
     }
 
-    public Double getTotal() {
-        return total;
+    public ArrayList<Long> getProdutos() {
+        return produtos;
     }
 
-    public void setTotal(Double total) {
-        this.total = total;
+    public void setProdutos(ArrayList<Long> produtos) {
+        this.produtos = produtos;
     }
 
-    public UsuarioEndereco getEnderecoEntrega() {
-        return enderecoEntrega;
+    public String getValidadeCartaoCredito() {
+        return validadeCartaoCredito;
     }
 
-    public void setEnderecoEntrega(UsuarioEndereco enderecoEntrega) {
-        this.enderecoEntrega = enderecoEntrega;
+    public void setValidadeCartaoCredito(String validadeCartaoCredito) {
+        this.validadeCartaoCredito = validadeCartaoCredito;
     }
 
-    public List<PedidoProduto> getItens() {
-        return itens;
+    public String getCartaoCredito() {
+
+        return cartaoCredito;
     }
 
-    public void setItens(List<PedidoProduto> itens) {
-        this.itens = itens;
-    }
-
-    public Integer getQuantidadeItens(){
-        Integer quantidade = 0;
-
-        quantidade += itens.size();
-
-        return quantidade;
+    public void setCartaoCredito(String cartaoCredito) {
+        this.cartaoCredito = cartaoCredito;
     }
 }

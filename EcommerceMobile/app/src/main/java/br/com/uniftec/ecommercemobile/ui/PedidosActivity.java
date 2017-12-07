@@ -45,8 +45,8 @@ public class PedidosActivity extends AbstractActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        mAdapter = new ListaPedidoProdutoAdapter(pedido.getItens());
-        recyclerView.setAdapter(mAdapter);
+        //mAdapter = new ListaPedidoProdutoAdapter(pedido.getItens());
+        //recyclerView.setAdapter(mAdapter);
     }
 
     @Override

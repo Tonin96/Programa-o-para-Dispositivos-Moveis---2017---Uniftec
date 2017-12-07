@@ -86,7 +86,7 @@ public class ListaPedidosAdapter extends RecyclerView.Adapter<ListaPedidosAdapte
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.pedido = pedidos.get(position);
-        holder.dataPedido.setText(pedidos.get(position).getData());
+        /*holder.dataPedido.setText(pedidos.get(position).getData());
         holder.status.setText(pedidos.get(position).getStatus());
         holder.qtd.setText(String.valueOf(pedidos.get(position).getQuantidadeItens()));
 
@@ -98,6 +98,7 @@ public class ListaPedidosAdapter extends RecyclerView.Adapter<ListaPedidosAdapte
         }
 
         holder.precoTotal.setText(String.valueOf(total));
+        */
     }
 
     @Override

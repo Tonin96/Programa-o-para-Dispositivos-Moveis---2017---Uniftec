@@ -83,10 +83,14 @@ public class ProdutoResponse {
 
     public Produto getProduto() {
         Produto produto = new Produto();
+        produto.setId(getId());
         produto.setDescricao(getDescricao());
         produto.setNome(getNome());
         produto.setPreco(getPreco());
         produto.setPrecoDesconto(getPrecoDesconto());
+        ProdutoCategoria produtoCategoria = new ProdutoCategoria();
+        produtoCategoria.setNome(getCategoria().getNome());
+        produto.setCategoria(produtoCategoria);
         ProdutoImagem produtoImagem = new ProdutoImagem();
         produtoImagem.setUrl(getImagemPrincipal().getUrl());
         ArrayList<ProdutoImagem> produtoImagemArrayList = new ArrayList<ProdutoImagem>();

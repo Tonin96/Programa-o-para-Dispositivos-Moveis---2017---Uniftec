@@ -60,7 +60,7 @@ public class ListaPedidosFragment extends Fragment {
         ArrayList<PedidoProduto> itens = new ArrayList<PedidoProduto>();
         Random gerador = new Random();
 
-        for (int i = 0; i < 100; i++) {
+        /*for (int i = 0; i < 100; i++) {
 
             Produto produto = new Produto();
             produto.setNome("Produto: " + i);
@@ -89,6 +89,7 @@ public class ListaPedidosFragment extends Fragment {
         pedidos.add(pedido2);
         mAdapter = new ListaPedidosAdapter(pedidos);
         recyclerView.setAdapter(mAdapter);
+        */
 
 
         super.onActivityCreated(savedInstanceState);

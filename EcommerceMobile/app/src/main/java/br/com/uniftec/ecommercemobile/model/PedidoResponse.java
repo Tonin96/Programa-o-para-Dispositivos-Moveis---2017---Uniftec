@@ -11,7 +11,7 @@ public class PedidoResponse {
     private String data;
     private String status;
     private Double total;
-    private List<UsuarioEnderecoResponse> enderecoEntrega;
+    private UsuarioEnderecoResponse enderecoEntrega;
     private List<PedidoProdutoResponse> itensDoPedido;
 
     public Long getId() {
@@ -46,11 +46,11 @@ public class PedidoResponse {
         this.total = total;
     }
 
-    public List<UsuarioEnderecoResponse> getEnderecoEntrega() {
+    public UsuarioEnderecoResponse getEnderecoEntrega() {
         return enderecoEntrega;
     }
 
-    public void setEnderecoEntrega(List<UsuarioEnderecoResponse> enderecoEntrega) {
+    public void setEnderecoEntrega(UsuarioEnderecoResponse enderecoEntrega) {
         this.enderecoEntrega = enderecoEntrega;
     }
 
