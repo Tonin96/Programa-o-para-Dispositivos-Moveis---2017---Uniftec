@@ -1,30 +1,23 @@
 package br.com.uniftec.ecommercemobile.services;
 
-import android.app.Activity;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.os.StrictMode;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.RemoteViews;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Objects;
@@ -37,13 +30,17 @@ import br.com.uniftec.ecommercemobile.task.CarregarProdutosTask;
 import br.com.uniftec.ecommercemobile.ui.ProdutoActivity;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService implements CarregarProdutosTask.CarregarProdutosDelegate {
+
     private static final String TAG = "Message";
     private RemoteMessage remoteMessage;
     private Produto produto;
+    private String produtoId;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         this.remoteMessage = remoteMessage;
+        this.produtoId = remoteMessage.getData().get("produtoId");
+
         carregarProdutos();
     }
 
@@ -51,7 +48,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService impleme
     @Override
     public void carregarProdutosSucesso(List<ProdutoResponse> listEcommerceResponse) {
         for (ProdutoResponse produtoResponse : listEcommerceResponse) {
-            if (Objects.equals(produtoResponse.getId(), Long.valueOf(remoteMessage.getNotification().getBody()))) {
+            if (Objects.equals(produtoResponse.getId(), Long.valueOf(produtoId))) {
                 this.produto = produtoResponse.getProduto();
             }
         }
