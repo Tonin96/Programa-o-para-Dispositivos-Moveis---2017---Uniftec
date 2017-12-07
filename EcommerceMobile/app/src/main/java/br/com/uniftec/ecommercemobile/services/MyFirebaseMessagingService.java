@@ -12,6 +12,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.widget.RemoteViews;
+import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -43,7 +44,17 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService impleme
         this.remoteMessage = remoteMessage;
         this.produtoId = remoteMessage.getData().get("produtoId");
 
-        carregarProdutos();
+        boolean validacao = true;
+        try {
+            double d = Double.parseDouble(produtoId);
+        }
+        catch(NumberFormatException nfe) {
+            validacao = false;
+        }
+
+        if(validacao) {
+            carregarProdutos();
+        }
     }
 
 
