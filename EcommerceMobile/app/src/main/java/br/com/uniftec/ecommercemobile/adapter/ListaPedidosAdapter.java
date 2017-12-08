@@ -46,8 +46,8 @@ public class ListaPedidosAdapter extends RecyclerView.Adapter<ListaPedidosAdapte
         ViewHolder(View view) {
             super(view);
             layout = view;
-            dataPedido = view.findViewById(R.id.row_pedido_data_pedido);
-            status = view.findViewById(R.id.row_pedido_status);
+            dataPedido = view.findViewById(R.id.row_lista_pedido_data_pedido);
+            status = view.findViewById(R.id.row_lista_pedido_status);
             precoTotal = view.findViewById(R.id.row_lista_pedido_total);
             view.setOnClickListener(this);
         }
