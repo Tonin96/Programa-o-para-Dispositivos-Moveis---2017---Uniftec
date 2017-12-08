@@ -1,6 +1,9 @@
 package br.com.uniftec.ecommercemobile.adapter;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,15 +24,15 @@ import br.com.uniftec.ecommercemobile.model.Produto;
 import br.com.uniftec.ecommercemobile.ui.PedidosActivity;
 import br.com.uniftec.ecommercemobile.ui.ProdutoActivity;
 
-/**
- * Created by bruno on 28/10/17.
- */
-
 public class ListaPedidosAdapter extends RecyclerView.Adapter<ListaPedidosAdapter.ViewHolder> {
-    private List<Pedido> pedidos;
 
-    public ListaPedidosAdapter(List<Pedido> pedidos) {
+    private List<Pedido> pedidos;
+    private Context context;
+
+    public ListaPedidosAdapter(List<Pedido> pedidos, Context context) {
+
         this.pedidos = pedidos;
+        this.context = context;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -40,65 +43,43 @@ public class ListaPedidosAdapter extends RecyclerView.Adapter<ListaPedidosAdapte
         TextView qtd;
         TextView precoTotal;
 
-        ViewHolder(View v) {
-            super(v);
-            layout = v;
-            dataPedido = v.findViewById(R.id.row_pedido_data_pedido);
-            status = v.findViewById(R.id.row_pedido_status);
-            qtd = v.findViewById(R.id.row_lista_pedido_qtd);
-            precoTotal = v.findViewById(R.id.row_lista_pedido_total);
-            v.setOnClickListener(this);
+        ViewHolder(View view) {
+            super(view);
+            layout = view;
+            dataPedido = view.findViewById(R.id.row_pedido_data_pedido);
+            status = view.findViewById(R.id.row_pedido_status);
+            precoTotal = view.findViewById(R.id.row_lista_pedido_total);
+            view.setOnClickListener(this);
         }
 
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
             final Intent intent;
 
-            intent =  new Intent(v.getContext(), PedidosActivity.class);
+            intent = new Intent(view.getContext(), PedidosActivity.class);
             intent.putExtra(PedidosActivity.PEDIDO_PARAMETER, pedido);
 
-            v.getContext().startActivity(intent);
+            view.getContext().startActivity(intent);
         }
     }
 
-    /*public void add(int position, Produto item) {
-        produtos.add(position, item);
-        notifyItemInserted(position);
-    }
-
-    public void remove(int position) {
-        produtos.remove(position);
-        notifyItemRemoved(position);
-    }*/
-
-
     @Override
-    public ListaPedidosAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                             int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(
-                parent.getContext());
-        View v = inflater.inflate(R.layout.row_lista_pedido, parent, false);
-        ViewHolder vh = new ViewHolder(v);
-        return vh;
+    public ListaPedidosAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.row_lista_pedido, parent, false);
+        ViewHolder viewHolder = new ViewHolder(view);
+
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.pedido = pedidos.get(position);
-        /*holder.dataPedido.setText(pedidos.get(position).getData());
+
+        holder.dataPedido.setText(pedidos.get(position).getData());
         holder.status.setText(pedidos.get(position).getStatus());
-        holder.qtd.setText(String.valueOf(pedidos.get(position).getQuantidadeItens()));
+        holder.precoTotal.setText(pedidos.get(position).getTotal().toString());
 
-        double total = 0;
-        List<PedidoProduto> produtos = pedidos.get(position).getItens();
-
-        for (PedidoProduto produto:produtos) {
-            total += produto.getValor();
-        }
-
-        holder.precoTotal.setText(String.valueOf(total));
-        */
     }
 
     @Override
