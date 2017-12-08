@@ -1,32 +1,24 @@
 package br.com.uniftec.ecommercemobile.ui;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
-import android.view.View;
-
-import org.json.JSONException;
-
-import java.util.ArrayList;
+import android.widget.TextView;
 
 import br.com.uniftec.ecommercemobile.R;
-import br.com.uniftec.ecommercemobile.adapter.ListaPedidoProdutoAdapter;
-import br.com.uniftec.ecommercemobile.adapter.ListaProdutoAdapter;
 import br.com.uniftec.ecommercemobile.model.Pedido;
-import br.com.uniftec.ecommercemobile.model.PedidoProduto;
-import br.com.uniftec.ecommercemobile.model.Produto;
 
-public class PedidosActivity extends AbstractActivity {
+public class PedidoActivity extends AbstractActivity {
+
     public static final String PEDIDO_PARAMETER = "PEDIDO_PARAMETER";
 
     private Pedido pedido;
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private TextView tituloPedido;
 
-    public PedidosActivity() {
+    public PedidoActivity() {
 
     }
 
@@ -37,16 +29,17 @@ public class PedidosActivity extends AbstractActivity {
 
     @Override
     protected void setupView() {
+        tituloPedido = (TextView) findViewById(R.id.activity_pedido_titulo);
+
         pedido = (Pedido) getIntent().getSerializableExtra(PEDIDO_PARAMETER);
+
+        tituloPedido.setText("Pedido " + pedido.getStatus());
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_pedido);
         recyclerView.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
-        //mAdapter = new ListaPedidoProdutoAdapter(pedido.getItens());
-        //recyclerView.setAdapter(mAdapter);
     }
 
     @Override

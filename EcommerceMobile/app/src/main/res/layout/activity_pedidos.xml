@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.com.uniftec.ecommercemobile.ui.PedidosActivity"
+    tools:context="br.com.uniftec.ecommercemobile.ui.PedidoActivity"
     android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
@@ -25,12 +25,12 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/activity_finaliza_carrinho_titulo"
+            android:id="@+id/activity_pedido_titulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Pedido"
-            android:textSize="40dp"
+            android:textSize="26dp"
             android:textStyle="bold" />
 
     </LinearLayout>

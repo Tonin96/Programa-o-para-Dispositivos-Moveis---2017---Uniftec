@@ -1,6 +1,8 @@
 package br.com.uniftec.ecommercemobile.model;
 
-public class PedidoProdutoResponse {
+import java.io.Serializable;
+
+public class PedidoProdutoResponse implements Serializable {
 
     private Long id;
     private ProdutoResponse produto;
