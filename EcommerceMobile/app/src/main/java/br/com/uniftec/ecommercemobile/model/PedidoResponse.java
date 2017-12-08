@@ -10,8 +10,8 @@ public class PedidoResponse {
     private Long id;
     private String data;
     private String status;
-    private Double total;
     private UsuarioEnderecoResponse enderecoEntrega;
+    private Double total;
     private List<PedidoProdutoResponse> itensDoPedido;
 
     public Long getId() {
@@ -38,14 +38,6 @@ public class PedidoResponse {
         this.status = status;
     }
 
-    public Double getTotal() {
-        return total;
-    }
-
-    public void setTotal(Double total) {
-        this.total = total;
-    }
-
     public UsuarioEnderecoResponse getEnderecoEntrega() {
         return enderecoEntrega;
     }
@@ -54,11 +46,33 @@ public class PedidoResponse {
         this.enderecoEntrega = enderecoEntrega;
     }
 
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+
     public List<PedidoProdutoResponse> getItensDoPedido() {
         return itensDoPedido;
     }
 
     public void setItensDoPedido(List<PedidoProdutoResponse> itensDoPedido) {
         this.itensDoPedido = itensDoPedido;
+    }
+
+    public Pedido getPedido() {
+
+        Pedido pedido = new Pedido();
+
+        pedido.setId(getId());
+        pedido.setData(getData());
+        pedido.setStatus(getStatus());
+        pedido.setEnderecoEntrega(getEnderecoEntrega());
+        pedido.setTotal(getTotal());
+        pedido.setItensDoPedido(getItensDoPedido());
+
+        return pedido;
     }
 }

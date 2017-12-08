@@ -1,13 +1,18 @@
 package br.com.uniftec.ecommercemobile.ui;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,22 +25,23 @@ import br.com.uniftec.ecommercemobile.adapter.ListaProdutoAdapter;
 import br.com.uniftec.ecommercemobile.model.Carrinho;
 import br.com.uniftec.ecommercemobile.model.Pedido;
 import br.com.uniftec.ecommercemobile.model.PedidoProduto;
+import br.com.uniftec.ecommercemobile.model.PedidoResponse;
 import br.com.uniftec.ecommercemobile.model.Produto;
 import br.com.uniftec.ecommercemobile.model.ProdutoImagem;
+import br.com.uniftec.ecommercemobile.task.CarregarPedidosTask;
 
-/**
- * Created by bruno on 06/11/17.
- */
-
-public class ListaPedidosFragment extends Fragment {
-
+public class ListaPedidosFragment extends Fragment implements CarregarPedidosTask.CarregarPedidosDelegate{
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private ProgressDialog progressDialog;
+    private SharedPreferences preferences;
+    private String token;
+    private List<Pedido> pedidos = new ArrayList<Pedido>();
 
     public ListaPedidosFragment() {
-        // Required empty public constructor
+        //
     }
 
     @Override
@@ -51,47 +57,56 @@ public class ListaPedidosFragment extends Fragment {
         layoutManager = new LinearLayoutManager(view.getContext());
         recyclerView.setLayoutManager(layoutManager);
 
+        preferences = view.getContext().getSharedPreferences("usuario_preferences", Context.MODE_PRIVATE);
+        this.token = preferences.getString("X-Token", "null");
+
         return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        ArrayList<Pedido> pedidos = new ArrayList<>();
-        ArrayList<PedidoProduto> itens = new ArrayList<PedidoProduto>();
-        Random gerador = new Random();
 
-        /*for (int i = 0; i < 100; i++) {
+        pedidos.clear();
+        mAdapter = new ListaPedidosAdapter(pedidos, getContext());
 
-            Produto produto = new Produto();
-            produto.setNome("Produto: " + i);
-            produto.setPreco((double) gerador.nextInt(100));
-            produto.setPrecoDesconto(produto.getPreco() / 2);
-            produto.setDescricao("O Produto: " + produto.getNome() + " é muito legal.");
-            ProdutoImagem produtoImagem = new ProdutoImagem();
-            produtoImagem.setUrl("ft_4gx0m4rifoqxbz9lejqq6wypqyo");
-            produto.setImagemPrincipal(produtoImagem);
-            PedidoProduto pedidoProduto = new PedidoProduto();
-            pedidoProduto.setProduto(produto);
-            pedidoProduto.setValor(produto.getPreco());
-            itens.add(pedidoProduto);
-        }// define an adapter
-
-
-        Pedido pedido = new Pedido();
-        pedido.setStatus("Aberto");
-        Pedido pedido2 = new Pedido();
-        pedido2.setStatus("FECHADO");
-        pedido.setData(new Date().toString());
-        pedido2.setData(new Date().toString());
-        pedido.setItens(itens);
-        pedido2.setItens(itens);
-        pedidos.add(pedido);
-        pedidos.add(pedido2);
-        mAdapter = new ListaPedidosAdapter(pedidos);
         recyclerView.setAdapter(mAdapter);
-        */
 
+        this.progressDialog(getActivity(), "Carregando Pedidos");
+
+        CarregarPedidosTask carregarPedidosTask = new CarregarPedidosTask(this);
+
+        carregarPedidosTask.execute(this.token);
 
         super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
+    public void carregarPedidosSucesso(List<PedidoResponse> listEcommerceResponse) {
+
+        this.pedidos.clear();
+
+        for (PedidoResponse pedidoResponse : listEcommerceResponse) {
+            this.pedidos.add(pedidoResponse.getPedido());
+        }
+
+        this.mAdapter.notifyDataSetChanged();
+
+        dismisProgressDialog();
+        Toast.makeText(getActivity(), "Pedidos carregados com sucesso", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void carregarPedidosFalha(String mensagem) {
+        dismisProgressDialog();
+        Toast.makeText(getActivity(), mensagem, Toast.LENGTH_SHORT).show();
+    }
+
+    private void progressDialog(Context context, String mensagem) {
+        progressDialog = ProgressDialog.show(context, "Aguarde", mensagem, true, false);
+    }
+
+    private void dismisProgressDialog() {
+        progressDialog.dismiss();
+        progressDialog = null;
     }
 }
