@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Pedido"
-            android:textSize="26dp"
+            android:textSize="25dp"
             android:textStyle="bold" />
 
     </LinearLayout>

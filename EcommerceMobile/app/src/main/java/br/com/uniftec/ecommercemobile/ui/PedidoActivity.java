@@ -24,7 +24,7 @@ public class PedidoActivity extends AbstractActivity {
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.activity_pedidos;
+        return R.layout.activity_pedido;
     }
 
     @Override
