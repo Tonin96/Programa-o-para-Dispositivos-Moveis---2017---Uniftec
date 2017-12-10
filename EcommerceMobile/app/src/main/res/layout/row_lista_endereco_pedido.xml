@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="6dip"
+    android:paddingLeft="1dip"
+    android:paddingRight="2dip"
+    android:paddingTop="6dip">
+
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        card_view:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="6dip">
+
+            <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/row_lista_endereco_pedido_radio_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/endereco_selecionado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </RadioGroup>
+
+
+            <TextView
+                android:id="@+id/row_lista_endereco_pedido_bairro_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/row_lista_endereco_pedido_radio_group"
+                android:text="Bairro: "
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/row_lista_endereco_pedido_bairro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/row_lista_endereco_pedido_bairro_label"
+                android:text="bairro" />
+
+
+            <TextView
+                android:id="@+id/row_lista_endereco_pedido_logradouro_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/row_lista_endereco_pedido_bairro_label"
+                android:layout_toRightOf="@+id/row_lista_endereco_pedido_radio_group"
+                android:text="Logradouro: "
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/row_lista_endereco_pedido_logradouro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/row_lista_endereco_pedido_bairro_label"
+                android:layout_toRightOf="@+id/row_lista_endereco_pedido_logradouro_label"
+                android:text="logradouro" />
+
+
+            <TextView
+                android:id="@+id/row_lista_endereco_pedido_complemento_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/row_lista_endereco_pedido_logradouro_label"
+                android:layout_toRightOf="@+id/row_lista_endereco_pedido_radio_group"
+                android:text="Complemento: "
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/row_lista_endereco_pedido_complemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/row_lista_endereco_pedido_logradouro_label"
+                android:layout_toRightOf="@+id/row_lista_endereco_pedido_complemento_label"
+                android:text="complemento" />
+
+
+            <TextView
+                android:id="@+id/row_lista_endereco_pedido_numero_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/row_lista_endereco_pedido_complemento_label"
+                android:layout_toRightOf="@+id/row_lista_endereco_pedido_radio_group"
+                android:text="Número: "
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/row_lista_endereco_pedido_numero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/row_lista_endereco_pedido_complemento_label"
+                android:layout_toRightOf="@+id/row_lista_endereco_pedido_numero_label"
+                android:text="numero" />
+
+
+            <TextView
+                android:id="@+id/row_lista_endereco_pedido_cidade_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/row_lista_endereco_pedido_numero_label"
+                android:layout_toRightOf="@+id/row_lista_endereco_pedido_radio_group"
+                android:text="Cidade: "
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/row_lista_endereco_pedido_cidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/row_lista_endereco_pedido_numero_label"
+                android:layout_toRightOf="@+id/row_lista_endereco_pedido_cidade_label"
+                android:text="cidade" />
+
+
+            <TextView
+                android:id="@+id/row_lista_endereco_pedido_estado_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/row_lista_endereco_pedido_numero_label"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/row_lista_endereco_pedido_cidade"
+                android:text="Estado: "
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/row_lista_endereco_pedido_estado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/row_lista_endereco_pedido_numero_label"
+                android:layout_toRightOf="@+id/row_lista_endereco_pedido_estado_label"
+                android:text="estado" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

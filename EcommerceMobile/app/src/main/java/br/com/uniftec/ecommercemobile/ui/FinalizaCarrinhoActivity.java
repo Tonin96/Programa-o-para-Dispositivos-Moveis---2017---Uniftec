@@ -3,7 +3,6 @@ package br.com.uniftec.ecommercemobile.ui;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -19,13 +20,13 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import br.com.uniftec.ecommercemobile.MainActivity;
 import br.com.uniftec.ecommercemobile.R;
-import br.com.uniftec.ecommercemobile.adapter.ListaEnderecoAdapter;
+import br.com.uniftec.ecommercemobile.adapter.ListaEnderecoPedidoAdapter;
 import br.com.uniftec.ecommercemobile.model.Pedido;
 import br.com.uniftec.ecommercemobile.model.PedidoProdutoResponse;
 import br.com.uniftec.ecommercemobile.model.PedidoResponse;
 import br.com.uniftec.ecommercemobile.model.Produto;
+import br.com.uniftec.ecommercemobile.model.Usuario;
 import br.com.uniftec.ecommercemobile.model.UsuarioEndereco;
 import br.com.uniftec.ecommercemobile.model.UsuarioEnderecoResponse;
 import br.com.uniftec.ecommercemobile.model.UsuarioResponse;
@@ -80,9 +81,8 @@ public class FinalizaCarrinhoActivity extends AbstractActivity implements Salvar
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        mAdapter = new ListaEnderecoAdapter(usuarioEnderecoArrayList, this);
+        mAdapter = new ListaEnderecoPedidoAdapter(usuarioEnderecoArrayList, this);
         recyclerView.setAdapter(mAdapter);
-
         finalizarCarrinho.setOnClickListener(this);
     }
 
@@ -112,11 +112,12 @@ public class FinalizaCarrinhoActivity extends AbstractActivity implements Salvar
                     retornoJsonUsuarioResponse = gson.fromJson(usuario, UsuarioResponse.class);
                 }
 
-                Log.d("Enviado", gson.toJson(pedido));
 
-                for (UsuarioEnderecoResponse usuarioEnderecoResponse : retornoJsonUsuarioResponse.getEnderecos()) {
-                    pedido.setIdEnderecoUsuario(usuarioEnderecoResponse.getId());
-                }
+                UsuarioEndereco usuarioEndereco = (UsuarioEndereco)findViewById(R.id.endereco_selecionado).getTag();
+                pedido.setIdEnderecoUsuario(usuarioEndereco.getId());
+
+
+                Log.d("Enviado", gson.toJson(pedido));
                 SalvarPedidoTask salvarPedidoTask = new SalvarPedidoTask(this);
 
                 Object[] parametros = new Object[2];
@@ -138,6 +139,7 @@ public class FinalizaCarrinhoActivity extends AbstractActivity implements Salvar
         editor.commit();
         dismisProgressDialog();
         Toast.makeText(this, "Pedido Enviado", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override
