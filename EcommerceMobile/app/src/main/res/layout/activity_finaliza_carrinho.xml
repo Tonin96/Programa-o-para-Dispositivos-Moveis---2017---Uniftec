@@ -25,124 +25,126 @@
             </android.support.design.widget.AppBarLayout>
         </LinearLayout>
 
-        <LinearLayout
+
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/activity_finaliza_carrinho_titulo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Finalizar carrinho"
-                    android:textSize="40dp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Selecione um endereço"
-                    android:textAlignment="center"
-                    android:textSize="20dp"/>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_view_lista_enderecos_finaliza_carrinho"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                </android.support.v7.widget.RecyclerView>
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/activity_finaliza_carrinho_titulo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Finalizar carrinho"
+                        android:textSize="40dp"
+                        android:textStyle="bold" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                </LinearLayout>
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Dados do cartão"
-                    android:textAlignment="center"
-                    android:textSize="20dp"/>
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Número do cartão: "
-                    />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Selecione um endereço"
+                        android:textAlignment="center"
+                        android:textSize="20dp" />
 
-                <EditText
-                    android:id="@+id/activity_finaliza_carrinho_edit_text_numero_do_cartao"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recycler_view_lista_enderecos_finaliza_carrinho"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
 
-            </LinearLayout>
+                </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Data de Vencimento: "
-                    />
-
-                <EditText
-                    android:id="@+id/activity_finaliza_carrinho_edit_text_data_de_vencimento_do_cartao"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="CVV: "
-                    />
-
-                <EditText
-                    android:id="@+id/activity_finaliza_carrinho_edit_text_cvv_do_cartao"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linear_layout_salvar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/linear_layout_telefone">
-
-                <Button
-                    android:id="@+id/activity_finaliza_carrinho_button_finalizar"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Finalizar"
-                    />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Dados do cartão"
+                        android:textAlignment="center"
+                        android:textSize="20dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Número do cartão: " />
+
+                    <EditText
+                        android:id="@+id/activity_finaliza_carrinho_edit_text_numero_do_cartao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Data de Vencimento: " />
+
+                    <EditText
+                        android:id="@+id/activity_finaliza_carrinho_edit_text_data_de_vencimento_do_cartao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CVV: " />
+
+                    <EditText
+                        android:id="@+id/activity_finaliza_carrinho_edit_text_cvv_do_cartao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_salvar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linear_layout_telefone">
+
+                    <Button
+                        android:id="@+id/activity_finaliza_carrinho_button_finalizar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Finalizar" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
-
+        </ScrollView>
     </LinearLayout>
 
 
