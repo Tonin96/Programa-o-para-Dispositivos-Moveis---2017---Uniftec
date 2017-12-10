@@ -2,10 +2,12 @@ package br.com.uniftec.ecommercemobile.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PedidoResponse {
+public class PedidoResponse implements Serializable{
 
     private Long id;
     private String data;
@@ -58,8 +60,8 @@ public class PedidoResponse {
         return itens;
     }
 
-    public void setItens(List<PedidoProdutoResponse> itens) {
-        this.itens = itens;
+    public void setItens(List<PedidoProdutoResponse> itensDoPedido) {
+        this.itens = itensDoPedido;
     }
 
     public Pedido getPedido() {
@@ -71,7 +73,16 @@ public class PedidoResponse {
         pedido.setStatus(getStatus());
         pedido.setEnderecoEntrega(getEnderecoEntrega());
         pedido.setTotal(getTotal());
-        pedido.setItensDoPedido(getItens());
+
+        List<Produto> produtosPedido = new ArrayList<Produto>();
+
+        for (PedidoProdutoResponse pedidoProdutoResponse : getItens()) {
+            produtosPedido.add(pedidoProdutoResponse.getProduto().getProduto());
+        }
+
+        pedido.setProdutosPedido(produtosPedido);
+
+        //pedido.setItensDoPedido(getItens());
 
         return pedido;
     }

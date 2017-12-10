@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import br.com.uniftec.ecommercemobile.R;
+import br.com.uniftec.ecommercemobile.adapter.ListaProdutoAdapter;
 import br.com.uniftec.ecommercemobile.model.Pedido;
 import br.com.uniftec.ecommercemobile.model.UsuarioEndereco;
 import br.com.uniftec.ecommercemobile.model.UsuarioEnderecoResponse;
@@ -63,11 +64,16 @@ public class PedidoActivity extends AbstractActivity {
         logradouro.setText(enderecoEntrega.getLogradouro());
         numero.setText(enderecoEntrega.getNumero());
 
+        pedido.getProdutosPedido();
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view_pedido);
         recyclerView.setHasFixedSize(true);
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
+
+        mAdapter = new ListaProdutoAdapter(pedido.getProdutosPedido());
+        recyclerView.setAdapter(mAdapter);
     }
 
     @Override
