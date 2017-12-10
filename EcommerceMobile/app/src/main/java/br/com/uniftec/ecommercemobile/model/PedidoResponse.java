@@ -2,17 +2,19 @@ package br.com.uniftec.ecommercemobile.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PedidoResponse {
+public class PedidoResponse implements Serializable{
 
     private Long id;
     private String data;
     private String status;
     private UsuarioEnderecoResponse enderecoEntrega;
     private Double total;
-    private List<PedidoProdutoResponse> itensDoPedido;
+    private List<PedidoProdutoResponse> itens;
 
     public Long getId() {
         return id;
@@ -54,12 +56,12 @@ public class PedidoResponse {
         this.total = total;
     }
 
-    public List<PedidoProdutoResponse> getItensDoPedido() {
-        return itensDoPedido;
+    public List<PedidoProdutoResponse> getItens() {
+        return itens;
     }
 
-    public void setItensDoPedido(List<PedidoProdutoResponse> itensDoPedido) {
-        this.itensDoPedido = itensDoPedido;
+    public void setItens(List<PedidoProdutoResponse> itensDoPedido) {
+        this.itens = itensDoPedido;
     }
 
     public Pedido getPedido() {
@@ -71,7 +73,16 @@ public class PedidoResponse {
         pedido.setStatus(getStatus());
         pedido.setEnderecoEntrega(getEnderecoEntrega());
         pedido.setTotal(getTotal());
-        pedido.setItensDoPedido(getItensDoPedido());
+
+        List<Produto> produtosPedido = new ArrayList<Produto>();
+
+        for (PedidoProdutoResponse pedidoProdutoResponse : getItens()) {
+            produtosPedido.add(pedidoProdutoResponse.getProduto().getProduto());
+        }
+
+        pedido.setProdutosPedido(produtosPedido);
+
+        //pedido.setItensDoPedido(getItens());
 
         return pedido;
     }

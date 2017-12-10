@@ -48,7 +48,6 @@ public class ProdutoActivity extends AbstractActivity implements View.OnClickLis
         imagemPrincipalImageView = (ImageView) findViewById(R.id.activity_produto_imagen_principal);
         botaoComprar = (Button) findViewById(R.id.activity_produto_botao_comprar);
 
-
         produto = (Produto) getIntent().getSerializableExtra(PRODUTO_PARAMETER);
 
         getSupportActionBar().setTitle(produto.getNome());

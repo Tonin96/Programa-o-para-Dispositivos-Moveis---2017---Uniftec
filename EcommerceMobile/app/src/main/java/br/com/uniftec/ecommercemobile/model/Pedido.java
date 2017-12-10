@@ -18,6 +18,7 @@ public class Pedido implements Serializable {
     private UsuarioEnderecoResponse enderecoEntrega;
     private Double total;
     private List<PedidoProdutoResponse> itensDoPedido;
+    private List<Produto> produtosPedido;
 
     public Long getId() {
         return id;
@@ -103,5 +104,13 @@ public class Pedido implements Serializable {
 
     public void setItensDoPedido(List<PedidoProdutoResponse> itensDoPedido) {
         this.itensDoPedido = itensDoPedido;
+    }
+
+    public List<Produto> getProdutosPedido() {
+        return produtosPedido;
+    }
+
+    public void setProdutosPedido(List<Produto> produtosPedido) {
+        this.produtosPedido = produtosPedido;
     }
 }

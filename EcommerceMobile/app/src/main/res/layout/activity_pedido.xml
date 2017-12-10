@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="br.com.uniftec.ecommercemobile.ui.PedidoActivity"
+    android:orientation="vertical">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/main_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:theme="@style/Toolbar">
+
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <TextView
+                android:id="@+id/activity_pedido_label_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pedido "
+                android:textSize="25dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/activity_pedido_titulo"
+                android:layout_toRightOf="@id/activity_pedido_label_titulo"
+                android:layout_alignBaseline="@+id/activity_pedido_label_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="id"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/activity_pedido_label_data"
+                android:layout_below="@+id/activity_pedido_label_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data: " />
+
+            <TextView
+                android:id="@+id/activity_pedido_data"
+                android:layout_below="@+id/activity_pedido_label_titulo"
+                android:layout_toRightOf="@id/activity_pedido_label_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="data" />
+
+            <TextView
+                android:id="@+id/activity_pedido_label_status"
+                android:layout_below="@+id/activity_pedido_label_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status: " />
+
+            <TextView
+                android:id="@+id/activity_pedido_status"
+                android:layout_below="@+id/activity_pedido_label_data"
+                android:layout_toRightOf="@id/activity_pedido_label_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="status" />
+
+            <TextView
+                android:id="@+id/activity_pedido_endereco"
+                android:layout_below="@id/activity_pedido_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:text="Endereço de entrega"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/activity_pedido_label_bairro"
+                android:layout_below="@+id/activity_pedido_endereco"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bairro: " />
+
+            <TextView
+                android:id="@+id/activity_pedido_bairro"
+                android:layout_below="@+id/activity_pedido_endereco"
+                android:layout_toRightOf="@id/activity_pedido_label_bairro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="bairro" />
+
+            <TextView
+                android:id="@+id/activity_pedido_label_cidade"
+                android:layout_below="@+id/activity_pedido_bairro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cidade: " />
+
+            <TextView
+                android:id="@+id/activity_pedido_cidade"
+                android:layout_below="@+id/activity_pedido_bairro"
+                android:layout_toRightOf="@id/activity_pedido_label_cidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="cidade" />
+
+            <TextView
+                android:id="@+id/activity_pedido_label_complemento"
+                android:layout_below="@+id/activity_pedido_cidade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Complemento: " />
+
+            <TextView
+                android:id="@+id/activity_pedido_complemento"
+                android:layout_below="@+id/activity_pedido_cidade"
+                android:layout_toRightOf="@id/activity_pedido_label_complemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="complemento" />
+            
+            <TextView
+                android:id="@+id/activity_pedido_label_estado"
+                android:layout_below="@+id/activity_pedido_complemento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Estado: " />
+
+            <TextView
+                android:id="@+id/activity_pedido_estado"
+                android:layout_below="@+id/activity_pedido_complemento"
+                android:layout_toRightOf="@id/activity_pedido_label_estado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="estado" />
+            
+            <TextView
+                android:id="@+id/activity_pedido_label_logradouro"
+                android:layout_below="@+id/activity_pedido_estado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Logradouro: " />
+
+            <TextView
+                android:id="@+id/activity_pedido_logradouro"
+                android:layout_below="@+id/activity_pedido_estado"
+                android:layout_toRightOf="@id/activity_pedido_label_logradouro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="logradouro" />
+
+            <TextView
+                android:id="@+id/activity_pedido_label_numero"
+                android:layout_below="@+id/activity_pedido_estado"
+                android:layout_toRightOf="@id/activity_pedido_logradouro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=", " />
+
+            <TextView
+                android:id="@+id/activity_pedido_numero"
+                android:layout_below="@+id/activity_pedido_estado"
+                android:layout_toRightOf="@id/activity_pedido_label_numero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="numero" />
+
+            <TextView
+                android:id="@+id/activity_pedido_label_produtos"
+                android:layout_below="@id/activity_pedido_numero"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:text="Itens do pedido"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_pedido"
+                android:layout_below="@+id/activity_pedido_label_produtos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>
