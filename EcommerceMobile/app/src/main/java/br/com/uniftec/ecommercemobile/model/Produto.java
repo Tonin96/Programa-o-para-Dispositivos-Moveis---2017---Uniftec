@@ -1,10 +1,13 @@
 package br.com.uniftec.ecommercemobile.model;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
-public class Produto implements Serializable {
+public class Produto implements Serializable{
 
     private Long id;
     private String descricao;
@@ -77,5 +80,22 @@ public class Produto implements Serializable {
 
     public void setImagens(List<ProdutoImagem> imagens) {
         this.imagens = imagens;
+    }
+
+
+    public static class CompararNome implements Comparator<Produto>{
+        @Override
+        public int compare(Produto o1, Produto o2) {
+            return o1.getNome().compareTo(o2.getNome());
+        }
+    }
+
+    public static class CompararPreco implements Comparator<Produto>{
+        @Override
+        public int compare(Produto o1, Produto o2) {
+            if(o1.getPreco() > o2.getPreco()) return 1;
+            if(o1.getPreco() < o2.getPreco()) return -1;
+            return 0;
+        }
     }
 }
