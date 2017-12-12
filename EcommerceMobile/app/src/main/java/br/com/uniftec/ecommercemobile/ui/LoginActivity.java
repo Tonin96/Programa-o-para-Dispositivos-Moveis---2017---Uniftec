@@ -138,6 +138,8 @@ public class LoginActivity extends AppCompatActivity
         dismisProgressDialog();
         Toast.makeText(this, "Login realizado com sucesso", Toast.LENGTH_SHORT).show();
 
+        finish();
+
         Intent intent = null;
         intent =  new Intent(this, MainActivity.class);
 
