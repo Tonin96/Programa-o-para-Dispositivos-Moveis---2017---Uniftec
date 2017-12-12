@@ -29,17 +29,23 @@
                 android:id="@+id/lista_produtos_ordenacao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ordenação"/>
+
                 <RadioButton
                     android:id="@+id/lista_produtos_ordenacao_alfabetico"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="Alfebetico"/>
+                    android:text="A-z"/>
                 <RadioButton
                     android:id="@+id/lista_produtos_ordenacao_preco"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Preço"/>
+                    android:text="R$"/>
             </RadioGroup>
         </LinearLayout>
 
