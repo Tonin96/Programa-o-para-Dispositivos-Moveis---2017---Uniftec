@@ -145,8 +145,10 @@ public class CriaEnderecoUsuarioActivity extends AbstractActivity
         dismisProgressDialog();
         Toast.makeText(this, "Endereço incluído com sucesso", Toast.LENGTH_SHORT).show();
 
+        finish();
+
         Intent intent = null;
-        intent =  new Intent(this, ListaEnderecosUsuarioActivity.class);
+        intent = new Intent(this, ListaEnderecosUsuarioActivity.class);
 
         this.startActivity(intent);
     }

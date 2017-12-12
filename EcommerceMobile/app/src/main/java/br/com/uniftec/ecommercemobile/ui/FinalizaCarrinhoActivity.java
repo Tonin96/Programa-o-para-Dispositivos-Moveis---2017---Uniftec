@@ -3,6 +3,7 @@ package br.com.uniftec.ecommercemobile.ui;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -61,7 +62,6 @@ public class FinalizaCarrinhoActivity extends AbstractActivity implements Salvar
         finalizarCarrinho = (Button) findViewById(R.id.activity_finaliza_carrinho_button_finalizar);
         carrinhoService = new CarrinhoService(this);
 
-
         preferences = this.getSharedPreferences("usuario_preferences", Context.MODE_PRIVATE);
         token = preferences.getString("X-Token", "null");
 
@@ -75,7 +75,6 @@ public class FinalizaCarrinhoActivity extends AbstractActivity implements Salvar
         for (UsuarioEnderecoResponse usuarioEnderecoResponse : retornoJsonUsuarioResponse.getEnderecos()) {
             usuarioEnderecoArrayList.add(usuarioEnderecoResponse.getEndereco());
         }
-
 
         recyclerView.setHasFixedSize(true);
         // use a linear layout manager
@@ -140,13 +139,18 @@ public class FinalizaCarrinhoActivity extends AbstractActivity implements Salvar
         dismisProgressDialog();
         Toast.makeText(this, "Pedido Enviado", Toast.LENGTH_SHORT).show();
         finish();
+
+        Intent intent = null;
+        intent = new Intent(this, CarrinhoActivity.class);
+
+        this.startActivity(intent);
     }
 
     @Override
     public void salvarPedidoFalha(String mensagem) {
         dismisProgressDialog();
 
-        Log.d("Falha", mensagem);
+        Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show();
     }
 
     public void progressDialog(Activity activity, String mensagem) {
@@ -161,10 +165,13 @@ public class FinalizaCarrinhoActivity extends AbstractActivity implements Salvar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (item.getItemId() == android.R.id.home) {
+        if(item.getItemId() == android.R.id.home) {
 
-
-            finish();
+            if(getParent() != null) {
+                finish();
+            } else {
+                finish();
+            }
 
             return true;
         }
@@ -176,7 +183,7 @@ public class FinalizaCarrinhoActivity extends AbstractActivity implements Salvar
         boolean validacao = true;
 
         if(Objects.equals(String.valueOf(numeroCartao.getText()), "")){
-           numeroCartao.setError("Preencha o numero do cartao");
+           numeroCartao.setError("Preencha o número do cartão");
             validacao = false;
         }
 
@@ -185,7 +192,7 @@ public class FinalizaCarrinhoActivity extends AbstractActivity implements Salvar
             validacao = false;
         }
         if(Objects.equals(String.valueOf(vencimentoCartao.getText()), "")){
-            vencimentoCartao.setError("Preencha a data de vencimento do cartao");
+            vencimentoCartao.setError("Preencha a data de vencimento do cartão");
             validacao = false;
         }
 

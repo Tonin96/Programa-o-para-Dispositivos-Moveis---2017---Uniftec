@@ -1,9 +1,7 @@
 package br.com.uniftec.ecommercemobile.ui;
 
-import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -12,12 +10,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
-import br.com.uniftec.ecommercemobile.MainActivity;
 import br.com.uniftec.ecommercemobile.R;
 import br.com.uniftec.ecommercemobile.adapter.ListaImagensAdapter;
-import br.com.uniftec.ecommercemobile.adapter.ListaProdutoAdapter;
 import br.com.uniftec.ecommercemobile.model.Produto;
 import br.com.uniftec.ecommercemobile.services.CarrinhoService;
 
@@ -90,13 +84,12 @@ public class ProdutoActivity extends AbstractActivity implements View.OnClickLis
 
         if(item.getItemId() == android.R.id.home) {
 
-            if(getParent() != null){
+            if(getParent() != null) {
                 finish();
-            }else {
+            } else {
                 finish();
-                Intent intent = new Intent(this, MainActivity.class);
-                this.startActivity(intent);
             }
+
             return true;
         }
 

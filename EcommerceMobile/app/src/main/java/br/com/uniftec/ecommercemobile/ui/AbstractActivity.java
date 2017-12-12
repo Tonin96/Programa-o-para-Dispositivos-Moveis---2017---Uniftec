@@ -67,9 +67,12 @@ public abstract class AbstractActivity extends AppCompatActivity implements View
     }
 
     public void onClick(View v){
-        Intent intent =  new Intent(this, AlteraContaUsuarioActivity.class);
 
-        this.startActivity(intent);
+        if(v.getId() != android.R.id.home) {
+            Intent intent = new Intent(this, AlteraContaUsuarioActivity.class);
+
+            this.startActivity(intent);
+        }
     }
 
     protected abstract int getLayoutRes();

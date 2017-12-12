@@ -57,7 +57,9 @@ public class CarrinhoActivity extends AbstractActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        super.onClick(v);
+        //super.onClick(v);
+
+        finish();
 
         final Intent intent;
 
@@ -72,7 +74,12 @@ public class CarrinhoActivity extends AbstractActivity implements View.OnClickLi
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if(item.getItemId() == android.R.id.home) {
-            finish();
+
+            if(getParent() != null) {
+                finish();
+            } else {
+                finish();
+            }
 
             return true;
         }

@@ -48,7 +48,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Finalizar carrinho"
-                        android:textSize="40dp"
+                        android:textSize="25dp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -63,7 +63,7 @@
                         android:layout_height="wrap_content"
                         android:text="Selecione um endereço"
                         android:textAlignment="center"
-                        android:textSize="20dp" />
+                        android:textSize="16dp" />
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recycler_view_lista_enderecos_finaliza_carrinho"
@@ -80,18 +80,20 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingTop="16dp"
                         android:text="Dados do cartão"
+                        android:textStyle="bold"
                         android:textAlignment="center"
-                        android:textSize="20dp" />
+                        android:textSize="16dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Número do cartão: " />
+                        android:text="Número do cartão:" />
 
                     <EditText
                         android:id="@+id/activity_finaliza_carrinho_edit_text_numero_do_cartao"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
@@ -103,11 +105,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Data de Vencimento: " />
+                        android:text="Data de Vencimento:" />
 
-                    <EditText
-                        android:id="@+id/activity_finaliza_carrinho_edit_text_data_de_vencimento_do_cartao"
-                        android:layout_width="wrap_content"
+                    <EditText android:id="@+id/activity_finaliza_carrinho_edit_text_data_de_vencimento_do_cartao"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
@@ -119,11 +120,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="CVV: " />
+                        android:text="CVV:" />
 
                     <EditText
                         android:id="@+id/activity_finaliza_carrinho_edit_text_cvv_do_cartao"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
                 </LinearLayout>
@@ -132,6 +133,7 @@
                     android:id="@+id/linear_layout_salvar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingTop="16dp"
                     android:layout_below="@+id/linear_layout_telefone">
 
                     <Button
@@ -146,6 +148,5 @@
 
         </ScrollView>
     </LinearLayout>
-
 
 </RelativeLayout>
