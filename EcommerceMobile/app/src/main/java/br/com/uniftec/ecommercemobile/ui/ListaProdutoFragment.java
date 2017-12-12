@@ -84,8 +84,12 @@ public class ListaProdutoFragment extends Fragment implements CarregarProdutosTa
 
         recyclerView.setAdapter(mAdapter);
 
-
         carregarProdutos();
+
+        CarregarCategoriasTask task = new CarregarCategoriasTask(this);
+        Object[] parametros = new Object[0];
+
+        task.execute(parametros);
 
         super.onActivityCreated(savedInstanceState);
     }
@@ -112,8 +116,12 @@ public class ListaProdutoFragment extends Fragment implements CarregarProdutosTa
     }
 
     public void dismisProgressDialog() {
-        progressDialog.dismiss();
-        progressDialog = null;
+
+        if(progressDialog != null) {
+            progressDialog.dismiss();
+            progressDialog = null;
+        }
+
     }
 
     @Override
@@ -121,6 +129,7 @@ public class ListaProdutoFragment extends Fragment implements CarregarProdutosTa
         drawerLayout.closeDrawers();
         this.categoria = Long.valueOf(item.getTitle().toString().split(" - ")[0]);
         carregarProdutos();
+
         return false;
     }
 
