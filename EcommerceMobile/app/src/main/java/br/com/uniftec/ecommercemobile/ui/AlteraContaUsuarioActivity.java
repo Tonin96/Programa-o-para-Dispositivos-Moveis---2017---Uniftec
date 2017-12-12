@@ -131,6 +131,8 @@ public class AlteraContaUsuarioActivity extends AbstractActivity
         dismisProgressDialog();
         Toast.makeText(this, "Usuário atualizado com sucesso", Toast.LENGTH_SHORT).show();
 
+        finish();
+
         Intent intent = null;
         intent =  new Intent(this, MainActivity.class);
 
