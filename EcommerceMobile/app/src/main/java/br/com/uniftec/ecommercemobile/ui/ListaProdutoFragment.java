@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -19,8 +20,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import br.com.uniftec.ecommercemobile.R;
@@ -32,7 +36,7 @@ import br.com.uniftec.ecommercemobile.model.ProdutoResponse;
 import br.com.uniftec.ecommercemobile.task.CarregarCategoriasTask;
 import br.com.uniftec.ecommercemobile.task.CarregarProdutosTask;
 
-public class ListaProdutoFragment extends Fragment implements CarregarProdutosTask.CarregarProdutosDelegate, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, CarregarCategoriasTask.CarregarCategoriasDelegate {
+public class ListaProdutoFragment extends Fragment implements RadioGroup.OnCheckedChangeListener, CarregarProdutosTask.CarregarProdutosDelegate, NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, CarregarCategoriasTask.CarregarCategoriasDelegate {
 
 
     private RecyclerView recyclerView;
@@ -45,6 +49,7 @@ public class ListaProdutoFragment extends Fragment implements CarregarProdutosTa
     private Boolean destaques = true;
     private Long categoria = null;
     private Button botaoDestaques;
+    private RadioGroup ordenacao;
 
     public ListaProdutoFragment() {
         // Required empty public constructor
@@ -58,6 +63,8 @@ public class ListaProdutoFragment extends Fragment implements CarregarProdutosTa
         View view = inflater.inflate(R.layout.fragment_lista_produto, container, false);
         botaoDestaques = view.findViewById(R.id.lista_produtos_button_destaques);
         Button botaoCategorias = view.findViewById(R.id.lista_produtos_button_categorias);
+        ordenacao = view.findViewById(R.id.lista_produtos_ordenacao);
+        ordenacao.setOnCheckedChangeListener(this);
         botaoDestaques.setOnClickListener(this);
         botaoCategorias.setOnClickListener(this);
         botaoDestaques.setText("Ocultar destaques");
@@ -80,6 +87,12 @@ public class ListaProdutoFragment extends Fragment implements CarregarProdutosTa
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 
         produtos.clear();
+
+        if(ordenacao.getCheckedRadioButtonId() == R.id.lista_produtos_ordenacao_preco){
+            Collections.sort(this.produtos, new Produto.CompararPreco());
+        }else{
+            Collections.sort(this.produtos, new Produto.CompararNome());
+        }
         mAdapter = new ListaProdutoAdapter(this.produtos);
 
         recyclerView.setAdapter(mAdapter);
@@ -101,7 +114,11 @@ public class ListaProdutoFragment extends Fragment implements CarregarProdutosTa
         for (ProdutoResponse produtoResponse : listEcommerceResponse) {
             this.produtos.add(produtoResponse.getProduto());
         }
-
+        if(ordenacao.getCheckedRadioButtonId() == R.id.lista_produtos_ordenacao_preco){
+            Collections.sort(this.produtos, new Produto.CompararPreco());
+        }else{
+            Collections.sort(this.produtos, new Produto.CompararNome());
+        }
         this.mAdapter.notifyDataSetChanged();
         dismisProgressDialog();
     }
@@ -137,7 +154,7 @@ public class ListaProdutoFragment extends Fragment implements CarregarProdutosTa
     public void onClick(View v) {
         if (v.getId() == R.id.lista_produtos_button_destaques) {
             clickDestaque();
-        } else {
+        }else {
             drawerLayout.openDrawer(GravityCompat.END);
 
             CarregarCategoriasTask task = new CarregarCategoriasTask(this);
@@ -181,6 +198,11 @@ public class ListaProdutoFragment extends Fragment implements CarregarProdutosTa
     @Override
     public void carregarCategoriasFalha(String mensagem) {
         dismisProgressDialog();
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+        carregarProdutos();
     }
 }
 
